@@ -20,6 +20,7 @@ nchoosek(10, 5);
 %{6}%
 x = 552;
 log(exp(x)) == x;
+log(exp(x)) == exp(log(x));
 
 %{7}%
 
