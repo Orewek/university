@@ -56,7 +56,7 @@ res == sqrt(555);
 А в final_x само число x, при котором оно было достигнуто
 %}
 
-res = 50;
+res = 5000;
 for x = 2:+10^-6:4
     temp_res = (0.5 * ((x - 2) ^ 3) - 40 * sin(x));
     if (abs(temp_res) < abs(res))
