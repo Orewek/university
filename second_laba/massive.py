@@ -21,12 +21,12 @@ def menu(action: int, mas: tuple) -> tuple:
 #def task():
 
 def main(mas: tuple) -> tuple:
-    print(f'1: input massive\n'
-          f'2: adjust massive\n'
-          f'3: output massive\n'
-          f'4: task\n'
-          f'5: exit\n')
-    
+    print('1: input massive\n'
+          '2: adjust massive\n'
+          '3: output massive\n'
+          '4: task\n'
+          '5: exit\n')
+
     print('What u wanna do? Write one digit')
     action = input()
 
@@ -37,7 +37,7 @@ def main(mas: tuple) -> tuple:
     action = int(action)
     mas = menu(action, mas)
     return mas
-    
+
 
 if __name__ == '__main__':
     mas = []
@@ -49,8 +49,5 @@ if __name__ == '__main__':
     while additional_check.lower() in approved:
         main(mas)
     print(mas)
-    
 
-    #print('Wanna make one more action? Yes/No')
-
-
+    # print('Wanna make one more action? Yes/No')

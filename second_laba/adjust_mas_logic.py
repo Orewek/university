@@ -23,4 +23,3 @@ def len_mas(mas: tuple) -> str:
     """
     ans = f'{len(mas)}- length of massive'
     return ans
-    
