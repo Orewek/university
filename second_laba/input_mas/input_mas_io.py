@@ -1,4 +1,4 @@
-from input_mas_logic import add_elements
+from input_mas.input_mas_logic import add_elements
 
 
 def create_mas(mas: tuple) -> tuple:

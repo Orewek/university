@@ -1,5 +1,5 @@
-from adjust_mas_logic import clear_mas, len_mas
-from adjust_mas_logic import show_elements, change_elements
+from adjust_mas.adjust_mas_logic import clear_mas, len_mas
+from adjust_mas.adjust_mas_logic import show_elements, change_elements
 
 
 def mas_elements(mas: tuple) -> tuple:

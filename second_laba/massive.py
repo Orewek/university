@@ -1,5 +1,5 @@
-from input_mas_io import create_mas
-from adjust_mas_io import adjust_mas
+from input_mas.input_mas_io import create_mas
+from adjust_mas.adjust_mas_io import adjust_mas
 
 
 def menu(action: int, mas: tuple) -> tuple:
