@@ -8,7 +8,7 @@ def menu(action: int, mas: tuple) -> tuple:
         2: adjust_mas,
         #3: output_mas,
         #4: task,
-        '5': 'exit'
+        5: 'exit'
     }
     mas = switcher[action](mas)
     return mas
@@ -21,17 +21,28 @@ def menu(action: int, mas: tuple) -> tuple:
 #def task():
 
 def main(mas: tuple) -> tuple:
-    print('1: input massive\n'
-          '2: adjust massive\n'
-          '3: output massive\n'
-          '4: task\n'
-          '5: exit\n')
+    table = """
+            1: input massive
+            2: adjust massive
+            3: output massive
+            4: task
+            5: exit
+            """
+    action_table = """
+                   U can write only one digit.
+                   After operation u can continue working with massive
+                   write -table to see the options
+                   """
+    print(table)
 
     print('What u wanna do? Write one digit')
     action = input()
 
     while len(action) != 1 or action.isdigit() is False:
-        print('U can write only one digit. After operation u can continue working with massive')
+        if action != '-table':
+            print(action_table)
+        else:
+            print(table)
         action = input()
 
     action = int(action)
@@ -43,11 +54,12 @@ if __name__ == '__main__':
     mas = []
     mas = main(mas)
 
-    print('One more?\n [y, yes, 1]')
-    additional_check = input()
     approved = ['y', 'yes', '1']
+    print(f'One more?\n {approved}')
+    additional_check = input()
+
     while additional_check.lower() in approved:
-        main(mas)
+        mas = main(mas)
     print(mas)
 
     # print('Wanna make one more action? Yes/No')
