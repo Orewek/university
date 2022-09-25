@@ -17,7 +17,6 @@ def change_elements(mas: tuple, change_mas: tuple) -> tuple:
             print(f'{i + 1}: {mas[i]}. Type new element for this cell')
             replace_cell = input()
             mas[i] = replace_cell
-    print(f'change VIHOD - {mas}')
     return mas
 
 

@@ -38,6 +38,8 @@ def main(mas: tuple) -> tuple:
     print('What u wanna do? Write one digit')
     action = input()
 
+    # checking for letters and multi-digits
+    # -talbe: user can void a talbe with options
     while len(action) != 1 or action.isdigit() is False:
         if action != '-table':
             print(action_table)
@@ -54,6 +56,7 @@ if __name__ == '__main__':
     mas = []
     mas = main(mas)
 
+    # If user wanna continue, he can write 1/yes/y
     approved = ['y', 'yes', '1']
     print(f'One more?\n {approved}')
     additional_check = input()
@@ -61,5 +64,3 @@ if __name__ == '__main__':
     while additional_check.lower() in approved:
         mas = main(mas)
     print(mas)
-
-    # print('Wanna make one more action? Yes/No')

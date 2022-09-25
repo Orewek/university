@@ -5,7 +5,7 @@ def create_mas(mas: tuple) -> tuple:
     print('\nWrite each element separated\nIf u wanna to exit, press Enter')
     mas = add_elements(mas)
 
-    print(f'Massive wa sucsessfully createad. Mas - {mas}')
+    print(f'Massive was sucsessfully createad. Mas - {mas}')
     return mas
 
 
