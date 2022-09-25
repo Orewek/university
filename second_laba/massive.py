@@ -1,11 +1,11 @@
 from input_mas.input_mas_io import create_mas
-from adjust_mas.adjust_mas_io import adjust_mas
+from adjust_mas.adjust_mas_io import adjust_massive
 
 
 def menu(action: int, mas: tuple) -> tuple:
     switcher = {
         1: create_mas,
-        2: adjust_mas,
+        2: adjust_massive,
         #3: output_mas,
         #4: task,
         5: 'exit'

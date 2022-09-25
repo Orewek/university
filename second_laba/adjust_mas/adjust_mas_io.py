@@ -46,7 +46,7 @@ def mas_elements(mas: tuple) -> tuple:
     return mas
 
 
-def adjust_mas(mas: tuple) -> tuple:
+def adjust_massive(mas: tuple) -> tuple:
     adjust_table = """
             1: massive length
             2: change elements
