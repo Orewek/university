@@ -6,7 +6,11 @@ def add_elements(mas: tuple) -> tuple:
     """
     el_mas = input()
     while el_mas != '':
-        mas.append(el_mas)
+        if el_mas.isdigit() is True:
+            mas.append(el_mas)
         el_mas = input()
 
     return mas
+
+
+

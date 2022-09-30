@@ -15,7 +15,11 @@ def change_elements(mas: tuple, change_mas: tuple) -> tuple:
     for i in range(len(mas)):
         if i in change_mas:
             print(f'{i + 1}: {mas[i]}. Type new element for this cell')
+
             replace_cell = input()
+            while replace_cell.isdigit() is False:
+                print('You can change element only on another number/digit')
+                replace_cell = input()      
             mas[i] = replace_cell
     return mas
 
