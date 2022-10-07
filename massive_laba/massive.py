@@ -1,31 +1,26 @@
 from input_mas.input_mas_io import create_mas
 from adjust_mas.adjust_mas_io import adjust_massive
 from output.output_mas import show_mas
+from kinda_task.task import task_io
 
 def menu(action: int, mas: tuple) -> tuple:
     switcher = {
         1: create_mas,
         2: adjust_massive,
         3: show_mas,
-        #4: task,
+        4: task_io,
         5: 'exit'
     }
     mas = switcher[action](mas)
     return mas
 
 
-#def output_mas(mas: tuple):
-#    print(mas)
-#
-#
-#def task():
-
 def main(mas: tuple) -> tuple:
     table = """
             1: input massive
             2: adjust massive
             3: output massive
-            4: task
+            4: tasks
             5: exit
             """
     action_table = """
