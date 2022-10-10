@@ -3,6 +3,7 @@ from adjust_mas.adjust_mas_io import adjust_massive
 from output.output_mas import show_mas
 from kinda_task.task import task_io
 
+
 def menu(action: int, mas: tuple) -> tuple:
     switcher = {
         1: create_mas,

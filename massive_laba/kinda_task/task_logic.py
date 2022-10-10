@@ -8,7 +8,7 @@ def mean_arif(mas: tuple) -> tuple:
         el_sum += int(mas[i])
 
     arif_sum = el_sum / len(mas)
-    print(f'Arifmetical sum = {arif_sum}') 
+    print(f'Arifmetical sum = {arif_sum}')
 
     return mas
 

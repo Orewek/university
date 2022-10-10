@@ -3,7 +3,8 @@ from input_mas.input_mas_logic import add_elements
 
 def create_mas(mas: tuple) -> tuple:
     print('\nWrite each element separated\n'
-          'Remember,You can write only digits. Non-digits elements will be deleted\n'
+          'Remember,You can write only digits. '
+          'Non-digits elements will be deleted\n'
           'If u wanna to exit, press Enter')
     mas = add_elements(mas)
 

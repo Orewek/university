@@ -19,7 +19,7 @@ def change_elements(mas: tuple, change_mas: tuple) -> tuple:
             replace_cell = input()
             while replace_cell.isdigit() is False:
                 print('You can change element only on another number/digit')
-                replace_cell = input()      
+                replace_cell = input()
             mas[i] = replace_cell
     return mas
 

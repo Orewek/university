@@ -27,7 +27,6 @@ def task_io(mas: tuple) -> tuple:
                  """
     print(task_table)
 
-    
     print('What u wanna do? Write one digit')
     action = input()
 

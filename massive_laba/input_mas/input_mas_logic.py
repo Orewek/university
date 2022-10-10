@@ -11,6 +11,3 @@ def add_elements(mas: tuple) -> tuple:
         el_mas = input()
 
     return mas
-
-
-
