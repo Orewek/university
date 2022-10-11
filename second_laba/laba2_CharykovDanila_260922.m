@@ -1,8 +1,9 @@
 %{1%}
 %Рандомно задаем число от 3 до 1000
 %Оно будет отвечать за размерность вектора
+%Чтобы продемонстрировать работу программы, будем использовать 5-мерный
 %razmernost = randi([3, 10^3]);
-razmernost = 3;
+razmernost = 5;
 syms vektor;
 
 %Создадим вектор
@@ -27,7 +28,6 @@ for dx = 1:razmernost
     end
 end
 
-
 %Найдем сумму всех аргументов вектора
 symma = 0;
 for x = 1:razmernost
@@ -39,27 +39,31 @@ end
 % прибавим получившуюся сумму
 vektor(razmernost) = vektor(razmernost) + symma;
 
-
 %{
 %2
 %Задаем вектор-строку с клавиатуры
+
 syms vektor
 for i = 1:2
     chislo = input('element =');
     vektor(i) = chislo;
 end
-%}
-
-%Вектор-строка
-vektor;
-%Вектор-столбец
-vektor';
 
 % Матрица
-%for x = 1:2
-%    for y = 1:2
-%    %chislo = input('element =');
+for x = 1:2
+    for y = 1:2
+    chislo = input('element =');
+    matrix([x],[y]) = chislo;
+    end
+end
 
+%Вектор-строка
+vektor
+%Вектор-столбец
+vektor'
+%Матрица
+matrix
+%}
 %3
 matrix_dot = zeros(2);
 matrix1 = ones(2);
