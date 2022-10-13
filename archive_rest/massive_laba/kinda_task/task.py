@@ -1,11 +1,14 @@
 from kinda_task.task_logic import mean_arif, min_el, max_el
+from kinda_task.task_logic import chered_checker, consecutive_result
 
 
 def task_menu(action: int, mas: tuple) -> tuple:
     switcher = {
         1: mean_arif,
         2: min_el,
-        3: max_el
+        3: max_el,
+        4: task_b8,
+        5: task_c8
     }
     mas = switcher[action](mas)
     return mas
@@ -24,6 +27,8 @@ def task_io(mas: tuple) -> tuple:
                  1: mean arifmetical
                  2: minimal element
                  3: maxmimun element
+                 4: %2 chered cheker
+                 5: equal para digits
                  """
     print(task_table)
 
@@ -41,6 +46,45 @@ def task_io(mas: tuple) -> tuple:
 
     action = int(action)
     mas = task_menu(action, mas)
+    return mas
+
+
+def task_b8(mas: tuple) -> tuple:
+    result_mas = []
+
+    for i in range(len(mas)):
+        num_len = len(mas[i])
+        result = chered_checker(int(mas[i]), len(mas[i]), 2)
+        result_mas.append(result)
+
+    """
+    Random numbers
+    Results, Yes(11) No(00)
+    Total amount
+    """
+
+    print(mas)
+    print(result_mas)
+    amount_numbers = result_mas.count('1')
+    print(f'Amount of non-chered elements: {amount_numbers}')
+
+    return mas
+
+
+def task_c8(mas: tuple) -> tuple:
+    result_mas = []
+
+    for i in range(len(mas)):
+        result = chered_checker(int(mas[i]), len(mas[i]), 10)
+        result_mas.append(result)
+
+    print(mas)
+    print(result_mas)
+
+    res1, res0 = consecutive_result(len(mas), result_mas)
+
+    print(f' max 1 = {res1}, max 0 = {res0}')
+
     return mas
 
 

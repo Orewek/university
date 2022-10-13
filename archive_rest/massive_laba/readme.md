@@ -1,3 +1,32 @@
+# Задание А8
+### Найти минимальный / максимальный элемент. Средне-арифмитическое
+
+##### Средне-арифмитическое. Складываем все эллементы и делим на кол-во
+```py
+def mean_arif(mas: tuple) -> tuple:
+    el_sum = 0
+    for i in range(len(mas)):
+        el_sum += int(mas[i])
+
+    arif_sum = el_sum / len(mas)
+    print(f'Arifmetical sum = {arif_sum}')
+
+    return mas
+```
+
+##### Минимальный / максимальный
+```py
+def min_el(mas: tuple) -> tuple:
+    print(f'minimal element of massvie = {min(mas)}')
+    return mas
+
+
+def max_el(mas: tuple) -> tuple:
+    print(f'maxmimum element of massvie = {max(mas)}')
+    return mas
+```
+
+
 # Задание B8
 ### Найти количество таких элементов, в которых чередуются четные и нечетные цифры
 
@@ -7,31 +36,25 @@
     * `1` если нет
     * `0` если да
 
-##### Создадим случайный массив
-```py
-number = randint(10**(num_len - 1), 10**num_len)
-number_mas.append(number)
-```
-
-##### Посмотрим на остатки двух соседних цифр, после чего выведим `11: подоходит` `00: не подходит`
+##### Посмотрим на остатки двух соседних цифр, после чего выведим `1: подоходит` `0: не подходит`
 ```py
 def chered_checker(number: int, num_len: int) -> str:
     for i in range(num_len - 1):
         if number % 2 == (number // 10) % 2:
-            return '00'
+            return '0'
         number //= 10
-    return '11'
+    return '1'
 ```
 
 #### Пример работы
 
 ##### Создали массив
 `[2102, 1945, 1427, 3793, 8738, 3268, 5113, 9188, 4240, 9424, 8530, 1756, 4484, 1658, 2828, 5159, 8842, 6320, 5850, 9975]`
-###### Какой массив получился после проверки (выводит 00 и 11 для того, чтобы результат был написан под числом)
-`['00', '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', '00', '11', '00', '00', '00', '00', '11', '00']`
+
+`['0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '1', '0']`
 
 ```py
-amount_numbers = result_mas.count('11')
+amount_numbers = result_mas.count('1')
 print(amount_numbers)
 ```
 Вывели их итоговое количество
@@ -46,19 +69,13 @@ print(amount_numbers)
     * `1` если нет
     * `0` если да
 
-##### Создадим случайный массив
-```py
-number = randint(10**(num_len - 1), 10**num_len)
-number_mas.append(number)
-```
-
 ```py
 def chered_checker(number: int, num_len: int) -> str:
     for i in range(num_len - 1):
         if number % 10 == (number // 10) % 10:
-            return '00'
+            return '0'
         number //= 10
-    return '11'
+    return '1'
 ```
 
 ##### Посмотрим, равны ли две соседние цифры, после чего выведим `11: подоходит` `00: не подходит`
@@ -66,9 +83,9 @@ def chered_checker(number: int, num_len: int) -> str:
 def chered_checker(number: int, num_len: int) -> str:
     for i in range(num_len - 1):
         if number % 10 == (number // 10) % 10:
-            return '00'
+            return '0'
         number //= 10
-    return '11'
+    return '1'
 ```
 
 ##### Находим максимальную последовательность `11` и `00` в массиве с результатами
@@ -80,7 +97,7 @@ def consecutive_result(mas_len: int, result_mas: tuple) -> tuple:
     res0 = 0
 
     for i in range(mas_len - 1):
-        if result_mas[i] == result_mas[i + 1] and result_mas[i] == '11':
+        if result_mas[i] == result_mas[i + 1] and result_mas[i] == '1':
             count += 1
         else:
             res1 = max(res1, count)
@@ -89,7 +106,7 @@ def consecutive_result(mas_len: int, result_mas: tuple) -> tuple:
     count = 1
 
     for i in range(mas_len - 1):
-        if result_mas[i] == result_mas[i + 1] and result_mas[i] == '00':
+        if result_mas[i] == result_mas[i + 1] and result_mas[i] == '0':
             count += 1
         else:
             res0 = max(res0, count)
@@ -104,13 +121,13 @@ def consecutive_result(mas_len: int, result_mas: tuple) -> tuple:
 * Как только мы выясняем что два подряд идущих эелемента не равны, заканчиваем сравнение.
     * Сравниваем `count` с максимально длинной строчкой, известной на данный момент. Если `count` больше => записываем
     * Сбрасываем `count` до 1, проходимся алгоритмом до конца массива
-* После того, как мы сделали данный алгоритм для `11`, делаем тоже самое для `00`
+* После того, как мы сделали данный алгоритм для `1`, делаем тоже самое для `0`
 * По итогу получили `res0` и `res1`, которые содержает нужные нам значения. Возвращаем их из функции
 
 #### Пример работы
 ##### Создали массив 
 `[6701, 7455, 2672, 5847, 9047, 7983, 6033, 5150, 2015, 7967, 2172, 5375, 5115, 9922, 7886, 7860, 9848, 9433, 1490, 8683]`
 ##### Попарно проверили числа
-`['11', '00', '11', '11', '11', '11', '00', '11', '11', '11', '11', '11', '00', '00', '00', '11', '11', '00', '11', '11']`
+`['1', '0', '1', '1', '1', '1', '0', '1', '1', '1', '1', '1', '0', '0', '0', '1', '1', '0', '1', '1']`
 ##### Вернули максимальные длины
 `max 1 = 5, max 0 = 3`

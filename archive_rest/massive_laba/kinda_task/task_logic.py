@@ -29,5 +29,57 @@ def max_el(mas: tuple) -> tuple:
     return mas
 
 
+def chered_checker(number: int, num_len: int, divide: int) -> str:
+    """
+    TASK B8
+        if n'th and (n-1)'th element give the same remainder % 2 -> return 0
+        else -> return 1
+
+        kinda yes/no
+
+    TASK C8
+        if n'th element == (n - 1)'th -> return 0
+        else -> return 1
+    """
+    for i in range(num_len - 1):
+        if number % divide == (number // 10) % divide:
+            return '0'
+        number //= 10
+    return '1'
+
+
+def consecutive_result(mas_len: int, result_mas: tuple) -> tuple:
+    """
+    consecutive 1 in the row = res1
+    consecutive 0 in the row = res0
+
+    while we finding out that n == n + 1 -> count += 1
+    else: if count > the longest row (res1 / res0) -> res = count
+    reseting count -> count = 1
+    """
+    count = 1
+
+    res1 = 0
+    res0 = 0
+
+    for i in range(mas_len - 1):
+        if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '1':
+            count += 1
+        else:
+            res1 = max(res1, count)
+            count = 1
+
+    count = 1
+
+    for i in range(mas_len - 1):
+        if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '0':
+            count += 1
+        else:
+            res0 = max(res0, count)
+            count = 1
+
+    return res1, res0
+
+
 if __name__ == '__main__':
     print('You cant run this file as main')
