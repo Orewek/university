@@ -1,5 +1,6 @@
 from kinda_task.task_logic import mean_arif, min_el, max_el
 from kinda_task.task_logic import chered_checker, consecutive_result
+from kinda_task.task_logic import bubble_sort
 
 
 def task_menu(action: int, mas: tuple) -> tuple:
@@ -8,7 +9,8 @@ def task_menu(action: int, mas: tuple) -> tuple:
         2: min_el,
         3: max_el,
         4: task_b8,
-        5: task_c8
+        5: task_c8,
+        6: bubble_sort
     }
     mas = switcher[action](mas)
     return mas
@@ -29,6 +31,8 @@ def task_io(mas: tuple) -> tuple:
                  3: maxmimun element
                  4: even / odd pairs
                  5: same digit pairs
+
+                 6: sort
                  """
     print(task_table)
 
@@ -53,7 +57,6 @@ def task_b8(mas: tuple) -> tuple:
     result_mas = []
 
     for i in range(len(mas)):
-        num_len = len(mas[i])
         result = chered_checker(int(mas[i]), len(mas[i]), 2)
         result_mas.append(result)
 

@@ -1,3 +1,6 @@
+from decorators.decorator import mas_before_after, str_to_int, count_time
+
+
 def mean_arif(mas: tuple) -> tuple:
     """
     Calculation arif sum of whole mas el
@@ -81,5 +84,19 @@ def consecutive_result(mas_len: int, result_mas: tuple) -> tuple:
     return res1, res0
 
 
+@mas_before_after
+@str_to_int
+@count_time
+def bubble_sort(mas: tuple) -> tuple:
+    for _ in range(len(mas)):
+        for i in range(len(mas) - 1):
+            if int(mas[i]) > int(mas[i + 1]):
+                mas[i], mas[i + 1] = mas[i + 1], mas[i]
+    return mas
+
+
 if __name__ == '__main__':
     print('You cant run this file as main')
+    mas = ['989', '213', '832', '932', '731', '84331', '232']
+    mas = mas.sort()
+    print(mas)
