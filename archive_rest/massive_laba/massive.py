@@ -1,4 +1,4 @@
-from input_mas.input_mas_io import create_mas
+from input_mas.input_mas_io import create_mas_io
 from adjust_mas.adjust_mas_io import adjust_massive
 from output.output_mas import show_mas
 from kinda_task.task import task_io
@@ -6,7 +6,7 @@ from kinda_task.task import task_io
 
 def menu(action: int, mas: tuple) -> tuple:
     switcher = {
-        1: create_mas,
+        1: create_mas_io,
         2: adjust_massive,
         3: show_mas,
         4: task_io,
@@ -49,8 +49,8 @@ def main(mas: tuple) -> tuple:
 
 
 if __name__ == '__main__':
-    mas = []
-    # mas = ['989', '213', '832', '932', '731', '84331', '232']
+    # mas = []
+    mas = ['989', '213', '832', '932', '731', '84331', '232']
     mas = main(mas)
 
     # If user wanna continue, he can write 1/yes/y
