@@ -27,8 +27,8 @@ def task_io(mas: tuple) -> tuple:
                  1: mean arifmetical
                  2: minimal element
                  3: maxmimun element
-                 4: %2 chered cheker
-                 5: equal para digits
+                 4: even / odd pairs
+                 5: same digit pairs
                  """
     print(task_table)
 

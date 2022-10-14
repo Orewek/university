@@ -50,6 +50,7 @@ def main(mas: tuple) -> tuple:
 
 if __name__ == '__main__':
     mas = []
+    # mas = ['989', '213', '832', '932', '731', '84331', '232']
     mas = main(mas)
 
     # If user wanna continue, he can write 1/yes/y
