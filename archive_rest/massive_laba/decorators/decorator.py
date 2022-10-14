@@ -12,7 +12,7 @@ def mas_before_after(func):
     def wrapper(*args):
         print(f'\nMassive before operation {args[0]}')
         result = func(args[0], *args[1:])
-        print(f'Massive after operation {args[0]}\n')
+        print(f'\nMassive after operation {args[0]}\n')
 
         return result
     return wrapper
@@ -33,8 +33,10 @@ def str_to_int(func):
                 str_el.append(args[0][i])
 
         if str_count > 0:
-            print(f'{str_count} elements were changed: str -> int')
-            print(f'This elements were str {str_el}')
+            print(f'\n===STRING_TO_INT===STRING_TO_INT===STRING_TO_INT\n'
+                  f'{str_count} elements were changed: str -> int\n'
+                  f'This elements were str {str_el}\n'
+                  f'===STRING_TO_INT===STRING_TO_INT===STRING_TO_INT')
 
         result = func(args[0], *args[1:])
 
@@ -52,7 +54,9 @@ def count_time(func):
         end_time = time.time()
 
         time_result = end_time - start_time
-        print(f'This function had been working for {time_result} seconds')
+        print(f'\n==TIME===TIME===TIME===TIME===TIME===TIME===TIME===TIME=\n'
+              f'This function had been working for {time_result} seconds\n'
+              f'===TIME===TIME===TIME===TIME===TIME===TIME===TIME===TIME==')
 
         return result
     return wrapper
