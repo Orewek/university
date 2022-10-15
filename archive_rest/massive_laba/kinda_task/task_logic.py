@@ -1,6 +1,7 @@
-from decorators.decorator import mas_before_after, str_to_int, count_time
+from decorators.decor_logic import str2int_before, int2str_before
 
 
+@str2int_before
 def mean_arif(mas: tuple) -> tuple:
     """
     Calculation arif sum of whole mas el
@@ -8,7 +9,7 @@ def mean_arif(mas: tuple) -> tuple:
     """
     el_sum = 0
     for i in range(len(mas)):
-        el_sum += int(mas[i])
+        el_sum += mas[i]
 
     arif_sum = el_sum / len(mas)
     print(f'Arifmetical sum = {arif_sum}')
@@ -16,6 +17,7 @@ def mean_arif(mas: tuple) -> tuple:
     return mas
 
 
+@str2int_before
 def min_el(mas: tuple) -> tuple:
     """
     Outputing the min el of mas
@@ -24,6 +26,7 @@ def min_el(mas: tuple) -> tuple:
     return mas
 
 
+@str2int_before
 def max_el(mas: tuple) -> tuple:
     """
     Outputing the max el of mas
@@ -32,7 +35,7 @@ def max_el(mas: tuple) -> tuple:
     return mas
 
 
-def chered_checker(number: int, num_len: int, divide: int) -> str:
+def chered_checker(number: int, divide: int) -> str:
     """
     TASK B8
         if n'th and (n-1)'th element give the same remainder % 2 -> return 0
@@ -44,14 +47,15 @@ def chered_checker(number: int, num_len: int, divide: int) -> str:
         if n'th element == (n - 1)'th -> return 0
         else -> return 1
     """
-    for i in range(num_len - 1):
+    while number > 0:
         if number % divide == (number // 10) % divide:
             return '0'
         number //= 10
     return '1'
 
 
-def consecutive_result(mas_len: int, result_mas: tuple) -> tuple:
+@int2str_before
+def consecutive_result(result_mas: tuple, mas_len: int) -> tuple:
     """
     consecutive 1 in the row = res1
     consecutive 0 in the row = res0
@@ -84,19 +88,14 @@ def consecutive_result(mas_len: int, result_mas: tuple) -> tuple:
     return res1, res0
 
 
-@mas_before_after
-@str_to_int
-@count_time
+@str2int_before
 def bubble_sort(mas: tuple) -> tuple:
     for _ in range(len(mas)):
         for i in range(len(mas) - 1):
-            if int(mas[i]) > int(mas[i + 1]):
+            if mas[i] > mas[i + 1]:
                 mas[i], mas[i + 1] = mas[i + 1], mas[i]
     return mas
 
 
 if __name__ == '__main__':
     print('You cant run this file as main')
-    mas = ['989', '213', '832', '932', '731', '84331', '232']
-    mas = mas.sort()
-    print(mas)

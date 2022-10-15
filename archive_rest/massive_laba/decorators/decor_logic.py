@@ -5,7 +5,7 @@ HERES ONLY DECORATORS THAT HAS ANY SENSE W/O PRINTS
 """
 
 
-def str_to_int_logic(func):
+def str2int_before(func):
     """
     Making whole el in mas str -> int
     """
@@ -13,6 +13,35 @@ def str_to_int_logic(func):
         for i in range(len(args[0])):
             if type(args[0][i]) is str:
                 args[0][i] = int(args[0][i])
+
+        result = func(args[0], *args[1:])
+
+        return result
+    return wrapper
+
+
+def str2int_after(func):
+    """
+    Making the same, but after the function
+    """
+    def wrapper(*args):
+        result = func(args[0], *args[1:])
+        for i in range(len(args[0])):
+            if type(args[0][i]) is str:
+                args[0][i] = int(args[0][i])
+
+        return result
+    return wrapper
+
+
+def int2str_before(func):
+    """
+    Making whole el in mas: int -> str
+    """
+    def wrapper(*args):
+        for i in range(len(args[0])):
+            if type(args[0][i]) is int:
+                args[0][i] = str(args[0][i])
 
         result = func(args[0], *args[1:])
 

@@ -1,6 +1,7 @@
 from kinda_task.task_logic import mean_arif, min_el, max_el
 from kinda_task.task_logic import chered_checker, consecutive_result
 from kinda_task.task_logic import bubble_sort
+from decorators.decor_logic import str2int_before
 
 
 def task_menu(action: int, mas: tuple) -> tuple:
@@ -53,11 +54,12 @@ def task_io(mas: tuple) -> tuple:
     return mas
 
 
+@str2int_before
 def task_b8(mas: tuple) -> tuple:
     result_mas = []
 
     for i in range(len(mas)):
-        result = chered_checker(int(mas[i]), len(mas[i]), 2)
+        result = chered_checker(mas[i], 2)
         result_mas.append(result)
 
     """
@@ -74,17 +76,18 @@ def task_b8(mas: tuple) -> tuple:
     return mas
 
 
+@str2int_before
 def task_c8(mas: tuple) -> tuple:
     result_mas = []
 
     for i in range(len(mas)):
-        result = chered_checker(int(mas[i]), len(mas[i]), 10)
+        result = chered_checker(mas[i], 10)
         result_mas.append(result)
 
     print(mas)
     print(result_mas)
 
-    res1, res0 = consecutive_result(len(mas), result_mas)
+    res1, res0 = consecutive_result(result_mas, len(mas))
 
     print(f' max 1 = {res1}, max 0 = {res0}')
 

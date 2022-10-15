@@ -1,6 +1,9 @@
 from random import randint
+from decorators.decor_logic import str2int_after
+from decorators.decorator import mas_before_after
 
 
+@str2int_after
 def add_elements(mas: tuple) -> tuple:
     """
     input: massive with n elements
