@@ -48,7 +48,7 @@ def chered_checker(number: int, divide: int) -> str:
         if n'th element == (n - 1)'th -> return 0
         else -> return 1
     """
-    while number > 0:
+    while (number // 10) > 0:
         if number % divide == (number // 10) % divide:
             return '0'
         number //= 10
@@ -56,7 +56,7 @@ def chered_checker(number: int, divide: int) -> str:
 
 
 @int2str_before
-def consecutive_result(result_mas: tuple, mas_len: int) -> tuple:
+def consecutive_result(result_mas: tuple) -> tuple:
     """
     consecutive 1 in the row = res1
     consecutive 0 in the row = res0
@@ -70,7 +70,7 @@ def consecutive_result(result_mas: tuple, mas_len: int) -> tuple:
     res1 = 0
     res0 = 0
 
-    for i in range(mas_len - 1):
+    for i in range(len(result_mas) - 1):
         if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '1':
             count += 1
         else:
@@ -79,7 +79,7 @@ def consecutive_result(result_mas: tuple, mas_len: int) -> tuple:
 
     count = 1
 
-    for i in range(mas_len - 1):
+    for i in range(len(result_mas) - 1):
         if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '0':
             count += 1
         else:

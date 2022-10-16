@@ -87,7 +87,7 @@ def task_c8(mas: tuple) -> tuple:
     print(mas)
     print(result_mas)
 
-    res1, res0 = consecutive_result(result_mas, len(mas))
+    res1, res0 = consecutive_result(result_mas)
 
     print(f' max 1 = {res1}, max 0 = {res0}')
 
