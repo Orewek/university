@@ -1,4 +1,5 @@
 from decorators.decor_logic import str2int_before, int2str_before
+from decorators.decorator import complete_bar
 
 
 @str2int_before
@@ -89,6 +90,7 @@ def consecutive_result(result_mas: tuple, mas_len: int) -> tuple:
 
 
 @str2int_before
+@complete_bar
 def bubble_sort(mas: tuple) -> tuple:
     for _ in range(len(mas)):
         for i in range(len(mas) - 1):

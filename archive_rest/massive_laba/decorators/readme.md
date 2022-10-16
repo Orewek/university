@@ -5,6 +5,7 @@
 * `str_to_int` - для целочисленных операций
 * `count_time` - фиксируем время до операции, и после. end - start = время работы функции
 * `negative_positive` - Берем все числа по модулю
+* `complete_bar` - шкала прогресса при обработке массива. Помогает понять, сколько еще осталось ждать
 
 #### Также существуют `name_logic` декораторы
 #### Они выполняют какую-либо функции, не выводя что-либо на экан
@@ -77,6 +78,19 @@ def negative_positive(func):
             print(f'{neg_count} elements were changed: negative -> positive')
 
         result = func(args[0], *args[1:])
+
+        return result
+    return wrapper
+```
+`complete_bar`
+```py
+def complete_bar(func):
+    def wrapper(*args):
+        bar = Bar('Processing', max=len(args[0]))
+        for i in range(len(args[0])):
+            result = func(*args)
+            bar.next()
+        bar.finish()
 
         return result
     return wrapper
