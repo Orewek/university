@@ -56,7 +56,7 @@ def count_time(func):
 
         time_result = end_time - start_time
         print(f'\n==TIME===TIME===TIME===TIME===TIME===TIME===TIME===TIME=\n'
-              f'This function had been working for {time_result} seconds\n'
+              f'This function had been working for {round(time_result, 3)} seconds\n'
               f'===TIME===TIME===TIME===TIME===TIME===TIME===TIME===TIME==')
 
         return result
