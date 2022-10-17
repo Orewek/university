@@ -12,7 +12,7 @@ def mas_before_after(func):
     """
     def wrapper(*args):
         print(f'\nMassive before operation {args[0]}')
-        result = func(args[0], *args[1:])
+        result = func(*args)
         print(f'\nMassive after operation {args[0]}\n')
 
         return result
@@ -39,7 +39,7 @@ def str_to_int(func):
                   f'This elements were str {str_el}\n'
                   f'===STRING_TO_INT===STRING_TO_INT===STRING_TO_INT')
 
-        result = func(args[0], *args[1:])
+        result = func(*args)
 
         return result
     return wrapper
@@ -77,7 +77,7 @@ def negative_positive(func):
         if neg_count > 0:
             print(f'{neg_count} elements were changed: negative -> positive')
 
-        result = func(args[0], *args[1:])
+        result = func(*args)
 
         return result
     return wrapper

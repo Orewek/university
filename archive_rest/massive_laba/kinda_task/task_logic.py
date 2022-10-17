@@ -1,4 +1,3 @@
-from itertools import count
 from decorators.decor_logic import str2int_before, int2str_before
 from decorators.decorator import complete_bar, count_time
 
@@ -88,6 +87,7 @@ def consecutive_result(result_mas: tuple) -> tuple:
             count = 1
 
     return res1, res0
+
 
 @count_time
 @str2int_before
