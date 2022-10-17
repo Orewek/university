@@ -2,7 +2,6 @@ from input_mas.input_mas_io import create_mas_io
 from adjust_mas.adjust_mas_io import adjust_massive
 from output.output_mas import show_mas
 from kinda_task.task import task_io
-from program_exit import exit
 
 
 def menu(action: int, mas: tuple) -> tuple:
@@ -10,8 +9,7 @@ def menu(action: int, mas: tuple) -> tuple:
         1: create_mas_io,
         2: adjust_massive,
         3: show_mas,
-        4: task_io,
-        5: exit
+        4: task_io
     }
     mas = switcher[action](mas)
     return mas
@@ -46,9 +44,8 @@ def main(mas: tuple) -> tuple:
 
     action = int(action)
     mas = menu(action, mas)
-    if action != 5:
-        return mas
-    return 'exit'
+    return mas
+    
 
 
 if __name__ == '__main__':
@@ -57,10 +54,10 @@ if __name__ == '__main__':
 
     # If user wanna continue, he can write 1/yes/y
     approved = ['y', 'yes', '1']
-    if 'exit' not in mas:
-        print(f'One more?\n {approved}')
-        additional_check = input()
 
-        while additional_check.lower() in approved:
-            mas = main(mas)
-        print(mas)
+    print(f'One more?\n {approved}')
+    additional_check = input()
+
+    while additional_check.lower() in approved:
+        mas = main(mas)
+    print(mas)
