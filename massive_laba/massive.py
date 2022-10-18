@@ -60,4 +60,5 @@ if __name__ == '__main__':
 
     while additional_check.lower() in approved and 'exit' not in mas:
         mas = main(mas)
+    mas = mas[:-1]
     print(mas)
