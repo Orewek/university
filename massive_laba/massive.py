@@ -11,7 +11,7 @@ def menu(action: int, mas: tuple) -> tuple:
         3: show_mas,
         4: task_io
     }
-    mas = switcher[action](mas)
+    if action != 5: mas = switcher[action](mas)
     return mas
 
 
@@ -44,8 +44,8 @@ def main(mas: tuple) -> tuple:
 
     action = int(action)
     mas = menu(action, mas)
+    if action == 5: mas.append('exit')
     return mas
-    
 
 
 if __name__ == '__main__':
@@ -58,6 +58,6 @@ if __name__ == '__main__':
     print(f'One more?\n {approved}')
     additional_check = input()
 
-    while additional_check.lower() in approved:
+    while additional_check.lower() in approved and 'exit' not in mas:
         mas = main(mas)
     print(mas)
