@@ -24,7 +24,7 @@ def main(mas: tuple) -> tuple:
             5: exit
             """
     action_table = """
-                   U can write only one digit.
+                   U can write only one digit, 1 to 5
                    After operation u can continue working with massive
                    write -table to see the options
                    """
