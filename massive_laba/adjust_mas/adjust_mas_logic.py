@@ -2,7 +2,6 @@ def show_elements(mas: tuple):
     """
     enumerate each element in mas
     """
-
     for count, ma in enumerate(mas):
         print(f'{count + 1}: {ma}')
 
@@ -11,7 +10,6 @@ def change_elements(mas: tuple, change_mas: tuple) -> tuple:
     """
     changing/replacing elements
     """
-
     for i in range(len(mas)):
         if i in change_mas:
             print(f'{i + 1}: {mas[i]}. Type new element for this cell')
