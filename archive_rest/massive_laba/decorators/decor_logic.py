@@ -54,9 +54,9 @@ def negative_positive_logic(func):
     changing negative el to positive
     """
     def wrapper(*args):
-        for x in range(len(args[0])):
-            if x < 0:
-                x = abs(x)
+        for el in range(len(args[0])):
+            if el < 0:
+                el = abs(el)
 
         result = func(args[0], *args[1:])
 

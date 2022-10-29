@@ -1,7 +1,8 @@
-from kinda_task.task_logic import mean_arif, min_el, max_el
-from kinda_task.task_logic import chered_checker, consecutive_result
-from kinda_task.task_logic import bubble_sort
 from decorators.decor_logic import str2int_before
+
+from kinda_task.task_logic import bubble_sort
+from kinda_task.task_logic import chered_checker, consecutive_result
+from kinda_task.task_logic import max_el, mean_arif, min_el
 
 
 def task_menu(action: int, mas: tuple) -> tuple:
@@ -11,7 +12,7 @@ def task_menu(action: int, mas: tuple) -> tuple:
         3: max_el,
         4: task_b8,
         5: task_c8,
-        6: bubble_sort
+        6: bubble_sort,
     }
     mas = switcher[action](mas)
     return mas

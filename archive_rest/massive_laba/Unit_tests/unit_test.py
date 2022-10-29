@@ -1,7 +1,11 @@
 import unittest
+
 from adjust_mas.adjust_mas_logic import clear_mas, len_mas
-from kinda_task.task_logic import mean_arif, chered_checker, consecutive_result
+
+
 from input_mas.input_mas_logic import generate_el
+
+from kinda_task.task_logic import chered_checker, consecutive_result, mean_arif
 
 
 class TestMas(unittest.TestCase):
@@ -61,17 +65,17 @@ class TestMas(unittest.TestCase):
 
         mas = generate_el(mas, amount_elements)
 
-        OK = 1
+        ok = 1
         if len(mas) > 0:
             for i in range(len(mas)):
                 if mas[i] is not None:
-                    OK *= 1
+                    ok *= 1
                 else:
-                    OK *= 0
+                    ok *= 0
         else:
-            OK *= 0
+            ok *= 0
 
-        self.assertAlmostEqual(OK, 1)
+        self.assertAlmostEqual(ok, 1)
 
 
 if __name__ == '__main__':

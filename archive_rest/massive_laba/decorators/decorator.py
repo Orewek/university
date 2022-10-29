@@ -1,4 +1,5 @@
 import time
+
 from progress.bar import Bar
 
 
@@ -69,9 +70,9 @@ def negative_positive(func):
     """
     def wrapper(*args):
         neg_count = 0
-        for x in range(len(args[0])):
-            if x < 0:
-                x = abs(x)
+        for el in range(len(args[0])):
+            if el < 0:
+                el = abs(el)
                 neg_count += 1
 
         if neg_count > 0:
@@ -88,11 +89,11 @@ def complete_bar(func):
     Progress bar
     """
     def wrapper(*args):
-        bar = Bar('Processing', max=len(args[0]))
-        for i in range(len(args[0])):
+        progress_bar = Bar('Processing', max=len(args[0]))
+        for _ in range(len(args[0])):
             result = func(*args)
-            bar.next()
-        bar.finish()
+            progress_bar.next()
+        progress_bar.finish()
 
         return result
     return wrapper

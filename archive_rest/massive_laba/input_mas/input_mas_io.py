@@ -4,7 +4,7 @@ from input_mas.input_mas_logic import add_elements, generate_el
 def input_menu(action: int, mas: tuple) -> tuple:
     switcher = {
         1: create_mas_manually,
-        2: create_mas_generated
+        2: create_mas_generated,
     }
     mas = switcher[action](mas)
     return mas

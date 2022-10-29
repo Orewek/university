@@ -1,4 +1,5 @@
 from random import randint
+
 from decorators.decor_logic import str2int_after
 from decorators.decorator import mas_before_after
 

@@ -1,5 +1,5 @@
+from adjust_mas.adjust_mas_logic import change_elements, show_elements
 from adjust_mas.adjust_mas_logic import clear_mas, len_mas
-from adjust_mas.adjust_mas_logic import show_elements, change_elements
 
 
 def mas_elements(mas: tuple) -> tuple:
@@ -73,7 +73,7 @@ def adjust_massive(mas: tuple) -> tuple:
     switcher = {
         1: len_mas,
         2: mas_elements,
-        3: clear_mas
+        3: clear_mas,
     }
     # when we writing len of mas (1 action), we dont change anything
     if action != 1:
