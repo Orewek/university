@@ -23,11 +23,11 @@ def main(number: str) -> str:
     - Переводим каждой кусочек в 16 систему
     - Складываем получившиеся кусочки
     """
-    znak = [1 if number.startswith('-') else 0]
+    znak = 1 if number.startswith('-') else 0
     exp_stepen = bin(len(number.replace('-', '').split('.')[0]) - 1 + 127)[2:]
     change_dec_point = number.replace('-', '').replace('.', '')[1:]
 
-    res = f'{znak[0]}{exp_stepen}{change_dec_point}'.ljust(32, '0')
+    res = f'{znak}{exp_stepen}{change_dec_point}'.ljust(32, '0')
     hex_res = ''.join([hex(int(res[i:i + 4], 2))[2:] for i in range(0, 32, 4)])
 
     return hex_res
@@ -35,4 +35,5 @@ def main(number: str) -> str:
 
 if __name__ == '__main__':
     number = input()
-    print(main(number))
+    bit32 = main(number)
+    print(bit32)
