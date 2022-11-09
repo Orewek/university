@@ -1,4 +1,5 @@
- shading flat
+%Charykov Danila #25
+shading flat
 syms Xvektor;
 syms Yvektor;
 
