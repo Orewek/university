@@ -3,6 +3,7 @@ from decorators.decor_logic import str2int_before
 from kinda_task.task_logic import bubble_sort
 from kinda_task.task_logic import chered_checker, consecutive_result
 from kinda_task.task_logic import max_el, mean_arif, min_el
+from kinda_task.task_logic_2 import find_sum_max2_min1, selection_sort
 
 
 def task_menu(action: int, mas: tuple) -> tuple:
@@ -13,6 +14,8 @@ def task_menu(action: int, mas: tuple) -> tuple:
         4: task_b8,
         5: task_c8,
         6: bubble_sort,
+        7: selection_sort,
+        8: find_sum_max2_min1,
     }
     mas = switcher[action](mas)
     return mas
@@ -33,8 +36,10 @@ def task_io(mas: tuple) -> tuple:
                  3: maxmimun element
                  4: even / odd pairs
                  5: same digit pairs
+                 6: bubble sort
 
-                 6: sort
+                 7: selection sort
+                 8: max_even + min_odd
                  """
     print(task_table)
 

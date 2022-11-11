@@ -33,5 +33,17 @@ def generate_el(mas: tuple, amount_elements: int) -> tuple:
     return mas
 
 
+@str2int_after
+def generate_border(mas: tuple, amount_elements: int) -> tuple:
+    l_border = int(input())
+    r_border = int(input())
+
+    for _ in range(amount_elements):
+        number = randint(l_border, r_border)
+        mas.append(number)
+
+    return mas
+
+
 if __name__ == '__main__':
     print('You cant run this file as main')

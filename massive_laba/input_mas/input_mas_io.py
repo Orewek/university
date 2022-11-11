@@ -1,10 +1,11 @@
-from input_mas.input_mas_logic import add_elements, generate_el
+from input_mas.input_mas_logic import add_elements, generate_el, generate_border
 
 
 def input_menu(action: int, mas: tuple) -> tuple:
     switcher = {
         1: create_mas_manually,
         2: create_mas_generated,
+        3: generate_border,
     }
     mas = switcher[action](mas)
     return mas
@@ -17,6 +18,7 @@ def create_mas_io(mas: tuple) -> tuple:
     input_table = """
                 1: manually
                 2: generate
+                3: generate with borders
                 """
     action_table = """
                    U can write only one digit.
