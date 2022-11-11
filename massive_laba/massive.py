@@ -7,7 +7,7 @@ from kinda_task.task import task_io
 from output.output_mas import show_mas
 
 
-def menu(action: int, mas: tuple) -> tuple:
+def menu(action: int, mas: list) -> list:
     switcher = {
         1: create_mas_io,
         2: adjust_massive,
@@ -19,7 +19,7 @@ def menu(action: int, mas: tuple) -> tuple:
     return mas
 
 
-def main(mas: tuple) -> tuple:
+def main(mas: list) -> list:
     table = """
             1: input massive
             2: adjust massive
@@ -46,16 +46,14 @@ def main(mas: tuple) -> tuple:
             print(table)
         action = input()
 
-    action = int(action)
-    mas = menu(action, mas)
-    if action == 5:
+    mas = menu(int(action), mas)
+    if int(action) == 5:
         mas.append('exit')
     return mas
 
 
 if __name__ == '__main__':
-    mas = []
-    mas = main(mas)
+    mas = main(mas=[])
 
     # If user wanna continue, he can write 1/yes/y
     approved = ['y', 'yes', '1']

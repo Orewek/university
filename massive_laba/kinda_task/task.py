@@ -55,8 +55,7 @@ def task_io(mas: tuple) -> tuple:
             print(task_table)
         action = input()
 
-    action = int(action)
-    mas = task_menu(action, mas)
+    mas = task_menu(int(action), mas)
     return mas
 
 

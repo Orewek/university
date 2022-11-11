@@ -3,7 +3,7 @@ from decorators.decorator import complete_bar, count_time
 
 
 @str2int_before
-def mean_arif(mas: tuple) -> tuple:
+def mean_arif(mas: list) -> list:
     """
     Calculation arif sum of whole mas el
     Firstly count total sum and divide on amount of elements
@@ -19,7 +19,7 @@ def mean_arif(mas: tuple) -> tuple:
 
 
 @str2int_before
-def min_el(mas: tuple) -> tuple:
+def min_el(mas: list) -> list:
     """
     Outputing the min el of mas
     """
@@ -28,7 +28,7 @@ def min_el(mas: tuple) -> tuple:
 
 
 @str2int_before
-def max_el(mas: tuple) -> tuple:
+def max_el(mas: list) -> list:
     """
     Outputing the max el of mas
     """
@@ -56,7 +56,7 @@ def chered_checker(number: int, divide: int) -> str:
 
 
 @int2str_before
-def consecutive_result(result_mas: tuple) -> tuple:
+def consecutive_result(result_mas: list) -> list:
     """
     consecutive 1 in the row = res1
     consecutive 0 in the row = res0
@@ -92,7 +92,7 @@ def consecutive_result(result_mas: tuple) -> tuple:
 @count_time
 @str2int_before
 @complete_bar
-def bubble_sort(mas: tuple) -> tuple:
+def bubble_sort(mas: list) -> list:
     for _ in range(len(mas)):
         for i in range(len(mas) - 1):
             if mas[i] > mas[i + 1]:

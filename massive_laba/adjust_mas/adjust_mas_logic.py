@@ -1,12 +1,14 @@
-def show_elements(mas: tuple):
+def show_elements(mas: list) -> list:
     """
     enumerate each element in mas
     """
     for count, ma in enumerate(mas):
         print(f'{count + 1}: {ma}')
 
+    return mas
 
-def change_elements(mas: tuple, change_mas: tuple) -> tuple:
+
+def change_elements(mas: list, change_mas: list) -> list:
     """
     changing/replacing elements
     """
@@ -22,7 +24,7 @@ def change_elements(mas: tuple, change_mas: tuple) -> tuple:
     return mas
 
 
-def clear_mas(mas: tuple) -> tuple:
+def clear_mas(mas: list) -> list:
     """
     clearing massive (reinitialization)
     """
@@ -30,7 +32,7 @@ def clear_mas(mas: tuple) -> tuple:
     return mas
 
 
-def len_mas(mas: tuple) -> str:
+def len_mas(mas: list) -> str:
     """
     Just calculating and returning the len of mas
     """

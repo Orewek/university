@@ -1,4 +1,4 @@
-from input_mas.input_mas_logic import add_elements, generate_el, generate_border
+from input_mas.input_mas_logic import add_elements, generate_border, generate_el
 
 
 def input_menu(action: int, mas: tuple) -> tuple:
@@ -39,8 +39,7 @@ def create_mas_io(mas: tuple) -> tuple:
             print(input_table)
         action = input()
 
-    action = int(action)
-    mas = input_menu(action, mas)
+    mas = input_menu(int(action), mas)
     return mas
 
 
@@ -62,9 +61,8 @@ def create_mas_generated(mas: tuple) -> tuple:
     while amount_elements.isdigit() is False:
         print('You can write only digits')
         amount_elements = input()
-    amount_elements = int(amount_elements)
 
-    mas = generate_el(mas, amount_elements)
+    mas = generate_el(mas, int(amount_elements))
 
     print(f'Your massive was sucsessfully generated\n mas: {mas}')
     return mas

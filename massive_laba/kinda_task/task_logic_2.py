@@ -3,7 +3,7 @@ from decorators.decorator import count_time
 
 
 @str2int_before
-def find_sum_max2_min1(mas: tuple) -> tuple:
+def find_sum_max2_min1(mas: list) -> list:
     """
     max_even - max el % 2 in mas
     min_odd - min el !% 2n in mas
@@ -27,7 +27,7 @@ def find_sum_max2_min1(mas: tuple) -> tuple:
     return mas
 
 
-def swap_el(index_max: int, perma_el: int, mas: tuple) -> tuple:
+def swap_el(index_max: int, perma_el: int, mas: list) -> list:
     """
     swapping max el in mas and last el in mas
     """
@@ -38,7 +38,7 @@ def swap_el(index_max: int, perma_el: int, mas: tuple) -> tuple:
 
 
 @str2int_before
-def selection_sort(mas: tuple) -> tuple:
+def selection_sort(mas: list) -> list:
     """
     perma_el - how many el's r permanent
     -(last 2, last 3 cuz the already max)

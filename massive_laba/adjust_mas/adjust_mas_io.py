@@ -25,7 +25,6 @@ def mas_elements(mas: tuple) -> tuple:
         while change_number.isdigit() is False:
             print('You can write only digits. Try again')
             change_number = input()
-        change_number = int(change_number)
 
         # Number of element cant be > than number of elemtns
         # ['a' 'b' 'c'] - 3, so user cant write smth > 3
@@ -33,7 +32,7 @@ def mas_elements(mas: tuple) -> tuple:
             print('Elements with this number doesnt exist. Try again')
             change_number = input()
 
-        change_mas.append(change_number)
+        change_mas.append(int(change_number))
         change_number = input()
 
     # System count elements from 0 to n - 1
@@ -68,7 +67,6 @@ def adjust_massive(mas: tuple) -> tuple:
         else:
             print(adjust_table)
         action = input()
-    action = int(action)
 
     switcher = {
         1: len_mas,
@@ -76,10 +74,10 @@ def adjust_massive(mas: tuple) -> tuple:
         3: clear_mas,
     }
     # when we writing len of mas (1 action), we dont change anything
-    if action != 1:
-        mas = switcher[action](mas)
+    if int(action) != 1:
+        mas = switcher[int(action)](mas)
     else:
-        mas_len = switcher[action](mas)
+        mas_len = switcher[int(action)](mas)
         print(mas_len)
 
     return mas

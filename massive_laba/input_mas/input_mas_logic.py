@@ -5,7 +5,7 @@ from decorators.decorator import mas_before_after
 
 
 @str2int_after
-def add_elements(mas: tuple) -> tuple:
+def add_elements(mas: list) -> list:
     """
     input: massive with n elements
     adding each elements into it
@@ -20,7 +20,7 @@ def add_elements(mas: tuple) -> tuple:
     return mas
 
 
-def generate_el(mas: tuple, amount_elements: int) -> tuple:
+def generate_el(mas: list, amount_elements: int) -> list:
     """
     input: massive with n elements
     generating (-1000; 1000) number
@@ -34,7 +34,7 @@ def generate_el(mas: tuple, amount_elements: int) -> tuple:
 
 
 @str2int_after
-def generate_border(mas: tuple, amount_elements: int) -> tuple:
+def generate_border(mas: list, amount_elements: int) -> list:
     l_border = int(input())
     r_border = int(input())
 
