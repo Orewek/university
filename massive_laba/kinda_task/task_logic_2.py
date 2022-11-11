@@ -3,7 +3,7 @@ from decorators.decorator import count_time
 
 
 @str2int_before
-def find_sum_max2_min1(mas: list) -> list:
+def sum_max2_min1(mas: list) -> list:
     """
     max_even - max el % 2 in mas
     min_odd - min el !% 2n in mas
@@ -60,6 +60,22 @@ def selection_sort(mas: list) -> list:
 
         mas = swap_el(index_el, perma_el, mas)
         perma_el += 1
+
+    return mas
+
+
+@str2int_before
+def chered_odd(mas: list) -> list:
+    """
+    pair - x'th and (x + 1)'th
+    x'th % 2 != (x + 1)'th % 2 => count += 1
+    """
+    count_odd_pairs = 0
+    for i in range(len(mas) - 1):
+        if mas[i] % 2 != mas[i + 1] % 2:
+            count_odd_pairs += 1
+
+    print(f'Found {count_odd_pairs} even_odd pairs')
 
     return mas
 

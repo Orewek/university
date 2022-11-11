@@ -1,9 +1,10 @@
 import time
+from typing import Any, Callable, Iterable
 
 from progress.bar import Bar
 
 
-def mas_before_after(func):
+def mas_before_after(func: Callable[[Iterable[Any]], Any]):
     """
     Massive before operation
     Operation is happening
@@ -11,7 +12,7 @@ def mas_before_after(func):
 
     Need to find some bugs or just to watch the diff
     """
-    def wrapper(*args):
+    def wrapper(*args: Any):
         print(f'\nMassive before operation {args[0]}')
         result = func(*args)
         print(f'\nMassive after operation {args[0]}\n')
@@ -20,11 +21,11 @@ def mas_before_after(func):
     return wrapper
 
 
-def str_to_int(func):
+def str_to_int(func: Callable[[Iterable[Any]], Any]):
     """
     Making whole el in mas str -> int
     """
-    def wrapper(*args):
+    def wrapper(*args: Any):
         str_count = 0
         str_el = []
 
@@ -46,11 +47,11 @@ def str_to_int(func):
     return wrapper
 
 
-def count_time(func):
+def count_time(func: Callable[[Iterable[Any]], Any]):
     """
     start_time; end_time; after operation (end - start)
     """
-    def wrapper(*args):
+    def wrapper(*args: Any):
         start_time = time.time()
         result = func(*args)
         end_time = time.time()
@@ -64,11 +65,11 @@ def count_time(func):
     return wrapper
 
 
-def negative_positive(func):
+def negative_positive(func: Callable[[Iterable[Any]], Any]):
     """
     changing negative el to positive
     """
-    def wrapper(*args):
+    def wrapper(*args: Any):
         neg_count = 0
         for el in range(len(args[0])):
             if el < 0:
@@ -84,11 +85,11 @@ def negative_positive(func):
     return wrapper
 
 
-def complete_bar(func):
+def complete_bar(func: Callable[[Iterable[Any]], Any]):
     """
     Progress bar
     """
-    def wrapper(*args):
+    def wrapper(*args: Any):
         progress_bar = Bar('Processing', max=len(args[0]))
         for _ in range(len(args[0])):
             result = func(*args)
