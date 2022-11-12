@@ -65,26 +65,26 @@ def consecutive_result(result_mas: list) -> tuple:
     else: if count > the longest row (res1 / res0) -> res = count
     reseting count -> count = 1
     """
-    count = 1
+    count1 = 1
+    count0 = 1
 
     res1 = 0
     res0 = 0
 
     for i in range(len(result_mas) - 1):
         if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '1':
-            count += 1
+            count1 += 1
+
         else:
-            res1 = max(res1, count)
-            count = 1
+            res1 = max(res1, count1)
+            count1 = 1
 
-    count = 1
-
-    for i in range(len(result_mas) - 1):
         if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '0':
-            count += 1
+            count0 += 1
+
         else:
-            res0 = max(res0, count)
-            count = 1
+            res0 = max(res0, count0)
+            count0 = 1
 
     return res1, res0
 

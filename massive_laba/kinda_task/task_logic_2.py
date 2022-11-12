@@ -24,6 +24,7 @@ def sum_max2_min1(mas: list) -> list:
               f'{max_even} + {min_odd} = {max_even + min_odd}')
     else:
         print('maximum even + minimum odd not in massive!')
+
     return mas
 
 
