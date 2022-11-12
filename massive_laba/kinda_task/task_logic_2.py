@@ -1,5 +1,5 @@
 from decorators.decor_logic import str2int_before
-from decorators.decorator import count_time
+from decorators.decorator import complete_bar, count_time
 
 
 @str2int_before
@@ -37,7 +37,9 @@ def swap_el(index_max: int, perma_el: int, mas: list) -> list:
     return mas
 
 
+@count_time
 @str2int_before
+@complete_bar
 def selection_sort(mas: list) -> list:
     """
     perma_el - how many el's r permanent
@@ -69,6 +71,7 @@ def chered_odd(mas: list) -> list:
     """
     pair - x'th and (x + 1)'th
     x'th % 2 != (x + 1)'th % 2 => count += 1
+    so, even_odd or odd_even += 1
     """
     count_odd_pairs = 0
     for i in range(len(mas) - 1):
@@ -76,6 +79,44 @@ def chered_odd(mas: list) -> list:
             count_odd_pairs += 1
 
     print(f'Found {count_odd_pairs} even_odd pairs')
+
+    return mas
+
+
+@count_time
+@str2int_before
+@complete_bar
+def quick_sort(mas: list) -> list:
+    """
+    Making this booffer for time decorator
+    cuz we have recursion, so its counts for each loop
+    and in we can see the time for each loop but not in total
+    """
+    mas = quick_sort_realization(mas)
+    return mas
+
+
+def quick_sort_realization(mas: list) -> list:
+    """
+    Quick_sort
+    pivot - first el in mas
+    sorting rest els to less; equal; greater
+    """
+    less = []
+    equal = []
+    greater = []
+
+    if len(mas) > 1:
+        pivot = mas[0]
+        for el in mas:
+            if el < pivot:
+                less.append(el)
+            if el == pivot:
+                equal.append(el)
+            if el > pivot:
+                greater.append(el)
+
+        return quick_sort(less) + equal + quick_sort(greater)
 
     return mas
 

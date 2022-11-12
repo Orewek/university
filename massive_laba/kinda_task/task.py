@@ -3,7 +3,8 @@ from decorators.decor_logic import str2int_before
 from kinda_task.task_logic import bubble_sort
 from kinda_task.task_logic import chered_checker, consecutive_result
 from kinda_task.task_logic import max_el, mean_arif, min_el
-from kinda_task.task_logic_2 import chered_odd, selection_sort, sum_max2_min1
+from kinda_task.task_logic_2 import chered_odd, selection_sort
+from kinda_task.task_logic_2 import quick_sort, sum_max2_min1
 
 
 def task_menu(action: int, mas: tuple) -> tuple:
@@ -14,9 +15,11 @@ def task_menu(action: int, mas: tuple) -> tuple:
         4: task_b8,
         5: task_c8,
         6: bubble_sort,
+
         7: selection_sort,
         8: sum_max2_min1,
         9: chered_odd,
+        10: quick_sort,
     }
     mas = switcher[action](mas)
     return mas
@@ -42,6 +45,7 @@ def task_io(mas: tuple) -> tuple:
                  7: selection sort
                  8: max_even + min_odd
                  9: odd pairs (second way)
+                 10: quick sort
                  """
     print(task_table)
 
@@ -50,7 +54,7 @@ def task_io(mas: tuple) -> tuple:
 
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
-    while len(action) != 1 or action.isdigit() is False:
+    while len(action) > 2 or action.isdigit() is False:
         if action != '-table':
             print(task_table)
         else:

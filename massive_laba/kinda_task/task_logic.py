@@ -56,7 +56,7 @@ def chered_checker(number: int, divide: int) -> str:
 
 
 @int2str_before
-def consecutive_result(result_mas: list) -> list:
+def consecutive_result(result_mas: list) -> tuple:
     """
     consecutive 1 in the row = res1
     consecutive 0 in the row = res0
