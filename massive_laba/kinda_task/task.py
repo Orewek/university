@@ -7,7 +7,7 @@ from kinda_task.task_logic_2 import chered_odd, selection_sort
 from kinda_task.task_logic_2 import quick_sort, sum_max2_min1
 
 
-def task_menu(action: int, mas: tuple) -> tuple:
+def task_menu(action: int, mas: list) -> list:
     switcher = {
         1: mean_arif,
         2: min_el,
@@ -25,7 +25,7 @@ def task_menu(action: int, mas: tuple) -> tuple:
     return mas
 
 
-def task_io(mas: tuple) -> tuple:
+def task_io(mas: list) -> list:
     """
     User can find min/max so + or * of el, median etc.
     Rn it has the name "task", cant change it
@@ -66,7 +66,7 @@ def task_io(mas: tuple) -> tuple:
 
 
 @str2int_before
-def task_b8(mas: tuple) -> tuple:
+def task_b8(mas: list) -> list:
     result_mas = []
 
     for i in range(len(mas)):
@@ -88,7 +88,7 @@ def task_b8(mas: tuple) -> tuple:
 
 
 @str2int_before
-def task_c8(mas: tuple) -> tuple:
+def task_c8(mas: list) -> list:
     result_mas = []
 
     for i in range(len(mas)):
