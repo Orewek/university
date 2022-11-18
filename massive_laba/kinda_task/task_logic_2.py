@@ -84,20 +84,8 @@ def chered_odd(mas: list) -> list:
     return mas
 
 
-@count_time
 @str2int_before
-@complete_bar
 def quick_sort(mas: list) -> list:
-    """
-    Making this booffer for time decorator
-    cuz we have recursion, so its counts for each loop
-    and in we can see the time for each loop but not in total
-    """
-    mas = quick_sort_realization(mas)
-    return mas
-
-
-def quick_sort_realization(mas: list) -> list:
     """
     Quick_sort
     pivot - first el in mas
