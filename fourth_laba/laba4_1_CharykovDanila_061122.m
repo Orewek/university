@@ -1,8 +1,9 @@
-%Charykov Danila #25
+%Charykov Danila #25 task 1
 shading flat
 syms Xvektor;
 syms Yvektor;
 
+%By cicle from 1 to 10
 for x = 1:10
     Xvektor(x) = x;
     Yvektor(x) = x * sin(x);
@@ -36,7 +37,7 @@ f1 = x_generated .* sin(x_generated);
 f2 = x_generated + sin(x_generated);
 f3 = exp(x_generated) + sin(x_generated);
 
-subplot(2, 3, 4);2
+subplot(2, 3, 4);
 plot(x_generated, f1);
 title('x * sin(x)')
 
