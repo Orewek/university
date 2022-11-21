@@ -1,3 +1,5 @@
+from Unit_tests.some_checks import check_int
+
 from input_mas.input_mas_logic import add_elements, generate_border, generate_el
 
 
@@ -5,7 +7,7 @@ def input_menu(action: int, mas: tuple) -> tuple:
     switcher = {
         1: create_mas_manually,
         2: create_mas_generated,
-        3: generate_border,
+        3: generate_border_io,
     }
     mas = switcher[action](mas)
     return mas
@@ -57,14 +59,35 @@ def create_mas_manually(mas: tuple) -> tuple:
 def create_mas_generated(mas: tuple) -> tuple:
     print('How many elements do u want?')
     amount_elements = input()
-
-    while amount_elements.isdigit() is False:
-        print('You can write only digits')
-        amount_elements = input()
+    amount_elements = check_int(amount_elements)
 
     mas = generate_el(mas, int(amount_elements))
 
     print(f'Your massive was sucsessfully generated\n mas: {mas}')
+    return mas
+
+
+def generate_border_io(mas: list) -> list:
+    """
+    Input l and r border
+    whole els in mas mas will be [lborder, rborder]
+    """
+    print('How many elements do u want?')
+    amount_els = input()
+    amount_els = check_int(amount_els)
+
+    print('Write left border')
+    l_border = input()
+    l_border = check_int(l_border)
+
+    print('Write right border')
+    r_border = input()
+    r_border = check_int(r_border)
+
+    if r_border > l_border:
+        l_border, r_border = r_border, l_border
+    mas = generate_border(mas, int(amount_els), int(l_border), int(r_border))
+
     return mas
 
 

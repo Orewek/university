@@ -1,3 +1,5 @@
+from Unit_tests.test_sort_speed import speed_checker
+
 from decorators.decor_logic import str2int_before
 
 from kinda_task.task_logic import bubble_sort
@@ -7,7 +9,7 @@ from kinda_task.task_logic_2 import chered_odd, selection_sort
 from kinda_task.task_logic_2 import quick_sort, sum_max2_min1
 
 
-def task_menu(action: int, mas: tuple) -> tuple:
+def task_menu(action: int, mas: list) -> list:
     switcher = {
         1: mean_arif,
         2: min_el,
@@ -20,12 +22,14 @@ def task_menu(action: int, mas: tuple) -> tuple:
         8: sum_max2_min1,
         9: chered_odd,
         10: quick_sort,
+
+        11: speed_checker,
     }
     mas = switcher[action](mas)
     return mas
 
 
-def task_io(mas: tuple) -> tuple:
+def task_io(mas: list) -> list:
     """
     User can find min/max so + or * of el, median etc.
     Rn it has the name "task", cant change it
@@ -46,6 +50,8 @@ def task_io(mas: tuple) -> tuple:
                  8: max_even + min_odd
                  9: odd pairs (second way)
                  10: quick sort
+
+                 11: Check sort's speed
                  """
     print(task_table)
 
@@ -66,7 +72,7 @@ def task_io(mas: tuple) -> tuple:
 
 
 @str2int_before
-def task_b8(mas: tuple) -> tuple:
+def task_b8(mas: list) -> list:
     result_mas = []
 
     for i in range(len(mas)):
@@ -88,7 +94,7 @@ def task_b8(mas: tuple) -> tuple:
 
 
 @str2int_before
-def task_c8(mas: tuple) -> tuple:
+def task_c8(mas: list) -> list:
     result_mas = []
 
     for i in range(len(mas)):

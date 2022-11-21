@@ -34,6 +34,7 @@ def main(number: str) -> str:
 
 
 if __name__ == '__main__':
+    print('Input bin number')
     number = input()
     bit32 = main(number)
     print(bit32)

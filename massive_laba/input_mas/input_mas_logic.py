@@ -34,11 +34,8 @@ def generate_el(mas: list, amount_elements: int) -> list:
 
 
 @str2int_after
-def generate_border(mas: list, amount_elements: int) -> list:
-    l_border = int(input())
-    r_border = int(input())
-
-    for _ in range(amount_elements):
+def generate_border(mas: list, amount_els: int, l_border: int, r_border: int) -> list:
+    for _ in range(amount_els):
         number = randint(l_border, r_border)
         mas.append(number)
 

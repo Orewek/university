@@ -1,3 +1,5 @@
+from Unit_tests.some_checks import check_int
+
 from adjust_mas.adjust_mas_logic import change_elements, show_elements
 from adjust_mas.adjust_mas_logic import clear_mas, len_mas
 
@@ -22,9 +24,7 @@ def mas_elements(mas: tuple) -> tuple:
     while change_number != '':
 
         # checking for letters
-        while change_number.isdigit() is False:
-            print('You can write only digits. Try again')
-            change_number = input()
+        change_number = check_int(change_number)
 
         # Number of element cant be > than number of elemtns
         # ['a' 'b' 'c'] - 3, so user cant write smth > 3
