@@ -39,8 +39,8 @@ def swap_el(index_max: int, perma_el: int, mas: list) -> list:
 
 
 @count_time
-@str2int_before
-@complete_bar
+# @str2int_before
+# @complete_bar
 def selection_sort(mas: list) -> list:
     """
     perma_el - how many el's r permanent

@@ -90,8 +90,8 @@ def consecutive_result(result_mas: list) -> tuple:
 
 
 @count_time
-@str2int_before
-@complete_bar
+# @str2int_before
+# @complete_bar
 def bubble_sort(mas: list) -> list:
     for _ in range(len(mas)):
         for i in range(len(mas) - 1):
