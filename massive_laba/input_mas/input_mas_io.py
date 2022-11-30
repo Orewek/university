@@ -84,7 +84,7 @@ def generate_border_io(mas: list) -> list:
     r_border = input()
     r_border = check_int(r_border)
 
-    if r_border > l_border:
+    if r_border < l_border:
         l_border, r_border = r_border, l_border
     mas = generate_border(mas, int(amount_els), int(l_border), int(r_border))
 

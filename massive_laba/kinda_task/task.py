@@ -1,7 +1,10 @@
-from Unit_tests.test_sort_speed import speed_checker
+from Unit_tests.some_checks import check_int
+from Unit_tests.test_sort_speed import speed_checker_search, speed_checker_sort
 
 from decorators.decor_logic import str2int_before
 
+from kinda_task.search import binary_search, interpolation_search
+from kinda_task.search import consistent_search, fibonacci_search
 from kinda_task.task_logic import bubble_sort
 from kinda_task.task_logic import chered_checker, consecutive_result
 from kinda_task.task_logic import max_el, mean_arif, min_el
@@ -23,9 +26,18 @@ def task_menu(action: int, mas: list) -> list:
         9: chered_odd,
         10: quick_sort,
 
-        11: speed_checker,
+        11: binary_search,
+        12: interpolation_search,
+        13: consistent_search,
+        14: fibonacci_search,
+
+        15: speed_checker_sort,
+        16: speed_checker_search,
     }
-    mas = switcher[action](mas)
+    if 11 <= action <= 14:
+        mas = search_collection(mas, action)
+    else:
+        mas = switcher[action](mas)
     return mas
 
 
@@ -39,20 +51,26 @@ def task_io(mas: list) -> list:
           'Heres the table what can you do:')
 
     task_table = """
-                 1: mean arifmetical
-                 2: minimal element
-                 3: maxmimun element
-                 4: even / odd pairs
-                 5: same digit pairs
-                 6: bubble sort
+                1: mean arifmetical
+                2: minimal element
+                3: maxmimun element
+                4: even / odd pairs
+                5: same digit pairs
+                6: bubble sort
 
-                 7: selection sort
-                 8: max_even + min_odd
-                 9: odd pairs (second way)
-                 10: quick sort
+                7: selection sort
+                8: max_even + min_odd
+                9: odd pairs (second way)
+                10: quick sort
 
-                 11: Check sort's speed
-                 """
+                11: binary search
+                12: interpolation search
+                13: consistent search
+                14: fibonacci search
+
+                15: Check sort speed
+                16: Check search el in massive speed
+                """
     print(task_table)
 
     print('What u wanna do? Write one digit')
@@ -110,6 +128,23 @@ def task_c8(mas: list) -> list:
 
     return mas
 
+
+def search_collection(mas: list, search: int) -> list:
+    print('Write which element you want to find in massive')
+    element = input()
+    check_int(element)
+
+    switcher = {
+        11: binary_search,
+        12: interpolation_search,
+        13: consistent_search,
+        14: fibonacci_search,
+    }
+
+    result = switcher[search](mas, int(element))
+    print(result)
+
+    return mas
 
 if __name__ == '__main__':
     print('You cant run this file as main')
