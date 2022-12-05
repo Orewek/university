@@ -35,6 +35,7 @@ def main(mas: list) -> list:
     print(table)
 
     print('What u wanna do? Write one digit')
+
     action = input()
 
     # checking for letters and multi-digits
@@ -53,7 +54,7 @@ def main(mas: list) -> list:
 
 
 if __name__ == '__main__':
-    mas = main(mas=[])
+    mas = main(mas=[415, -26, -231, -63, -984, -8, 15, 45, 213, -556, -510, -84, 280, 879, 565, 249])
 
     # If user wanna continue, he can write 1/yes/y
     approved = ['y', 'yes', '1']

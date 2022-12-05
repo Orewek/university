@@ -1,7 +1,7 @@
 from Unit_tests.some_checks import check_int
 from Unit_tests.test_sort_speed import speed_checker_search, speed_checker_sort
 
-from decorators.decor_logic import str2int_before
+from decorators.decor_logic import negative_positive_logic, str2int_before
 
 from kinda_task.search import binary_search, interpolation_search
 from kinda_task.search import consistent_search, fibonacci_search
@@ -10,6 +10,8 @@ from kinda_task.task_logic import chered_checker, consecutive_result
 from kinda_task.task_logic import max_el, mean_arif, min_el
 from kinda_task.task_logic_2 import chered_odd, selection_sort
 from kinda_task.task_logic_2 import quick_sort, sum_max2_min1
+from kinda_task.task_logic_3 import check_contain_5, prime_number
+from kinda_task.task_logic_3 import reverse_number, symmetrical_number
 
 
 def task_menu(action: int, mas: list) -> list:
@@ -33,6 +35,9 @@ def task_menu(action: int, mas: list) -> list:
 
         15: speed_checker_sort,
         16: speed_checker_search,
+
+        17: laba_3_b8,
+        18: laba_3_c5,
     }
     if 11 <= action <= 14:
         mas = search_collection(mas, action)
@@ -70,6 +75,9 @@ def task_io(mas: list) -> list:
 
                 15: Check sort speed
                 16: Check search el in massive speed
+
+                17: min symmetrical / reverse 100-999
+                18: sorting odds / removing prime w/o digit 5
                 """
     print(task_table)
 
@@ -145,6 +153,54 @@ def search_collection(mas: list, search: int) -> list:
     print(result)
 
     return mas
+
+
+@negative_positive_logic
+@str2int_before
+def laba_3_b8(mas: list) -> list:
+    max_number = 10 ** 10
+    for i in range(len(mas)):
+        if symmetrical_number(mas[i]) is True and max_number > mas[i] and mas[i] > 100:
+            max_number = mas[i]
+
+    if max_number == 10 ** 10:
+        print('0 symmetrical numbers have found')
+
+    else:
+        print(f'{max_number} is the lowest symmetrical number')
+
+    for i in range(len(mas)):
+        if len(str(mas[i])) == 3:
+            mas[i] = reverse_number(mas[i])
+
+    return mas
+
+
+@negative_positive_logic
+@str2int_before
+def laba_3_c5(mas: list) -> list:
+    # Removing prime numbers which doesnt contain digit 5
+    new_mas = []
+    for i in range(len(mas)):
+        if not(check_contain_5(mas[i]) is False and prime_number(mas[i]) is True):
+            new_mas.append(mas[i])
+
+    mas = new_mas
+
+    odd_els = []
+    for i in range(len(mas)):
+        if mas[i] % 2 == 1:
+            odd_els.append(mas[i])
+
+    odd_els = sorted(odd_els)
+    print(odd_els)
+    for i in range(len(mas)):
+        if mas[i] % 2 == 1:
+            mas[i] = odd_els[0]
+            odd_els.pop(0)
+
+    return mas
+
 
 if __name__ == '__main__':
     print('You cant run this file as main')

@@ -31,9 +31,12 @@ def speed_checker_sort(mas: list) -> list:
 def speed_checker_search(mas: list) -> list:
 
     binary_search(mas, 887)
-    # interpolation_search(mas, 887)
+    interpolation_search(mas, 887)
     consistent_search(mas, 887)
+
+    start_time = time.time()
     fibonacci_search(mas, 887)
+    end_time = time.time()
 
     start_time = time.time()
     mas.index(887)

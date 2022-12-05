@@ -57,8 +57,8 @@ def negative_positive_logic(func: Callable[[Iterable[Any]], Any]):
     """
     def wrapper(*args: Any):
         for el in range(len(args[0])):
-            if el < 0:
-                el = abs(el)
+            if args[0][el] < 0:
+                args[0][el] = abs(args[0][el])
 
         result = func(args[0], *args[1:])
 
