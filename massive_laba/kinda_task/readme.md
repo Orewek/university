@@ -240,3 +240,217 @@ def chered_odd(mas: list) -> list:
 
     return mas
 ```
+
+# Лаба #3
+
+## Последовательный поиск
+##### Просто перебираем эллементы в массиве
+```py
+def consistent_search(mas: list, find_el: int) -> int:
+    for i in range(len(mas)):
+        if mas[i] == find_el:
+            return i + 1
+    return -1
+```
+
+## Бинарный поиск
+
+```
+Берем эллемент посередине, допустим число которое мы ищем меньше
+Тогда мы делим массив пополам, и берем левую часть
+В этой часть находим опять эллемент в середине, и повторяем процедуру
+
+В конце остается один эллемент, если и он не совпадает, в след шаге массив будет пустым, а low = high, значит вернет -1
+```
+```py
+def binary_search(mas: list, find_el: int) -> int:
+    mas = sorted(mas)
+    low = 0
+    mid = 0
+    high = len(mas) - 1
+
+    while low < high:
+        mid = (low + high) // 2
+        if mas[mid] < find_el:
+            low = mid
+
+        if mas[mid] == find_el:
+            return mid + 1
+
+        if mas[mid] > find_el:
+            high = mid
+
+    return - 1
+```
+
+## Поиск фибоначчи
+
+```
+В отсортированном массиве ищем между какими числами (индексами) фибоначчи находится наше число
+
+Когда мы нашли этот отрезок, опять нумеруем эллементы (их индексы) через числа фибонначи
+
+В конце такого цикла у нас останется два или одно число, проверяем их на совпадение с нашим искомым эллементом
+```
+
+```py
+def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
+    mas = sorted(mas)
+    fib_index_1 = 1
+    fib_index_2 = 1
+
+    while fib_index_2 <= len(mas) - 1 and mas[fib_index_2] <= find_el:
+        # For example
+        # 1 + 1 = 2; 1 + 2 = 3
+        # 2 + 3 = 5; 3 + 5 = 8
+        fib_index_1 += fib_index_2
+        fib_index_2 += fib_index_1
+
+        # Heres might be 4 els in mas, but 2 + 3 = 5
+        # So fib_index_2 = 5, whichs > len(mas)
+        if fib_index_2 > len(mas):
+            fib_index_1 = fib_index_2 - fib_index_1
+            fib_index_2 = len(mas)
+            break
+
+    # Now find_el <= fib_i_2
+
+    while fib_index_1 > len(mas) - 1 or mas[fib_index_1] > find_el:
+        """
+        fib n'th and fib (n + 1)'th
+        to >>>
+        fib (n - 1)'th and fib n'th
+        """
+        type_var = fib_index_2
+        fib_index_2 = fib_index_1
+        fib_index_1 = type_var - fib_index_1
+
+    # Now fib_i_1 <= find_el <= fib_i_2
+    # Heres might be diff fib_i_2 than in prev while
+    new_mas = []
+    # Cutting new mas
+    for i in range(fib_index_1, fib_index_2):
+        new_mas.append(mas[i])
+
+    # Checking the corners
+    if fib_index_1 == fib_index_2 or fib_index_1 == 0:
+        if mas[0] == find_el:
+            return total_index + fib_index_1 + 1
+        if mas[-1] == find_el:
+            return total_index + fib_index_1 + 2
+        else:
+            return -1
+
+    return fibonacci_search(new_mas, find_el, total_index + fib_index_1)
+```
+
+## Интерполяционный поиск
+
+```py
+def interpolation_search(mas: list, find_el: int) -> int:
+    mas = sorted(mas)
+    left = 0
+    right = len(mas) - 1
+
+    # If mas[0] == mas[-1] means that whole mas contains same el
+    if mas[0] == mas[-1]:
+        return 0
+
+    while mas[left] <= find_el <= mas[right]:
+        mid = left + int((find_el - mas[left]) / (mas[right] - mas[left]) * (right - left))
+
+        if find_el < mas[mid]:
+            right = mid - 1
+
+        if find_el == mas[mid]:
+            return mid + 1
+
+        if find_el > mas[mid]:
+            left = mid - 1
+
+    return - 1
+```
+
+## Задание B8
+```
+Найти минимальное симметричное число, и перевернуть все числа с длиной равной три
+```
+```py
+def laba_3_b8(mas: list) -> list:
+    max_number = 10 ** 10
+    for i in range(len(mas)):
+        if symmetrical_number(mas[i]) is True and max_number > mas[i] and mas[i] > 100:
+            max_number = mas[i]
+
+    if max_number == 10 ** 10:
+        print('0 symmetrical numbers have found')
+
+    else:
+        print(f'{max_number} is the lowest symmetrical number')
+
+    for i in range(len(mas)):
+        if len(str(mas[i])) == 3:
+            mas[i] = reverse_number(mas[i])
+
+    return mas
+```
+##### Нахождеие симметричного числа
+```py
+def symmetrical_number(number: int) -> bool:
+    digits_of_num = []
+    while number != 0:
+        digits_of_num.append(number % 10)
+        number //= 10
+
+    for i in range(len(digits_of_num) // 2):
+        if digits_of_num[i] != digits_of_num[len(digits_of_num) - 1 - i]:
+            return False
+
+    # if u wanna see whole symmetrical numbers in mas
+    # print(digits_of_num)
+    return True
+```
+##### Переворт числа
+```py
+def reverse_number(number: int) -> int:
+    digits_of_num = []
+    while number != 0:
+        digits_of_num.append(number % 10)
+        number //= 10
+
+    reversed_number = 0
+    for i in range(len(digits_of_num)):
+        reversed_number += digits_of_num[i] * (10 ** i)
+
+    return reversed_number
+```
+
+## Задание C5
+```
+Удалить из массива все простые числа без цифры пять
+Отсортировать все нечетные числа, при этом не трогая четные
+```
+```py
+def laba_3_c5(mas: list) -> list:
+    # Removing prime numbers which doesnt contain digit 5
+    new_mas = []
+    for i in range(len(mas)):
+        if not(check_contain_5(mas[i]) is False and prime_number(mas[i]) is True):
+            new_mas.append(mas[i])
+
+    mas = new_mas
+
+    odd_els = []
+    for i in range(len(mas)):
+        if mas[i] % 2 == 1:
+            odd_els.append(mas[i])
+
+    odd_els = sorted(odd_els)
+    print(odd_els)
+    for i in range(len(mas)):
+        if mas[i] % 2 == 1:
+            mas[i] = odd_els[0]
+            odd_els.pop(0)
+
+    return mas
+```
