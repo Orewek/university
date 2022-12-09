@@ -1,5 +1,7 @@
 from Unit_tests.some_checks import check_int
 
+from decorators.decorator import count_time
+
 from input_mas.input_mas_logic import add_elements, generate_border, generate_el
 
 
@@ -56,6 +58,7 @@ def create_mas_manually(mas: tuple) -> tuple:
     return mas
 
 
+@count_time
 def create_mas_generated(mas: tuple) -> tuple:
     print('How many elements do u want?')
     amount_elements = input()
@@ -63,10 +66,11 @@ def create_mas_generated(mas: tuple) -> tuple:
 
     mas = generate_el(mas, int(amount_elements))
 
-    print(f'Your massive was sucsessfully generated\n mas: {mas}')
+    # print(f'Your massive was sucsessfully generated\n mas: {mas}')
     return mas
 
 
+@count_time
 def generate_border_io(mas: list) -> list:
     """
     Input l and r border

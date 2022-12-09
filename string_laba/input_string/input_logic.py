@@ -19,9 +19,7 @@ def input_generate(user_str: str, amount_of_els: int) -> str:
             new_letter_code = randint(65, 122 + 1)
 
         add_letters += chr(new_letter_code)
-    print('1', add_letters)
     user_str += add_letters
-    print('2', user_str)
     return user_str
 
 
