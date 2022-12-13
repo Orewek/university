@@ -23,16 +23,27 @@ def letters_jump(user_str: str, find_el: str) -> list:
 
 
 def same_letters_find_el(find_el_index: list) -> list:
-    letters: List[list] = []
+    """
+    [p, 1] -> separating [i][j] to 2 diff lists
+    if we found p and its already in our list[i]
+    we should take his el from list[j] (so here j == i)
+    so our [p, 4] must change to [p, 1] in total
+    """
+    total_letter: List[list] = []
+    letters_ascii_letter: List[int] = []
+    letters_word_jump: List[int] = []
     for i in range(len(find_el_index)):
-        if find_el_index[i] not in letters:
-            letters.append(find_el_index[i])
+        if find_el_index[i][0] not in letters_ascii_letter:
+            letters_ascii_letter.append(find_el_index[i][0])
+            letters_word_jump.append(find_el_index[i][1])
+            total_letter.append([find_el_index[i][0], find_el_index[i][1]])
         else:
-            for j in range(len(letters)):
-                if letters[j][0] == find_el_index[i][0]:
-                    letters.append(find_el_index[i][0][letters[j][1]])
+            for j in range(len(find_el_index)):
+                if letters_ascii_letter[j] == find_el_index[i][0]:
+                    total_letter.append([find_el_index[i][0], letters_word_jump[j]])
+                    break
 
-    return letters
+    return total_letter
 
 
 def sec_search(user_str: str, find_el: str) -> list:
