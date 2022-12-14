@@ -1,11 +1,47 @@
+# Поиск подстроки в строке
+
+### Последовательный поиск
+```
+Идем по строке, делаем срез на длину подстроки, смотри == ли
+если не нашли выводим -1
+```
+```py
 def consistent_search(user_str: str, find_str: str) -> int:
     for i in range(len(user_str) - len(find_str)):
         if user_str[i:i + len(find_str)] == find_str:
             return i + 1
 
     return - 1
+```
 
 
+### Поиск через метод Кнута-Морриса-Пратта
+```
+У нас есть подстрока, которую мы ищем - это наш префикс
+Проходимся вдоль подстроки, и там ищем подстроку подстроки, а также одинаковые эл.
+Возращаем лист эллементов, с вложенным листом для каждого эл.
+```
+```py
+def set_status(find_el: str) -> dict:
+    """
+    Checking, might be that find_el contains same letters
+    for example in "apple" heres 2 'p'
+    """
+    status = {el: [0 for _ in range(len(find_el))] for el in set(find_el)}
+    for i in range(len(find_el)):
+        for j in range(i + 1):
+            if find_el[i - j:i] == find_el[0:j]:
+                status[find_el[j]][i] = j + 1
+    return status
+```
+```
+Делаем наш префикс
+берем уникальные буквы из этого префикса
+В соотвестивии с эллементами из префикса нумеруем эл. из строки
+Так, где номер под эллементов == len(подстрока), там и есть наша подстрока (ее конец)
+Возвращаем лист со всеми такими найдеными len(подстрока)
+```
+```py
 def kmp_logic(user_str: str, find_el: str) -> list:
     status = set_status(find_el)
     key_set = set(status.keys())
@@ -18,24 +54,13 @@ def kmp_logic(user_str: str, find_el: str) -> list:
             match.append(i - len(find_el) + 1)
             j = 0
     return match
+```
 
+### Метод Бойера-Мура
 
-def set_status(find_el: str) -> dict:
-    """
-    Checking, might be that find_el contains same letters
-    for example in "apple" heres 2 'p'
-    """
-    status = {el: [0 for _ in range(len(find_el))] for el in set(find_el)}
-    for i in range(len(find_el)):
-        for j in range(i + 1):
-            if find_el[i - j:i] == find_el[0:j]:
-                status[find_el[j]][i] = j + 1
-    return status
+``` Все пояснения в коде ```
 
-
-from typing import List
-
-
+```py
 def letters_jump(user_str: str, find_el: str) -> list:
     """
     numeric each letter in find_el (in reversed find_el)
@@ -55,8 +80,8 @@ def letters_jump(user_str: str, find_el: str) -> list:
         prefix[find_el_index[i][0]][1] = find_el_index[i][1]
 
     return prefix
-
-
+```
+```py
 def same_letters_find_el(find_el_index: list) -> list:
     """
     [p, 1] -> separating [i][j] to 2 diff lists
@@ -79,8 +104,8 @@ def same_letters_find_el(find_el_index: list) -> list:
                     break
 
     return total_letter
-
-
+```
+```py
 def boiera_mura_search(user_str: str, find_el: str) -> list:
     """
     by this prefix we will make jump
@@ -110,6 +135,4 @@ def boiera_mura_search(user_str: str, find_el: str) -> list:
             user_str_index += len(find_el)
 
     return result
-
-if __name__ == '__main__':
-    print('You cant run this file as main')
+```

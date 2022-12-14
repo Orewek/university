@@ -1,9 +1,10 @@
-from search_string.search_logic import kmp_logic
+from search_string.search_logic import boiera_mura_search, kmp_logic
 
 
 def search_menu(user_str: str, find_el: str, action: int) -> str:
     switcher = {
         1: kmp_logic,
+        2: boiera_mura_search,
     }
     user_str = switcher[action](user_str, find_el)
 
@@ -16,6 +17,7 @@ def input_find_ed(user_str: str) -> str:
 
     search_table = """
             1: Knuth-Morris-Pratt
+            2: Boierra-Mura
             """
 
     action_table = """
