@@ -4,12 +4,16 @@ from output_string.output_logic import output_user_str
 
 from search_string.search_io import input_find_ed
 
+from task.tasks import task_b9
+
 
 def main_menu(user_str: str, action: int) -> str:
     switcher = {
         1: input_string_io,
         2: output_user_str,
         3: input_find_ed,
+
+        4: task_b9,
     }
     user_str = switcher[action](user_str)
 
@@ -21,6 +25,8 @@ def main(user_str: str) -> str:
             1: input string
             2: output string
             3: search string
+
+            4: task b9
             """
 
     action_table = """
@@ -48,6 +54,6 @@ def main(user_str: str) -> str:
 
 
 if __name__ == '__main__':
-    user_str = 'a{iY{RallahlvprqVBBqJFm[CZVrQme{yMczJDXiJeHw[WTzxthoyw'
+    user_str = ''
     while True:
         user_str = main(user_str)
