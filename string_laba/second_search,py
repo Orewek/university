@@ -1,0 +1,74 @@
+from typing import List
+
+
+def letters_jump(user_str: str, find_el: str) -> list:
+    """
+    numeric each letter in find_el (in reversed find_el)
+    vpo -> [[o, 0], [p, 1], [v, 2]]
+    rest letters in ASCII will have [letter, len(find_el)]
+    """
+    # creating this [letter, len(find_el)]
+    prefix = [[i, len(find_el)] for i in range(255)]
+    # numeric this vpo
+    find_el_index = [[ord(find_el[::-1][i]), i] for i in range(len(find_el))]
+
+    # if letter was before, it must have same index as last one
+    find_el_index = same_letters_find_el(find_el_index)
+    # replacing this vpo stuff into prefix
+    # so, for vpo [v, len(find_el)] ([v, 3]) => [v, 2]
+    for i in range(len(find_el_index)):
+        prefix[find_el_index[i][0]][1] = find_el_index[i][1]
+
+    return prefix
+
+
+def same_letters_find_el(find_el_index: list) -> list:
+    letters: List[list] = []
+    for i in range(len(find_el_index)):
+        if find_el_index[i] not in letters:
+            letters.append(find_el_index[i])
+        else:
+            for j in range(len(letters)):
+                if letters[j][0] == find_el_index[i][0]:
+                    letters.append(find_el_index[i][0][letters[j][1]])
+
+    return letters
+
+
+def sec_search(user_str: str, find_el: str) -> list:
+    """
+    by this prefix we will make jump
+    lets say that [user_str = 'asdkjvpoijqvpoqego[qf', find_el = 'vpo']
+    in prefix [a, 3], so we go from index 0 to index 3 in user_str
+    same for [k, 3] to 6
+    user_str[6] is p, which is [p, 1] in prefix, so go to 7
+    in prefix [o, 0] so we check, does {
+      user_str[user_str_index - len(find_el) + 1: user_str_index + 1] == find_el
+    }
+    after we decide does that equal, we make += len(find_el)
+    and like that to the end
+    """
+    # making this prefix
+    prefix = letters_jump(user_str, find_el)
+    user_str_index = 0
+    result: List[int] = []
+    # by user_str_index we will make a jump
+    while user_str_index <= len(user_str):
+        if prefix[ord(user_str[user_str_index])][1] != 0:
+            # Adding this for jump
+            user_str_index += prefix[ord(user_str[user_str_index])][1]
+        else:
+            # Here our jump equal to 0
+            if user_str[user_str_index - len(find_el) + 1: user_str_index + 1] == find_el:
+                result.append(user_str_index - len(find_el) + 1)
+            user_str_index += len(find_el)
+
+    return result
+
+
+if __name__ == '__main__':
+    print('You cant run this file as main')
+    user_str = 'Hoola - Hoola girls like Hooligans'
+    find_el = 'Hooligan'
+    res = sec_search(user_str, find_el)
+    print(f'result: {res}')
