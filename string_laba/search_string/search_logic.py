@@ -99,7 +99,7 @@ def boiera_mura_search(user_str: str, find_el: str) -> list:
     user_str_index = 0
     result: List[int] = []
     # by user_str_index we will make a jump
-    while user_str_index <= len(user_str):
+    while user_str_index < len(user_str):
         if prefix[ord(user_str[user_str_index])][1] != 0:
             # Adding this for jump
             user_str_index += prefix[ord(user_str[user_str_index])][1]

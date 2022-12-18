@@ -54,6 +54,6 @@ def main(user_str: str) -> str:
 
 
 if __name__ == '__main__':
-    user_str = ''
+    user_str = 'YNdXYnaGyNpogcwWcPpZulwTW{DuVRWwnZwrntFTChdTdgUARb'
     while True:
         user_str = main(user_str)
