@@ -45,7 +45,7 @@ head
 % task 5
 
 %{
-file = fopen('Gosha_lox.txt', 'w')
+file = fopen('Kristina.txt', 'w')
 f1 = fprintf(file, '%s', '1 2 3 4 100', [newline '6 7 8 9 0.1 0.2 0.3 0.4 200', ...
             [newline '0.5 0.6 0.7 0.8 300', [newline 'Ларкина Кристина 9061234567']]]);
 %}
@@ -139,24 +139,26 @@ char(matrixx)
 
 
 % task 8 C
-% 
+% Creating a table and changing corners
+% Between cols making a line
+%{
 amount_of_cols = 10;
 valid_vals = setdiff(65:122, [91, 92, 93, 94, 95, 96]);
 matrix = valid_vals( randi(length(valid_vals), 10, 50));
 for j = 1:50
-    matrix(1,j) = 45;
-    matrix(10,j) = 45;
+    matrix(1, j) = 45;
+    matrix(10, j) = 45;
 end
 
 for i = 1:10
-    matrix(i,1) = 124;
-    matrix(i,50) = 124;
+    matrix(i, 1) = 124;
+    matrix(i, 50) = 124;
 end
 
-matrix(1,1) = 43;
-matrix(1,50) = 43;
-matrix(10,50) = 43;
-matrix(10,1) = 43;
+matrix(1, 1) = 43;
+matrix(1, 50) = 43;
+matrix(10 ,50) = 43;
+matrix(10 ,1) = 43;
 
 for i = 1:10
     for j = 1:50
@@ -168,53 +170,56 @@ for i = 1:10
     end
 end
 char(matrix)
+%}
 
 % task 9
+% input text, reverse it, while didnt find space, append to result
 %{
 fprintf('А что вы говорили? ...\n')
 text = input('>> ','s');
-newText = reverse(text);
-outcome = '';
-for x = 1:length(newText)
-    if newText(x) == ' '
+reversed_text = reverse(text);
+result = '';
+for x = 1:length(reversed_text)
+    if reversed_text(x) == ' '
         break
     end
-    outcome = append(outcome,newText(x));
+    result = append(result, reversed_text(x));
 end
-fprintf('В самом деле, %s?\n',reverse(outcome))
+fprintf('В самом деле, %s?\n', reverse(result))
 %}
+
 % task 10
-% NEED TO CHANGE THE WORDS
 %{
-quantifiers = ["все" "несколько" "каждые" "всякие" "некоторые" "немногие" "любые" "никакие"];
-nouns = ["студенты" "россияне" "учителя" "собаки" "кошки" "футболисты" "программисты" "математики"];
-verbs = ["любят" "обожают" "ненавидят" "презирают" "едят" "опасаются" "слушают" "играют"];
-nouns2 = ["футбол" "яблоки" "уроки" "учебу в школе" "музыку" "программирование" "школьные задания" "МАТЛАБ"];
-fprintf("%s %s %s %s\n",quantifiers(randi(8)), nouns(randi(8)), verbs(randi(8)), nouns2(randi(8)))
+quantifiers = ["все" "несколько" "многие" "некоторые" "каждый" "любые"];
+person = ["футболисты" "математики" "боб" "стол" "ребенок" "пальцы" "программисты"];
+verbs = ["хотят" "смотрят" "понимают" "читают" "хотят" "боятся" "идут" "играют"];
+object = ["крокодил" "апельсин" "пары" "танцев" "вероисповедание" "программирование" "зачет" "МатЛаб"];
+fprintf("%s %s %s %s\n", quantifiers(randi(6)), person(randi(7)), verbs(randi(8)), object(randi(8)))
 %}
+
 % task 11
+% input text, reverse it, change " " to " "; for each step print
 %{
-text = input('>> ','s');
-newText = reverse(text);
-outcome = '';
-for x = 1:length(newText)
-    if newText(x) == " "
-        newText(x) = "-";
+text = input('>> ', 's');
+reversed_text = reverse(text);
+result = '';
+for x = 1:length(reversed_text)
+    if reversed_text(x) == " "
+        reversed_text(x) = "-";
     end
-    outcome = append(outcome,newText(x));
-    fprintf("%s\n", reverse(outcome))
+    result = append(result, reversed_text(x));
+    fprintf("%s\n", reverse(result))
 end
 %}
 
 % task 12
+% input text, make lower, split, if in split[i] in predlog_soyz += 0; += 1
 %{
-dictionary = readlines('dictionary.txt');
-text = input('=> ','s');
-text = lower(text);
-textAr = split(text);
+predlog_soyz = readlines('predlog_soyz.txt');
+text = split(lower(input('=> ','s')));
 count = 0;
-for str = 1:size(textAr)
-    if contains(dictionary, textAr(str)) == 0
+for str = 1:size(text)
+    if contains(predlog_soyz, text(str)) == 0
         count = count + 1;
     end
 end
@@ -226,24 +231,23 @@ fprintf('%d - количество слов в предложении\n', count)
 countries = readlines('countries.txt');
 country = (countries(randi(length(countries))));
 answer = country;
-attempt = 0;
-country = char (country);
+country = char(country);
 country = country(randperm(length(country)));
+fprintf('%s\n', upper(country));
 
-fprintf('%s\n',upper(country));
-
-while attempt < 4
-    playerGuess = input('Введите название страны = ','s');
-    if playerGuess == answer
+attempts_count = 0;
+while attempts_count < 4
+    guesser_answer = input('Введите название страны = ','s');
+    if guesser_answer == answer
         fprintf('Поздравляю, вы угадали!\n')
         break;
     else
-        attempt = attempt + 1;
-        if attempt == 4
+        attempts_count = attempts_count + 1;
+        if attempts_count == 4
             fprintf('Неверно, Вы проиграли\nПравильный ответ = %s\n', answer);
             break
         end
-        fprintf('Неверно, у вас осталось %d попытки(а)\n', 4 - attempt);
+        fprintf('Неверно, у вас осталось %d попытки(а)\n', 4 - attempts_count);
     end
 end
 %}
