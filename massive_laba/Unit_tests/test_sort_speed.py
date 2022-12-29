@@ -29,17 +29,17 @@ def speed_checker_sort(mas: list) -> list:
 
 
 def speed_checker_search(mas: list) -> list:
-
-    binary_search(mas, 887)
-    interpolation_search(mas, 887)
-    consistent_search(mas, 887)
+    number = int(input())
+    binary_search(mas, number)
+    interpolation_search(mas, number)
+    consistent_search(mas, number)
 
     start_time = time.time()
-    fibonacci_search(mas, 887)
+    fibonacci_search(mas, number)
     end_time = time.time()
 
     start_time = time.time()
-    mas.index(887)
+    mas.index(number)
     end_time = time.time()
     print(f'PYTHON SEARCH TIME {end_time - start_time}')
 
