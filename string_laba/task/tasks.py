@@ -49,4 +49,3 @@ def same_letters(word: str) -> bool:
 
 if __name__ == '__main__':
     print('You cant run this file as main')
-    task_b9('')
