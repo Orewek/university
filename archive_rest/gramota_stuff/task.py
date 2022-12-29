@@ -7,12 +7,12 @@ def normal_view(integer: str, frac_part: str) -> str:
             return f'{integer[0]}.{integer[1:]}{frac_part} * 10^{str(len(integer[1:]))}'
         return f'{integer[0:2]}.{integer[2:]}{frac_part} * 10^{str(len(integer[1:]) - 1)}'
     else:
-        if not (integer.startswith('-')):
+        if (integer.startswith('-')):
             negative = '-'
         else:
             negative = ''
         if len(str(int(frac_part))) != 1:
-            return f'{negative}{str(int(frac_part))[0]}, {str(int(frac_part))[1:]} * 10^-({str(len(frac_part) - len((str(int(frac_part))) + 1))})'
+            return f'{negative}{str(int(frac_part))[0]}, {str(int(frac_part))[1:]} * 10^(-{str(len(frac_part) - len((str(int(frac_part)))) + 1)})'
         else:
             return f'{negative}{str(int(frac_part))} * 10^(-{str(len(frac_part) - len(str(int(frac_part))))})'
 
@@ -35,7 +35,7 @@ def to_bin_frac(frac_part: str) -> str:
     """
     to bin frac part
     """
-    amount_of_digits = 20  # how many digits
+    amount_of_digits = 20
     bin_frac = ''
     if len(str(int(frac_part))) == len(frac_part):
         frac_part = int(frac_part)
@@ -62,8 +62,8 @@ def main() -> None:
     try:
         print('Input a number % 1 != 0\n')
         number = input()
-        # number = '-10.1'
-        integer, frac_part = number.split('.')
+        # number = '95821.99123'
+        integer, frac_part = str(number).split('.')
 
         if integer.startswith('-'):
             negative = '-'
@@ -71,9 +71,9 @@ def main() -> None:
             negative = ''
 
         if int(integer) != 0:
-            number = negative + str(bin(int(integer))[2:] + '.' + to_bin_frac(frac_part))
+            number = negative + str(bin(int(integer))[2:] + '.' + to_bin_frac(str(frac_part)))
         else:
-            number = f'{negative}0.{to_bin_frac(integer)}'
+            number = f'{negative}0.{to_bin_frac(frac_part)}'
 
         print(f'normalized view: {normal_view(integer, frac_part)}')
         print(f'non-normalized view: {non_normal_view(integer, frac_part)}')
@@ -104,3 +104,10 @@ def main() -> None:
 
 if __name__ == '__main__':
     main()
+
+    approved = ['y', 'yes', '1']
+    additional_check = input()
+    while additional_check.lower():
+        main()
+        additional_check = input()
+        print(f'One more?\n {approved}')
