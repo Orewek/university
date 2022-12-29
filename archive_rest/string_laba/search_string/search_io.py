@@ -1,10 +1,11 @@
 from search_string.search_logic import boiera_mura_search, kmp_logic
 
-
+from check_speed import time_speed
 def search_menu(user_str: str, find_el: str, action: int) -> str:
     switcher = {
         1: kmp_logic,
         2: boiera_mura_search,
+        3: time_speed,
     }
     user_str = switcher[action](user_str, find_el)
 
@@ -18,6 +19,7 @@ def input_find_ed(user_str: str) -> str:
     search_table = """
             1: Knuth-Morris-Pratt
             2: Boierra-Mura
+            3: compare time speed
             """
 
     action_table = """
