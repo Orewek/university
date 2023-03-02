@@ -1,5 +1,8 @@
 build: all
-
+ALLFILES=stack.c stack.h build.c
+FILES= stack.c build.c
 all:
-	gcc parasha.c build.c -o task
-	./task
+	gcc $(FILES) -o task
+
+check:
+	cppcheck --enable=all --suppress=missingIncludeSystem --platform=win64 $(ALLFILES)

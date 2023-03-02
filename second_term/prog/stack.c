@@ -4,40 +4,43 @@
 
 
 
-struct node *init(int value);
-struct node *push(int value, struct node **end);
-int pop(struct node **end);
+struct node *init(char *word);
+struct node *push(char *word, struct node **end);
+char *pop(struct node **end);
 void destroy(struct node *end);
 
 struct node{
-	int data;
+	char *data;
 	struct node *next;
 	struct node *prev;
 };	
 
-struct node *init(int value) {
+struct node *init(char *word) {
     struct node *node;
     node = (struct node *)malloc(sizeof(struct node));
-    node->data = value;
+    printf("New word was added: %s\n", word);
+    node->data = word;
     node->next = NULL;
     node->prev = NULL;
     return node;
 }
 
-struct node *push(int value, struct node **end) {
+struct node *push(char *word, struct node **end) {
     struct node *node;
     node = malloc(sizeof(struct node));
-    node->data = value;
+    printf("New word was added: %s\n", word);
+    node->data = word;
     node->next = NULL;
     node->prev = (*end);
     (*end) = node;
     return (*end);
 }
-int pop(struct node **end) {
+char *pop(struct node **end) {
     struct node *temp = *end;
     (*end) = (*end)->prev;
     (*end)->next = NULL;
-    int result = temp->data;
+    char *result = temp->data;
+    printf("Item that was deleted: %s\n", result);
     free(temp);
     return result;
 }
@@ -46,5 +49,6 @@ void destroy(struct node *end) {
     while (end->prev) {
         pop(&end);
     }
+    printf("stack was destroyed\n");
     free(end);
 }
