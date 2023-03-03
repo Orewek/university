@@ -227,7 +227,7 @@ fprintf('%d - количество слов в предложении\n', count)
 %}
 
 % task 13
-%{
+
 countries = readlines('countries.txt');
 country = (countries(randi(length(countries))));
 answer = country;
@@ -250,4 +250,3 @@ while attempts_count < 4
         fprintf('Неверно, у вас осталось %d попытки(а)\n', 4 - attempts_count);
     end
 end
-%}
