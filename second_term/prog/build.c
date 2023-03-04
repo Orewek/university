@@ -10,8 +10,6 @@
 int main(){
     FILE *file;
     char line[32] = {0};
-    size_t len = 0;
-    ssize_t read;
     struct node *student_stack = init("#");
 
     file = fopen("students.txt", "r");
@@ -20,7 +18,7 @@ int main(){
         exit(0);
     }
     while (fgets(line, 32, file)){
-        push(line, &student_stack);
+        printf("%p\n", push(line, &student_stack));
     }
     fclose(file);
     destroy(student_stack);

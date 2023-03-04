@@ -1,6 +1,7 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 
 
@@ -10,7 +11,7 @@ char *pop(struct node **end);
 void destroy(struct node *end);
 
 struct node{
-	char *data;
+	char data[32];
 	struct node *next;
 	struct node *prev;
 };	
@@ -19,7 +20,7 @@ struct node *init(char *word) {
     struct node *node;
     node = (struct node *)malloc(sizeof(struct node));
     printf("New word was added: %s\n", word);
-    node->data = word;
+    strcpy(node->data, word);
     node->next = NULL;
     node->prev = NULL;
     return node;
@@ -29,7 +30,7 @@ struct node *push(char *word, struct node **end) {
     struct node *node;
     node = malloc(sizeof(struct node));
     printf("New word was added: %s\n", word);
-    node->data = word;
+    strcpy(node->data, word);
     node->next = NULL;
     node->prev = (*end);
     (*end) = node;
@@ -40,7 +41,7 @@ char *pop(struct node **end) {
     (*end) = (*end)->prev;
     (*end)->next = NULL;
     char *result = temp->data;
-    printf("Item that was deleted: %s\n", result);
+    printf("%p Item that was deleted: %s\n", (*end), result);
     free(temp);
     return result;
 }
