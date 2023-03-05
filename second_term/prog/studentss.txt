@@ -1,6 +1,6 @@
-Yashin
-Shykov
-Shuvalov
-Pevchih
 Petrov
 Ivanov
+Shykov
+Shuvalov
+Yashin
+Pevchih

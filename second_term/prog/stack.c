@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 
-
-
 struct node *init();
 struct node *push(char *word, struct node **end);
 char *pop(struct node **end);
@@ -14,7 +12,7 @@ struct node{
 	char data[32];
 	struct node *next;
 	struct node *prev;
-};	
+};
 
 struct node *init() {
     struct node *node;
