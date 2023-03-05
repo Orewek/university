@@ -10,18 +10,26 @@
 int main(){
     FILE *file;
     char line[32] = {0};
-    struct node *student_stack = init("#");
+
+    struct node *input_stack = init();
+    struct node *result_stack = init();
 
     file = fopen("students.txt", "r");
     if (NULL == file){
         printf("cant find this .txt file!");
         exit(0);
     }
+    int lines_count = 0;
     while (fgets(line, 32, file)){
-        printf("%p\n", push(line, &student_stack));
+        push(line, &input_stack);
+        lines_count++;
     }
     fclose(file);
-    destroy(student_stack);
+
+
+    
+    destroy(result_stack);
+    destroy(input_stack);
     
     return 0;
 }
