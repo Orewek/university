@@ -9,7 +9,6 @@
 
 struct node{
 	char data[32];
-	struct node *next;
 	struct node *prev;
 };
 
