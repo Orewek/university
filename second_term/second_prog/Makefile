@@ -1,20 +1,20 @@
 all:
-	gcc -c -DBUILD_DLL parser.c
-	gcc -shared -o parser.dll parser.o -Wl,--add-stdcall-alias
+	gcc -c -DBUILD_DLL parser.c stack.c
+	move /y *.o object_files
 
+	gcc -shared -o dll/parser.dll object_files/parser.o -Wl,--add-stdcall-alias
+	gcc -shared -o dll/stack.dll object_files/stack.o -Wl,--add-stdcall-alias
+
+run:
 	python polish_notation.py
-
 
 check:
 	cppcheck --enable=all --suppress=missingIncludeSystem --platform=win64 *.c *.h
 	clang-format -n *.c *.h
-	gcc -Wall -Werror -Wextra *.c
+
 clean:
 	del *.o *.dll *.exe *.txt
+	del object_files\* dll \* /q 
 
 rebuild:
-	make clean
-	make all
-	make clean
-	make check
-	make clean
+	make clean all run clean check clean

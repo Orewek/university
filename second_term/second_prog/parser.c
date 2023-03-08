@@ -18,7 +18,7 @@ int next_token(token *t) {
     do {
         c = getchar();
     } while (c == ' ');
-    
+
     if (isdigit(c)) {
         t->type = T_NUMBER;
         t->value = 0;
@@ -39,7 +39,6 @@ int next_token(token *t) {
     } else if (c == '\n') {
         ungetc(c, stdin);
         return 0;
-
     }
 
     return 1;
