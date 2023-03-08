@@ -1,6 +1,6 @@
 #include <stddef.h>
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 struct node *init();
@@ -8,9 +8,9 @@ struct node *push(char *word, struct node **end);
 char *pop(struct node **end);
 void destroy(struct node *end);
 
-struct node{
-	char data[32];
-	struct node *prev;
+struct node {
+    char data[32];
+    struct node *prev;
 };
 
 struct node *init() {

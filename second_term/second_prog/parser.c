@@ -1,63 +1,69 @@
 #include <ctype.h>
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 
 #define T_NUMBER 0
 #define T_OPERATOR 1
 #define T_BRACKET 2
 
 typedef struct {
-  int type;
-  int value;
+    int type;
+    int value;
 } token;
 
 int next_token(token *t) {
-  char c;
+    char c;
 
-  do {
-    c = getchar();
-  } while (c == ' ');
-
-  if (isdigit(c)) {
-    t->type = T_NUMBER;
-    t->value = 0;
     do {
-      t->value = t->value * 10 + (c - '0');
-      c = getchar();
-    } while (isdigit(c));
-    ungetc(c, stdin); /* save the non-digit for next time */
+        c = getchar();
+    } while (c == ' ');
+    
+    if (isdigit(c)) {
+        t->type = T_NUMBER;
+        t->value = 0;
+        do {
+            t->value = t->value * 10 + (c - '0');
+            c = getchar();
+        } while (isdigit(c));
+        ungetc(c, stdin);
 
-  } else if (c == '+' || c == '-' || c == '*' || c == '/') {
-    t->type = T_OPERATOR;
-    t->value = c;
+    } else if (c == '+' || c == '-' || c == '*' || c == '/') {
+        t->type = T_OPERATOR;
+        t->value = c;
 
-  } else if (c == '(' || c == ')') {
-    t->type = T_BRACKET;
-    t->value = c;
+    } else if (c == '(' || c == ')') {
+        t->type = T_BRACKET;
+        t->value = c;
 
-  } else if (c == '\n') {
-    ungetc(c, stdin);
-    return 0;
+    } else if (c == '\n') {
+        ungetc(c, stdin);
+        exit(0);
 
-  } else {
+    }
 
-  }
-
-  return 1;
+    return 1;
 }
 
-int main() {
-
-  token t;
-
-  while (next_token(&t)) {
-    switch (t.type) {
-      case T_NUMBER:   printf("number   %d\n", t.value); break;
-      case T_OPERATOR: printf("operator %c\n", t.value); break;
-      case T_BRACKET:  printf("bracket  %c\n", t.value); break;
+void main() {
+    token t;
+    FILE *file;
+    file = fopen("stack.txt", "w");
+    while (next_token(&t)) {
+        switch (t.type) {
+            case T_NUMBER:
+                fprintf(file, "%d\n", t.value);
+                printf("number   %d\n", t.value);
+                break;
+            case T_OPERATOR:
+                fprintf(file, "%c\n", t.value);
+                printf("operator %c\n", t.value);
+                break;
+            case T_BRACKET:
+                fprintf(file, "%c\n", t.value);
+                printf("bracket  %c\n", t.value);
+                break;
+        }
     }
-  }
-
-  return 0;
+    fclose(file);
 }
