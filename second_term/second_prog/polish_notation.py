@@ -17,14 +17,9 @@ def remove_last_line(lines_amount: int) -> None:
 def main() -> None:
     parser = WinDLL(r".\dll\parser.dll")
     print("PARSER WAS SUCCESSFULLY LOADED")
-    stack = WinDLL(r".\dll\stack.dll")
-    print("STACK WAS SUCCSESSFULLY LOADED")
 
     lines_amount = parser.parse()
     remove_last_line(lines_amount)
-
-    
-
 
 
 if __name__ == '__main__':
