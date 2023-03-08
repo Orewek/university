@@ -10,7 +10,7 @@ check:
 	clang-format -n *.c *.h
 	gcc -Wall -Werror -Wextra *.c
 clean:
-	del *.o *.dll
+	del *.o *.dll *.exe *.txt
 
 rebuild:
 	make clean

@@ -38,32 +38,32 @@ int next_token(token *t) {
 
     } else if (c == '\n') {
         ungetc(c, stdin);
-        exit(0);
+        return 0;
 
     }
 
     return 1;
 }
 
-void main() {
+int parse() {
     token t;
     FILE *file;
-    file = fopen("stack.txt", "w");
+    file = fopen("temp.txt", "w");
+    int lines_count = 0;
     while (next_token(&t)) {
+        lines_count++;
         switch (t.type) {
             case T_NUMBER:
                 fprintf(file, "%d\n", t.value);
-                printf("number   %d\n", t.value);
                 break;
             case T_OPERATOR:
                 fprintf(file, "%c\n", t.value);
-                printf("operator %c\n", t.value);
                 break;
             case T_BRACKET:
                 fprintf(file, "%c\n", t.value);
-                printf("bracket  %c\n", t.value);
                 break;
         }
     }
     fclose(file);
+    return lines_count;
 }

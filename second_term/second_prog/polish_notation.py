@@ -1,13 +1,27 @@
 from ctypes import WinDLL
+import os
 
-parser = WinDLL(r".\parser.dll")
-print("PARSER WAS SUCCESSFULLY LOADED")
+def remove_last_line(lines_amount: int) -> None:
+    i = 1
+    with open("temp.txt", "r") as f:
+        with open("stack.txt", "w") as s:
+            for line in f:
+                if i != lines_amount:
+                    s.write(line)
+                i += 1
 
-# our_string = str(input())
-parser.main()
+    os.remove("temp.txt")
 
-with open("stack.txt", "r") as f:
-    lines = f.readlines()
-    for line in lines:
-        print(line)
-        print("here")
+
+
+def main() -> None:
+    parser = WinDLL(r".\parser.dll")
+    print("PARSER WAS SUCCESSFULLY LOADED")
+
+    # our_string = str(input())
+    lines_amount = parser.parse()
+    remove_last_line(lines_amount)
+
+
+if __name__ == '__main__':
+    main()
