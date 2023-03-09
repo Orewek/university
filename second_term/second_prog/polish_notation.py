@@ -1,5 +1,6 @@
-from ctypes import WinDLL
 import os
+from ctypes import WinDLL
+
 
 def remove_last_line(lines_amount: int) -> None:
     i = 1
@@ -11,7 +12,6 @@ def remove_last_line(lines_amount: int) -> None:
                 i += 1
 
     os.remove("temp.txt")
-
 
 
 def main() -> None:
