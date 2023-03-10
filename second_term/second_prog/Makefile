@@ -6,6 +6,7 @@ all:
 
 run:
 	python polish_notation.py
+	python check2.py
 
 check:
 	cppcheck --enable=all --suppress=missingIncludeSystem --platform=win64 *.c *.h

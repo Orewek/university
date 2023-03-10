@@ -1,16 +1,8 @@
 def infix_to_postfix() -> str:
-    operators = set(['+', '-', '*', '/', '(', ')', '^'])
+    operators = '+-*/()^'
     prio = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}
 
-    expression = ''
-    with open("stack.txt", "r") as f:
-        lines = f.readlines()
-
-        for line in lines:
-            expression += f' {line.strip()}'
-
-    expression = expression.strip()
-
+    expression = read_expression()
     print(f'expression: {expression}')
     stack = []
     output = ''
@@ -22,15 +14,47 @@ def infix_to_postfix() -> str:
             stack.append('(')
 
         elif char == ')':
-            while stack and stack[-1] != '(':
-                output += stack.pop()
-            stack.pop()
+            output = read_parenthesized_expression(stack, output)
+
         else:
-            while stack and stack[-1] != '(' and prio[char] <= prio[stack[-1]]:
-                output += stack.pop()
-            stack.append(char)
+            output = logical_postfix(stack, output, char, prio)
+
+    output = get_rest_stack(stack, output)
+
+    return output
+
+
+def read_expression() -> str:
+    expression = ''
+
+    with open("stack.txt", "r") as f:
+        lines = f.readlines()
+        for line in lines:
+            expression += f' {line.strip()}'
+
+    return expression.strip()
+
+
+def read_parenthesized_expression(stack: list, output: str) -> str:
+    while stack and stack[-1] != '(':
+        output += stack.pop()
+    stack.pop()
+
+    return output
+
+
+def get_rest_stack(stack: list, output: str) -> str:
     while stack:
         output += stack.pop()
+
+    return output
+
+
+def logical_postfix(stack: list, output: str, char: str, prio: list) -> str:
+    while stack and stack[-1] != '(' and prio[char] <= prio[stack[-1]]:
+        output += stack.pop()
+
+    stack.append(char)
 
     return output
 
