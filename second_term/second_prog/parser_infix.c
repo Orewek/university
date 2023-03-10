@@ -12,12 +12,7 @@ typedef struct {
     int value;
 } token;
 
-int next_token(token *t) {
-    char c;
-
-    do {
-        c = getchar();
-    } while (c == ' ');
+int next_token(token *t, char c) {
 
     if (isdigit(c)) {
         t->type = T_NUMBER;
@@ -44,24 +39,29 @@ int next_token(token *t) {
     return 1;
 }
 
-int parse() {
+int parse(char *word) {
     token t;
     FILE *file;
-    file = fopen("temp.txt", "w");
+    file = fopen("txts/temp.txt", "w");
     int lines_count = 0;
-    while (next_token(&t)) {
-        lines_count++;
-        switch (t.type) {
-            case T_NUMBER:
-                fprintf(file, "%d\n", t.value);
-                break;
-            case T_OPERATOR:
-                fprintf(file, "%c\n", t.value);
-                break;
-            case T_BRACKET:
-                fprintf(file, "%c\n", t.value);
-                break;
+    while (*word != '\0'){
+        char c = *word;
+    
+        while (next_token(&t, c)) {
+            lines_count++;
+            switch (t.type) {
+                case T_NUMBER:
+                    fprintf(file, "%d\n", t.value);
+                    break;
+                case T_OPERATOR:
+                    fprintf(file, "%c\n", t.value);
+                    break;
+                case T_BRACKET:
+                    fprintf(file, "%c\n", t.value);
+                    break;
+            }
         }
+        word++;
     }
     fclose(file);
     return lines_count;
