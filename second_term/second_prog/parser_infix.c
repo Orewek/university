@@ -12,18 +12,20 @@ typedef struct {
     int value;
 } token;
 
-int next_token(token *t, char c) {
-
+int next_token(token *t, char c, char *word) {
     if (isdigit(c)) {
         t->type = T_NUMBER;
         t->value = 0;
         do {
             t->value = t->value * 10 + (c - '0');
-            c = getchar();
+            word++;
+            c = *word;
+            printf("(%c): in loop\n", c);
         } while (isdigit(c));
         ungetc(c, stdin);
 
     } else if (c == '+' || c == '-' || c == '*' || c == '/') {
+        printf("here operator");
         t->type = T_OPERATOR;
         t->value = c;
 
@@ -45,23 +47,27 @@ int parse(char *word) {
     file = fopen("txts/temp.txt", "w");
     int lines_count = 0;
     while (*word != '\0'){
-        char c = *word;
-    
-        while (next_token(&t, c)) {
-            lines_count++;
-            switch (t.type) {
-                case T_NUMBER:
-                    fprintf(file, "%d\n", t.value);
-                    break;
-                case T_OPERATOR:
-                    fprintf(file, "%c\n", t.value);
-                    break;
-                case T_BRACKET:
-                    fprintf(file, "%c\n", t.value);
-                    break;
-            }
+        if (*word == ' '){
+            word++;
+            continue;
         }
-        word++;
+        char c = *word;
+        printf("%c\n", c);
+        next_token(&t, c, word);
+        lines_count++;
+        switch (t.type) {
+            case T_NUMBER:
+                fprintf(file, "%d\n", t.value);
+                break;
+            case T_OPERATOR:
+                fprintf(file, "%c\n", t.value);
+                printf("here in case %c", t.value);
+                break;
+            case T_BRACKET:
+                fprintf(file, "%c\n", t.value);
+                break;
+        }
+        word++;        
     }
     fclose(file);
     return lines_count;
