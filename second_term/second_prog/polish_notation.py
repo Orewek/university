@@ -22,9 +22,9 @@ def calculace_expression() -> float:
     with open(r".\txts\postfix.txt", "r") as f:
         lines = f.readlines()
         result = eval_postfix(lines)
-    
+
     return result
-    
+
 
 def main() -> None:
     parser = ctypes.WinDLL(r".\dll\parser.dll")
@@ -48,6 +48,7 @@ def main() -> None:
     result = calculace_expression()
 
     print(f"result: {result}")
+
 
 if __name__ == '__main__':
     main()
