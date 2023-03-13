@@ -20,12 +20,10 @@ int next_token(token *t, char c, char *word) {
             t->value = t->value * 10 + (c - '0');
             word++;
             c = *word;
-            printf("(%c): in loop\n", c);
         } while (isdigit(c));
         ungetc(c, stdin);
 
     } else if (c == '+' || c == '-' || c == '*' || c == '/') {
-        printf("here operator");
         t->type = T_OPERATOR;
         t->value = c;
 
@@ -61,7 +59,6 @@ int parse(char *word) {
                 break;
             case T_OPERATOR:
                 fprintf(file, "%c\n", t.value);
-                printf("here in case %c", t.value);
                 break;
             case T_BRACKET:
                 fprintf(file, "%c\n", t.value);

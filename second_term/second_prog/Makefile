@@ -1,8 +1,8 @@
 all:
-	gcc -c -DBUILD_DLL parser_infix.c
+	gcc -c -DBUILD_DLL parser.c
 	move /y *.o object_files
 
-	gcc -shared -o dll/parser_infix.dll object_files/parser_infix.o -Wl,--add-stdcall-alias
+	gcc -shared -o dll/parser.dll object_files/parser.o -Wl,--add-stdcall-alias
 
 run:
 	python polish_notation.py
