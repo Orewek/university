@@ -7,12 +7,19 @@
 #define T_OPERATOR 1
 #define T_BRACKET 2
 
+// struct with type of value and value
 typedef struct {
     int type;
     int value;
 } token;
 
 int next_token(token *t, char c, char *word) {
+    /*
+        Check if that is a digit
+        Also need to check is that a number
+        So if next char also a number:
+        (digit1 * 10 + digit2)
+    */
     if (isdigit(c)) {
         t->type = T_NUMBER;
         t->value = 0;
@@ -39,20 +46,19 @@ int next_token(token *t, char c, char *word) {
     return 1;
 }
 
-int parse(char *word) {
+void parse(char *word) {
     token t;
     FILE *file;
     file = fopen("txts/temp.txt", "w");
-    int lines_count = 0;
-    while (*word != '\0'){
-        if (*word == ' '){
+    while (*word != '\0') {
+        // skipping spaces
+        if (*word == ' ') {
             word++;
             continue;
         }
         char c = *word;
-        printf("%c\n", c);
         next_token(&t, c, word);
-        lines_count++;
+        // adding a number/operand into additional line into .txt
         switch (t.type) {
             case T_NUMBER:
                 fprintf(file, "%d\n", t.value);
@@ -64,8 +70,7 @@ int parse(char *word) {
                 fprintf(file, "%c\n", t.value);
                 break;
         }
-        word++;        
+        word++;
     }
     fclose(file);
-    return lines_count;
 }

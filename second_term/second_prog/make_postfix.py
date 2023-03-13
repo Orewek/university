@@ -1,4 +1,5 @@
 def infix_to_postfix() -> str:
+    """ making a string with postfix expression """
     expression = read_expression()
     print(f'expression: {expression}')
 
@@ -24,6 +25,7 @@ def infix_to_postfix() -> str:
 
 
 def read_expression() -> str:
+    """ reading math expression from the file """
     expression = ''
 
     with open(r".\txts\infix.txt", "r") as f:
@@ -35,6 +37,7 @@ def read_expression() -> str:
 
 
 def read_parenthesized_expression(stack: list, output: str) -> str:
+    """ readling expression into () """
     while stack and stack[-1] != '(':
         output += stack.pop()
     stack.pop()
@@ -43,6 +46,7 @@ def read_parenthesized_expression(stack: list, output: str) -> str:
 
 
 def get_rest_stack(stack: list, output: str) -> str:
+    """ reading rest of the stack """
     while stack:
         output += stack.pop()
 
@@ -50,6 +54,7 @@ def get_rest_stack(stack: list, output: str) -> str:
 
 
 def logical_postfix(stack: list, output: str, char: str) -> str:
+    """ reading stack with prio of operands """
     prio = {'+': 1, '-': 1, '*': 2, '/': 2, '^': 3}
 
     while stack and stack[-1] != '(' and prio[char] <= prio[stack[-1]]:

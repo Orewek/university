@@ -2,6 +2,7 @@ from make_postfix import infix_to_postfix
 
 
 def eval_postfix(text: list) -> float:
+    """ calculating math expression """
     stack = list()
     for symbol in text:
         symbol = symbol.strip()
@@ -25,6 +26,7 @@ if __name__ == '__main__':
 
 
 def elementary_calc(operand: str, stack: list) -> int:
+    """ making an elementary math calculations """
     if operand == "+":
         plus = stack.pop() + stack.pop()
     elif operand == "-":
