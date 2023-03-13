@@ -18,6 +18,14 @@ def change_file_name(lines_amount: int, file_name: str) -> None:
     os.remove(r'.\txts\temp.txt')
 
 
+def calculace_expression() -> float:
+    with open(r".\txts\postfix.txt", "r") as f:
+        lines = f.readlines()
+        result = eval_postfix(lines)
+    
+    return result
+    
+
 def main() -> None:
     parser = ctypes.WinDLL(r".\dll\parser.dll")
     print("PARSER_INFIX WAS SUCCESSFULLY LOADED")
@@ -37,10 +45,9 @@ def main() -> None:
     new_lines_amount = parser.parse(postfix_utf)
     change_file_name(new_lines_amount, "postfix")
 
-    with open(r".\txts\postfix.txt", "r") as f:
-        lines = f.readlines()
-        eval_postfix(lines)
+    result = calculace_expression()
 
+    print(f"result: {result}")
 
 if __name__ == '__main__':
     main()

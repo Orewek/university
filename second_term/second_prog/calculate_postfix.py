@@ -5,7 +5,6 @@ def eval_postfix(text: list) -> float:
     stack = list()
     for symbol in text:
         symbol = symbol.strip()
-        print(f'input symbol: "{symbol}"')
 
         if symbol == " ":
             continue
@@ -17,7 +16,6 @@ def eval_postfix(text: list) -> float:
             plus = elementary_calc(symbol, stack)
 
             stack.append(plus)
-            print("append in stack", plus)
 
     return stack.pop()
 
