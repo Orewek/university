@@ -41,7 +41,6 @@ def main() -> None:
     parser.parse.arguments = [ctypes.c_char_p]
     parser.parse(our_string_utf)
     change_file_name("infix")
-
     # creating string with postfix
     postfix = infix_to_postfix()
 
