@@ -34,6 +34,13 @@ def add_city(cities: list) -> list:
 
     return cities
 
+def delete_city(cities: list) -> list:
+    for count, city in enumerate(cities):
+        print(count, city)
+
+    return cities
+
+
 
 def main() -> None:
     moscow = city_17(13_000_000, 'Sobyanin', 876, 'Moscow')
