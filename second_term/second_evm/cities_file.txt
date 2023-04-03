@@ -1,0 +1,3 @@
+population,mayor,age,name
+13000000,Sobyanin,1147,Moscow
+7739000,Barack Obama,1796,Washington
