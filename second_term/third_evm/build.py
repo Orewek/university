@@ -1,9 +1,10 @@
+import datetime
 import os
 import shutil
-import datetime
 
 
 def choose_file(file_path: str) -> str:
+    """ choose a path for file/folder """
     file_path = input()
 
     if os.path.exists(file_path) is False:
@@ -17,6 +18,7 @@ def choose_file(file_path: str) -> str:
 
 
 def print_absolute_path(file_path: str) -> str:
+    """ output absolute path for file/folder """
     abs_path = os.path.abspath(file_path)
     print(f'ABSOLUTE PATH\n'
           f'-------------\n'
@@ -27,7 +29,7 @@ def print_absolute_path(file_path: str) -> str:
 
 
 def show_files_in_folder(file_path: str) -> str:
-
+    """ show all files into the folder """
     if os.path.isfile(file_path) is True:
         print('You must write a folder path')
 
@@ -42,6 +44,7 @@ def show_files_in_folder(file_path: str) -> str:
 
 
 def create_new_folder(file_path: str) -> str:
+    """ create a new folder """
     if file_path is None:
         file_path = input()
 
@@ -59,17 +62,18 @@ def create_new_folder(file_path: str) -> str:
 
 
 def show_all_file_properties(file_path: str) -> str:
+    """ show all information about the file """
     file_stats = os.stat(file_path)
 
     file_size = os.path.getsize(file_path)
-    file_last_time_modified = os.path.getmtime(file_path)
+    last_time_modified = os.path.getmtime(file_path)
     file_creation_time = os.path.getctime(file_path)
 
-    file_last_time_modified = datetime.datetime.fromtimestamp(file_last_time_modified)
+    last_time_modified = datetime.datetime.fromtimestamp(last_time_modified)
     file_creation_time = datetime.datetime.fromtimestamp(file_creation_time)
 
     print(f'file size: {file_size}\n'
-          f'time of last modification: {file_last_time_modified}\n'
+          f'time of last modification: {last_time_modified}\n'
           f'creation time: {file_creation_time}\n')
 
     print('print "more" for additional info')
@@ -89,6 +93,7 @@ def show_all_file_properties(file_path: str) -> str:
 
 
 def create_file_copy(file_path: str) -> str:
+    """ create a copy of the file """
     if "." in file_path:
         extension = file_path.split(".")
         copy_file_path = f'{extension[0]}_copy.{extension[1]}'
@@ -96,7 +101,6 @@ def create_file_copy(file_path: str) -> str:
         print('Choose a file path for a copy')
 
         new_path = input()
-
         while os.path.exists(new_path) is False or os.path.isfile(new_path) is True:
             print('You should write a competely a new path for that copy')
             new_path = input()
@@ -112,35 +116,29 @@ def create_file_copy(file_path: str) -> str:
 
 
 def show_all_spec_files_in_folder(file_path: str) -> str:
+    """ show all files in folder with exact extension """
     if os.path.isfile(file_path) is True:
         print('You must write a folder path')
     else:
-        all_files = []
-        for path in os.listdir(file_path):
-            if os.path.isfile(os.path.join(file_path, path)):
-                all_files.append(path)
+        all_files = make_files_list([], file_path)
+        print('Write an extension')
+        extension = input()
+        if "." not in extension:
+            extension = f'.{extension}'
 
-            print('Write an extension')
-            extension = input()
-            if "." not in extension:
-                extension = f'.{extension}'
-
-            for file in all_files:
-                if extension in file:
-                    print(file)
+        for file in all_files:
+            if extension in file:
+                print(file)
 
     return file_path
 
 
 def delete_file_or_folder(file_path: str) -> None:
+    """ delete file/folder """
     if os.path.isfile(file_path) is True:
         os.remove(file_path)
     else:
-        all_files = []
-        for path in os.listdir(file_path):
-            if os.path.isfile(os.path.join(file_path, path)):
-                all_files.append(path)
-        
+        all_files = make_files_list([], file_path)
         yes_confirmation = ['y', 'yes', 'yeah']
 
         for file in all_files:
@@ -149,12 +147,7 @@ def delete_file_or_folder(file_path: str) -> None:
             if confirmation.lower() in yes_confirmation:
                 os.remove(rf'{file_path}\{file}')
 
-
-        all_files = []
-        for path in os.listdir(file_path):
-            if os.path.isfile(os.path.join(file_path, path)):
-                all_files.append(path)
-
+        all_files = make_files_list([], file_path)
         if all_files == []:
             os.rmdir(file_path)
         else:
@@ -163,16 +156,23 @@ def delete_file_or_folder(file_path: str) -> None:
     return None
 
 
+def make_files_list(all_files: list, file_path: str) -> list:
+    """ make a list of files into the folder """
+    all_files = []
+    for path in os.listdir(file_path):
+        if os.path.isfile(os.path.join(file_path, path)):
+            all_files.append(path)
+
+    return all_files
+
+
 def find_file_in_folder(file_path: str) -> str:
+    """ check does the folder contain some file """
     if os.path.isfile(file_path) is True:
         print('You must write a folder path')
 
     else:
-        all_files = []
-        for path in os.listdir(file_path):
-            if os.path.isfile(os.path.join(file_path, path)):
-                all_files.append(path)
-
+        all_files = make_files_list([], file_path)
         print('Write a file_name that we are loooking for')
         file_name = input()
         if file_name in all_files:
@@ -199,7 +199,7 @@ def main_menu(file_path: str, action: int) -> str:
         print('You didnt write a file path, nothing to read!')
         return None
 
-    file_path = switcher[action](file_path)
+    file_path = str(switcher[action](file_path))
 
     return file_path
 
