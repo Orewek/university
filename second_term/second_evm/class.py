@@ -1,7 +1,8 @@
 import csv
 
 
-class city_17(object):
+class City_17(object):
+    """ a class with some methods and arguments """
     def __init__(self, ppl: int, mayor: str, age: int, name: str) -> None:
         self.population = ppl
         self.mayor = mayor
@@ -19,6 +20,7 @@ class city_17(object):
 
 
 def add_city(cities: list) -> list:
+    """ add a new city with some properties to list of cities """
     print('Write a name of city')
     name = str(input())
 
@@ -38,7 +40,7 @@ def add_city(cities: list) -> list:
         print('You can write only digits in age category')
         age = input()
 
-    city_name = city_17(int(population), mayor, int(age), name.capitalize())
+    city_name = City_17(int(population), mayor, int(age), name.capitalize())
     cities.append(city_name)
     print(f'{city_name.name} was succsessfully added')
 
@@ -46,6 +48,7 @@ def add_city(cities: list) -> list:
 
 
 def delete_city(cities: list) -> list:
+    """ delete a city from the list """
     for count, city in enumerate(cities):
         print(count + 1, city.name)
 
@@ -64,7 +67,23 @@ def delete_city(cities: list) -> list:
     return cities
 
 
+def action_menu(action_city: str, city: City_17, new_info: str) -> None:
+    """ change some atribute in city """
+    if int(action_city) == 1:
+        city.name = new_info
+
+    if int(action_city) == 2:
+        city.age = int(new_info)
+
+    if int(action_city) == 3:
+        city.population = int(new_info)
+
+    if int(action_city) == 4:
+        city.mayor = new_info
+
+
 def change_smth_city(cities: list) -> list:
+    """ change some information for city into the list """
     for count, city in enumerate(cities):
         print(count + 1, city.name)
 
@@ -103,22 +122,13 @@ def change_smth_city(cities: list) -> list:
         print('You can write only digits to age and population')
         new_info = input()
 
-    if int(action_city) == 1:
-        city.name = new_info
-
-    if int(action_city) == 2:
-        city.age = int(new_info)
-
-    if int(action_city) == 3:
-        city.population = int(new_info)
-
-    if int(action_city) == 4:
-        city.mayor = new_info
+    action_menu(action_city, city, new_info)
 
     return cities
 
 
 def show_city_info(cities: list) -> list:
+    """ show properties of exact city """
     for count, city in enumerate(cities):
         print(count + 1, city.name)
 
@@ -139,7 +149,31 @@ def show_city_info(cities: list) -> list:
     return cities
 
 
+def cities_satisty_filter(action_city: str, less_big: str, border: str) -> None:
+    """ print cities that satisfy the filter """
+    if int(action_city) == 2 and int(less_big) == 1:
+            for city in cities:
+                if city.age < int(border):
+                    print(city.name, city.age)
+
+    if int(action_city) == 2 and int(less_big) == 2:
+            for city in cities:
+                if city.age > int(border):
+                    print(city.name, city.age)
+
+    if int(action_city) == 3 and int(less_big) == 1:
+        for city in cities:
+            if city.population < int(border):
+                print(city.name, city.population)
+
+    if int(action_city) == 3 and int(less_big) == 2:
+        for city in cities:
+            if city.population > int(border):
+                print(city.name, city.population)
+
+
 def city_filter(cities: list) -> list:
+    """ ouput all cities that satisfy the filter """
     print('Choose which parameter should we use')
 
     table = """
@@ -170,32 +204,13 @@ def city_filter(cities: list) -> list:
         print('You can write only a number')
         border = input()
 
-    if int(action_city) == 2:
-        if int(less_big) == 1:
-            for city in cities:
-                if city.age < int(border):
-                    print(city.name, city.age)
-
-        if int(less_big) == 2:
-            for city in cities:
-                if city.age > int(border):
-                    print(city.name, city.age)
-
-    if int(action_city) == 3:
-        if int(less_big) == 1:
-            for city in cities:
-                if city.population < int(border):
-                    print(city.name, city.population)
-
-        if int(less_big) == 2:
-            for city in cities:
-                if city.population > int(border):
-                    print(city.name, city.population)
+    cities_satisty_filter(action_city, less_big, border)
 
     return cities
 
 
 def show_all_cities_info(cities: list) -> list:
+    """ show all cities from the list and their properties """
     for city in cities:
         print(f'name: {city.name}\n'
               f'population: {city.population}\n'
@@ -206,6 +221,7 @@ def show_all_cities_info(cities: list) -> list:
 
 
 def city_counter(cities: list) -> list:
+    """ show how many cities currently in the list """
     print(f'Have {len(cities)} cities in our list')
 
     return cities
@@ -251,7 +267,7 @@ def main(cities: list) -> list:
 
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
-    while len(action) != 1 or action.isdigit() is False or (not (0 < int(action) < 9)):
+    while action.isdigit() is False or (not (0 < int(action) < 9)):
         if action != '-table':
             print(action_table)
         else:
@@ -286,7 +302,7 @@ if __name__ == '__main__':
         lines = 0
         for row in csv_reader:
             if lines > 0 and row != []:
-                city_name = city_17(int(row[0]), row[1], int(row[2]), row[3])
+                city_name = City_17(int(row[0]), row[1], int(row[2]), row[3])
                 cities.append(city_name)
 
             lines += 1
@@ -301,4 +317,7 @@ if __name__ == '__main__':
             writer.writeheader()
 
             for city in cities:
-                writer.writerow({'population': f'{city.population}', 'mayor': f'{city.mayor}', 'age': f'{city.age}', 'name': f'{city.name}'})
+                writer.writerow({'population': f'{city.population}',
+                                'mayor': f'{city.mayor}',
+                                'age': f'{city.age}',
+                                'name': f'{city.name}'})
