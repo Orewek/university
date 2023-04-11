@@ -12,18 +12,26 @@ def cut(length_prices: list) -> int:
 def input_prices(length_prices: list) -> list:
     print('Write numbers one-by-one, write "exit" to quit')
     price = ''
-    meters = 1
-    while price.lower() != "exit":
-        print(f'Write a price for {meters} meters')
-        price = input()
-        if price.isdigit() is True:
-            meters += 1
+    meters = ''
+    included_list = []
+    while price.lower() != "exit" and meters.lower() != "exit":
+        print('Write a  meter')
+        meters = input()
+
+        if meters != "exit":
+            print(f'Write a price for {meters} meters')
+            price = input()
+
+        if price.isdigit() is True and meters.isdigit() is True and int(meters) not in included_list:
             length_prices.append(int(price))
-        elif price.lower() != "exit":
-            print('You can write only numbers as a price')
+            included_list.append(int(meters))
+
+        elif price.lower() != "exit" and meters.lower() != "exit":
+            print('You can write only numbers as a price or meter')
 
     print(f'Prices were succsessfully added\n'
-          f'Modidied list: {length_prices[1:]}')
+          f'Modidied pricee list: {length_prices[1:]}\n'
+          f'meters list: {included_list}')
     return length_prices
 
 
