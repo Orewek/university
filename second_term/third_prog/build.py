@@ -148,6 +148,9 @@ def main() -> None:
             total_price = max(total_price, new_price)
 
         total_list = make_correct_length(main_shard, list_indexes)
+        for i in range(10):
+            total_list[i] *= parts
+
         shard_total_list = make_correct_length(ost_meters, list_indexes)
         for i in range(10):
             total_list[i] += shard_total_list[i]
