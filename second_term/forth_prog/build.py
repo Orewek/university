@@ -3,6 +3,7 @@ from typing import Any
 
 
 def input_file_path() -> str:
+    """ input a path to .csv and check on validation """
     file_path = None
     print('Choose file')
 
@@ -20,6 +21,7 @@ def input_file_path() -> str:
 
 
 def read_file_data(file_path: str) -> Any:
+    """ parse to lists each el in text"""
     names = []
     volumes = []
     prices = []
@@ -39,6 +41,10 @@ def read_file_data(file_path: str) -> Any:
 
 
 def get_table(volumes: list, prices: list, bag_volume: int) -> list:
+    """
+    make a table with prices per volume
+    last column contains optimal (max) prices
+    """
     volume = [[0 for x in range(bag_volume + 1)] for y in range(len(prices) + 1)]
 
     for x in range(len(prices) + 1):
@@ -60,6 +66,7 @@ def get_optimal_prices_names(names: list,
                              volumes: list,
                              prices: list,
                              items: list) -> Any:
+    """ convert lists with [volume, price] to item_name """
     named_items = []
     optimal_price = 0
     print(items)
@@ -77,6 +84,10 @@ def get_items(names: list,
               prices: list,
               volume: list,
               bag_volume: int) -> list:
+    """
+    by looking at the last column in the table, make a list
+    subtract that from bag volume, to append the next item
+    """
 
     res = volume[len(prices)][bag_volume]
     items = []
