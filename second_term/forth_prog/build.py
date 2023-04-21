@@ -124,7 +124,8 @@ def main() -> None:
                                                           prices,
                                                           items)
 
-    print(named_items, optimal_price)
+    print(f'Items that give optimal price:\n{named_items}\n'
+          f'optimal price is ${optimal_price}')
 
 
 if __name__ == '__main__':
