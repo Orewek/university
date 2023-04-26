@@ -1,45 +1,52 @@
 import math
+from typing import Any
 
-import cv2 as cv
-import numpy as np
-import pandas as pd
-import matplotlib.pyplot as pltqwfe
-from scipy.interpolate import CubicSpline
 from MedianFrame import median_frame
 
+import cv2 as cv
 
-########################################################################################################################
-# Класс Детектор
+import matplotlib.pyplot as pltqwfe
+
+import numpy as np
+
+import pandas as pd
+
+from scipy.interpolate import CubicSpline
+
 
 class Detector:
-
-    def __init__(self, x, y):
-        self.detX = x  # Координата по x
-        self.detY = y  # Координата по y
-        self.avgColour = []  # Список средних значений цвета для детектора
-        self.detections = []  # Список активаций детектора 0/1
+    def __init__(self, x: int, y: int):
+        self.detX = x
+        self.detY = y
+        # Список средних значений цвета для детектора
+        self.avgColour = []
+        # Список активаций детектора 0/1
+        self.detections = []
 
     # Добавление среднего значения цвета для детектора
-    def add_avg_colour_sum(self, value):
+    def add_avg_colour_sum(self, value: int) -> None:
         self.avgColour.append(value)
 
 
-########################################################################################################################
 drawing = True
-mouseX, mouseY = -1, -1  # Переменные для хранения координат курсора мыши
-detector_height = 30  # Высота детектора в пикселях
-detector_width = 60  # Ширина детектора в пикселях
+# Переменные для хранения координат курсора мыши
+mouseX, mouseY = -1, -1
+# Высота детектора в пикселях
+detector_height = 30
+# Ширина детектора в пикселях
+detector_width = 60
 
-lanes = []  # Список полос
-detectors = []  # Список детекторов
+# Список полос
+lanes = []
+# Список детекторов
+detectors = []
 lanes_points = []
 
 xs_lanes = []
 cs_lanes = []
 
 
-########################################################################################################################
-def set_spline(lanes):
+def set_spline(lanes: list) -> Any:
     x = []
     y = []
     for linePoint in lanes:
@@ -50,36 +57,47 @@ def set_spline(lanes):
     return xs, cs
 
 
-########################################################################################################################
-def draw_detector(lane, colour_number):
-    colours = [[0, 0, 255], [0, 255, 0], [255, 0, 0], [0, 0, 127], [0, 127, 0], [127, 0, 0]]
+def draw_detector(lane: list, colour_number: int) -> None:
+    colours = [[0, 0, 255],
+               [0, 255, 0],
+               [255, 0, 0],
+               [0, 0, 127],
+               [0, 127, 0],
+               [127, 0, 0]]
     for detector in lane:
-        image = cv.rectangle(frame, (int(detector.detX - width / 2), int(detector.detY - heigth / 2)),
+        image = cv.rectangle(frame,
+                             (int(detector.detX - width / 2),
+                              int(detector.detY - heigth / 2)),
                              (int(detector.detX + width / 2), int(detector.detY + heigth / 2)),
                              colours[colour_number], 2)
 
 
-########################################################################################################################
 linePoints = []
-
 width = 60
 heigth = 30
 
 
-########################################################################################################################
-def sort_points(linePoints):
+def sort_points(linePoints: list) -> list:
     return sorted(linePoints, key=lambda x: x[0])
 
 
-########################################################################################################################
-
-def set_point(event, x, y, flags, param):
+def set_point(event: Any, x: int, y: int) -> None:
     global mouseX, mouseY, drawing
-    colours = [[0, 0, 255], [0, 255, 0], [255, 0, 0], [0, 0, 127], [0, 127, 0], [127, 0, 0]]
+    colours = [[0, 0, 255],
+               [0, 255, 0],
+               [255, 0, 0],
+               [0, 0, 127],
+               [0, 127, 0],
+               [127, 0, 0]]
     if event == cv.EVENT_LBUTTONDOWN:
         mouseX, mouseY = x, y
-        cv.putText(frame, "Lane  number: " + str(len(lanes_points)), (50, 50 + 50 * len(lanes_points)),
-                   cv.FONT_HERSHEY_SIMPLEX, 1, colours[len(lanes_points)], 2, cv.LINE_AA)
+        cv.putText(frame,
+                   f'Lane  number: {str(len(lanes_points))}',
+                   (50, 50 + 50 * len(lanes_points)),
+                   cv.FONT_HERSHEY_SIMPLEX, 1,
+                   colours[len(lanes_points)],
+                   2,
+                   cv.LINE_AA)
         image = cv.circle(frame, (mouseX, mouseY), 10, colours[len(lanes_points)], 2)
         linePoints.append((x, y))
         cv.imshow('Median frame', image)
@@ -90,8 +108,7 @@ def set_point(event, x, y, flags, param):
             print("lane added")
 
 
-########################################################################################################################
-def set_detectors(xs_lanes, cs_lanes):
+def set_detectors(xs_lanes: list, cs_lanes: list) -> list:
     i = 0
     for lane in xs_lanes:
         for point in lane:
@@ -102,29 +119,29 @@ def set_detectors(xs_lanes, cs_lanes):
     return lanes
 
 
-########################################################################################################################
-# Получение среднего значения цвета
-def get_avg_colour_sum(gray, detectors):
+def get_avg_colour_sum(gray: Any, detectors: list) -> None:
+    """ Получение среднего значения цвета """
     # для всех детекторов
     for detector in detectors:
         # Вырезаем область детектора
         detector_zone = gray[int((detector.detY - (heigth / 2))):int((detector.detY + (heigth / 2))),
-                        int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
-        avg_color_per_row = np.average(detector_zone, axis=0)  # считаем средние цвета для пикселей по горизонтали
-        avg_color = np.average(avg_color_per_row, axis=0)  # считаем средний цвет для средних цветов по горизонтали
+                             int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
+        # считаем средние цвета для пикселей по горизонтали
+        avg_color_per_row = np.average(detector_zone, axis=0)
+        # считаем средний цвет для средних цветов по горизонтали
+        avg_color = np.average(avg_color_per_row, axis=0)
         # Добавляем значение среднего цвета для детектора
         detector.add_avg_colour_sum(avg_color)
         # print(avg_color)  # Выводм значение среднего цвета для детектора в консоль
 
 
-########################################################################################################################
-# Получение среднего значения квадрата цвета
 def get_avg_square_sum(gray, detectors):
+    """ Получение среднего значения квадрата цвета """
     # для всех детекторов
     for detector in detectors:
         # Вырезаем область детектора
         detector_zone = gray[int((detector.detY - (heigth / 2))):int((detector.detY + (heigth / 2))),
-                        int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
+                             int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
         sum_pow = 0
         h, w = detector_zone.shape
         for i in range(0, h):
@@ -133,19 +150,19 @@ def get_avg_square_sum(gray, detectors):
         sum_sqr_avg = math.sqrt(sum_pow) / detector_zone.size
         # Добавляем значение среднего цвета для детектора
         detector.add_avg_colour_sum(sum_sqr_avg)
-        # print(avg_color)  # Выводм значение среднего цвета для детектора в консоль
+        # Выводм значение среднего цвета для детектора в консоль
+        # print(avg_color)
 
 
-########################################################################################################################
-# Получение среднего разницы цветов текущего и предыдущего кадров
-def get_avg_diff_sum(gray, previous_gray, detectors):
+def get_avg_diff_sum(gray: Any, previous_gray: Any, detectors: list) -> None:
+    """ Получение среднего разницы цветов текущего и предыдущего кадров """
     # для всех детекторов
     for detector in detectors:
         # Вырезаем область детектора
         detector_zone = gray[int((detector.detY - (heigth / 2))):int((detector.detY + (heigth / 2))),
-                        int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
+                             int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
         previous_detector_zone = previous_gray[int((detector.detY - (heigth / 2))):int((detector.detY + (heigth / 2))),
-                                 int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
+                                               int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
         sum_pow = 0
         h, w = detector_zone.shape
         for i in range(0, h):
@@ -157,16 +174,15 @@ def get_avg_diff_sum(gray, previous_gray, detectors):
         # print(avg_color)  # Выводм значение среднего цвета для детектора в консоль
 
 
-########################################################################################################################
-# Получение среднего разницы цветов текущего и медианного кадров
-def get_avg_median_sum(gray, median, detectors, eps):
+def get_avg_median_sum(gray: Any, median: Any, detectors: list, eps: float) -> None:
+    """ Получение среднего разницы цветов текущего и медианного кадров """
     # для всех детекторов
     for detector in detectors:
         # Вырезаем область детектора
         detector_zone = gray[int((detector.detY - (heigth / 2))):int((detector.detY + (heigth / 2))),
-                        int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
+                             int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
         median_detector_zone = median[int((detector.detY - (heigth / 2))):int((detector.detY + (heigth / 2))),
-                               int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
+                                      int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
         sum = 0
         h, w = detector_zone.shape
         for i in range(0, h):
@@ -179,9 +195,8 @@ def get_avg_median_sum(gray, median, detectors, eps):
         # print(avg_color)  # Выводм значение среднего цвета для детектора в консоль
 
 
-########################################################################################################################
-# Дискретизация активаций детекторов
-def detectors_discretization(detectors, frameCounter):
+def detectors_discretization(detectors: list, frameCounter: int) -> None:
+    """ Дискретизация активаций детекторов """
     # Значение разницы среднего цвета в % при котором будет проходить активация детектора
     activation_avg_colour_delta = 1.5
     # Задаем начальное значение активации всех детекторов на всех кадрах как 0
@@ -192,16 +207,14 @@ def detectors_discretization(detectors, frameCounter):
     for i in range(0, len(detectors)):
         for j in range(0, frameCounter - 1):
             # Считаем текущую разницу среднего цвета между текущим и предыдущим кадрами
-            current_avg_colour_delta = abs(
-                (detectors[i].avgColour[j] - detectors[i].avgColour[j + 1]) / detectors[i].avgColour[j]) * 100
+            current_avg_colour_delta = abs((detectors[i].avgColour[j] - detectors[i].avgColour[j + 1]) / detectors[i].avgColour[j]) * 100
             # Если разница больше заданной, то активируем детектор
             if current_avg_colour_delta > activation_avg_colour_delta:
                 detectors[i].detections[j + 1] = 1
 
 
-########################################################################################################################
-# Фильтр для дискретизации активаций детекторов
-def detectors_discretization_filter(detectors, frameCounter):
+def detectors_discretization_filter(detectors: list, frameCounter: int) -> None:
+    """ Фильтр для дискретизации активаций детекторов """
     frames_unite = 10  # Количество кадров на которые смотрим вперед от текущего
     # Проходим по всем детекторам полосы
     for i in range(0, len(detectors)):
@@ -228,8 +241,6 @@ def detectors_discretization_filter(detectors, frameCounter):
                 detectors[i].detections[j] = 0
 
 
-########################################################################################################################
-
 filename = "traffic2.mp4"
 cap = cv.VideoCapture(filename)
 if not cap.isOpened():
@@ -237,7 +248,6 @@ if not cap.isOpened():
 
 cv.namedWindow('Median frame', cv.WINDOW_NORMAL)
 cv.resizeWindow('Median frame', 800, 600)
-
 cv.setMouseCallback('Median frame', set_point)
 
 frame = median_frame(filename)
@@ -281,53 +291,48 @@ while cap.isOpened():
         break
 cv.destroyAllWindows()
 
-########################################################################################################################
 # Заполняем csv файл средними цветами с детекторов
 data = dict()
 lane_counter = 1
 for lane in lanes:
-    detectorNumber = 1
+    DETECTOR_NUMBER = 1
     for detector in lane:
-        new_dict = {"lane" + str(lane_counter) + " det" + str(detectorNumber): detector.avgColour}
+        new_dict = {f'lane {str(lane_counter)} det {str(DETECTOR_NUMBER)}': detector.avgColour}
         data.update(new_dict)
-        detectorNumber += 1
+        DETECTOR_NUMBER += 1
     lane_counter += 1
 df = pd.DataFrame(data)
 df.to_csv(r'AvgColours.csv', sep=';', index=False)
-########################################################################################################################
 # Дискретизируем значения детектров
 for lane in lanes:
     detectors_discretization(lane, frame_counter)
 
-########################################################################################################################
 # Заполняем csv файл дискретными значениями с детекторов
 data = dict()
 lane_counter = 1
 for lane in lanes:
-    detectorNumber = 1
+    DETECTOR_NUMBER = 1
     for detector in lane:
-        new_dict = {"lane" + str(lane_counter) + " det" + str(detectorNumber): detector.detections}
+        new_dict = {f'lane {str(lane_counter)} det {str(DETECTOR_NUMBER)}': detector.detections}
         data.update(new_dict)
-        detectorNumber += 1
+        DETECTOR_NUMBER += 1
     lane_counter += 1
 df = pd.DataFrame(data)
 df.to_csv(r'RawDetections.csv', sep=';', index=False)
 
-########################################################################################################################
 # Фильтруем дискретные значения детектров
 for lane in lanes:
     detectors_discretization_filter(lane, frame_counter)
 
-########################################################################################################################
 # Заполняем csv файл дискретными отфильтрованными значениями с детекторов
 data = dict()
 lane_counter = 1
 for lane in lanes:
-    detectorNumber = 1
+    DETECTOR_NUMBER = 1
     for detector in lane:
-        new_dict = {"lane" + str(lane_counter) + " det" + str(detectorNumber): detector.detections}
+        new_dict = {"lane" + f'{str(lane_counter)} det{str(DETECTOR_NUMBER)}': detector.detections}
         data.update(new_dict)
-        detectorNumber += 1
+        DETECTOR_NUMBER += 1
     lane_counter += 1
 df = pd.DataFrame(data)
 df.to_csv(r'FilteredDetections.csv', sep=';', index=False)
