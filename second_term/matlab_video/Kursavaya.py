@@ -19,39 +19,21 @@ class Detector:
         self.detX = x
         self.detY = y
         # Список средних значений цвета для детектора
-        self.avgColour = []
+        self.avgColour: list = []
         # Список активаций детектора 0/1
-        self.detections = []
+        self.detections: list = []
 
     # Добавление среднего значения цвета для детектора
     def add_avg_colour_sum(self, value: int) -> None:
         self.avgColour.append(value)
 
 
-drawing = True
-# Переменные для хранения координат курсора мыши
-mouseX, mouseY = -1, -1
-# Высота детектора в пикселях
-detector_height = 30
-# Ширина детектора в пикселях
-detector_width = 60
-
-# Список полос
-lanes = []
-# Список детекторов
-detectors = []
-lanes_points = []
-
-xs_lanes = []
-cs_lanes = []
-
-
 def set_spline(lanes: list) -> Any:
     x = []
     y = []
-    for linePoint in lanes:
-        x.append(linePoint[0])
-        y.append(linePoint[1])
+    for line_point in lanes:
+        x.append(line_point[0])
+        y.append(line_point[1])
     cs = CubicSpline(x, y)
     xs = np.arange(x[0], x[len(x) - 1], width + 1)
     return xs, cs
@@ -68,21 +50,17 @@ def draw_detector(lane: list, colour_number: int) -> None:
         image = cv.rectangle(frame,
                              (int(detector.detX - width / 2),
                               int(detector.detY - heigth / 2)),
-                             (int(detector.detX + width / 2), int(detector.detY + heigth / 2)),
+                             (int(detector.detX + width / 2),
+                              int(detector.detY + heigth / 2)),
                              colours[colour_number], 2)
 
 
-linePoints = []
-width = 60
-heigth = 30
-
-
-def sort_points(linePoints: list) -> list:
-    return sorted(linePoints, key=lambda x: x[0])
+def sort_points(line_points: list) -> list:
+    return sorted(line_points, key=lambda x: x[0])
 
 
 def set_point(event: Any, x: int, y: int) -> None:
-    global mouseX, mouseY, drawing
+    global mouse_x, mouse_y, drawing
     colours = [[0, 0, 255],
                [0, 255, 0],
                [255, 0, 0],
@@ -90,7 +68,7 @@ def set_point(event: Any, x: int, y: int) -> None:
                [0, 127, 0],
                [127, 0, 0]]
     if event == cv.EVENT_LBUTTONDOWN:
-        mouseX, mouseY = x, y
+        mouse_x, mouse_y = x, y
         cv.putText(frame,
                    f'Lane  number: {str(len(lanes_points))}',
                    (50, 50 + 50 * len(lanes_points)),
@@ -98,13 +76,17 @@ def set_point(event: Any, x: int, y: int) -> None:
                    colours[len(lanes_points)],
                    2,
                    cv.LINE_AA)
-        image = cv.circle(frame, (mouseX, mouseY), 10, colours[len(lanes_points)], 2)
-        linePoints.append((x, y))
+        image = cv.circle(frame,
+                          (mouse_x, mouse_y),
+                          10,
+                          colours[len(lanes_points)],
+                          2)
+        line_points.append((x, y))
         cv.imshow('Median frame', image)
-        print(str(mouseX) + " " + str(mouseY))
+        print(str(mouse_x) + " " + str(mouse_y))
         if cv.waitKeyEx(0) == ord('w'):
-            lanes_points.append(linePoints.copy())
-            linePoints.clear()
+            lanes_points.append(line_points.copy())
+            line_points.clear()
             print("lane added")
 
 
@@ -135,14 +117,14 @@ def get_avg_colour_sum(gray: Any, detectors: list) -> None:
         # print(avg_color)  # Выводм значение среднего цвета для детектора в консоль
 
 
-def get_avg_square_sum(gray, detectors):
+def get_avg_square_sum(gray: Any, detectors: list) -> None:
     """ Получение среднего значения квадрата цвета """
     # для всех детекторов
     for detector in detectors:
         # Вырезаем область детектора
         detector_zone = gray[int((detector.detY - (heigth / 2))):int((detector.detY + (heigth / 2))),
                              int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
-        sum_pow = 0
+        sum_pow: float = 0
         h, w = detector_zone.shape
         for i in range(0, h):
             for j in range(0, w):
@@ -183,7 +165,7 @@ def get_avg_median_sum(gray: Any, median: Any, detectors: list, eps: float) -> N
                              int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
         median_detector_zone = median[int((detector.detY - (heigth / 2))):int((detector.detY + (heigth / 2))),
                                       int((detector.detX - (width / 2))):int((detector.detX + (width / 2)))]
-        sum = 0
+        sum: int = 0
         h, w = detector_zone.shape
         for i in range(0, h):
             for j in range(0, w):
@@ -223,8 +205,9 @@ def detectors_discretization_filter(detectors: list, frameCounter: int) -> None:
             # Смотрим на 1..frames_unite кадров вперед от текущего
             for k in range(1, frames_unite):
                 # Если детектор активирован на текущем и 1..frames_unite кадре
-                if (detectors[i].detections[j] == 1 and ((j + k) < (frameCounter - k - 1)) and (
-                        detectors[i].detections[j + k] == 1)):
+                if all((detectors[i].detections[j] == 1,
+                       ((j + k) < (frameCounter - k - 1)),
+                       (detectors[i].detections[j + k] == 1))):
                     # Увеличиваем счетчик срабатываний детектора
                     detector_activations_count += 1
                 # Вручную активируем детектор на detector_activations_count кадров от текущего
@@ -241,7 +224,25 @@ def detectors_discretization_filter(detectors: list, frameCounter: int) -> None:
                 detectors[i].detections[j] = 0
 
 
-filename = "traffic2.mp4"
+drawing = True
+# Переменные для хранения координат курсора мыши
+mouse_x, mouse_y = -1, -1
+# Высота детектора в пикселях
+detector_height = 30
+# Ширина детектора в пикселях
+detector_width = 60
+# Список полос
+lanes: list = []
+# Список детекторов
+detectors: list = []
+lanes_points: list = []
+xs_lanes: list = []
+cs_lanes: list = []
+line_points: list = []
+width = 60
+heigth = 30
+
+filename = "traffic.mp4"
 cap = cv.VideoCapture(filename)
 if not cap.isOpened():
     print("Error opening file")
