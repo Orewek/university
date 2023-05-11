@@ -107,26 +107,97 @@ def get_items(names: list,
     return items
 
 
-def main() -> None:
-    file_path = input_file_path()
-    names, volumes, prices = read_file_data(file_path)
+def main(file_path: str,
+         names: list,
+         volumes: list,
+         prices: list,
+         bag_volume: int,
+         named_prices: list,
+         named_items: list,
+         optimal_price: int) -> str:
 
-    print('Write a bag volume')
-    bag_volume = input()
-    while bag_volume.isdigit() is False:
-        print('You can write only a number')
+    table = """
+            1: read a file
+            2: write a bag volume
+            3: solve the task
+            4: check current items into bag
+            5: write a path
+            """
+
+    action_table = """
+                   U can write only one digit.
+                   After operation u can continue working with massive
+                   write -table to see the options
+                   """
+    print(table)
+    action = input()
+
+    while action.isdigit is False or (not (1 <= int(action) <= 9)):
+        if action != '-table':
+            print(action_table)
+        else:
+            print(table)
+
+        action = input()
+
+    if int(action) != 5 and file_path is None:
+        print('Firstly read a file!')
+
+    elif int(action) in (3, 4) and bag_volume is None:
+        print('Write a bag volume firsty!')
+
+
+    elif int(action) == 1:
+        names, volumes, prices = read_file_data(file_path)
+
+    elif int(action) == 2:
+        print('Write a bag volume')
         bag_volume = input()
 
-    volume = get_table(volumes, prices, int(bag_volume))
-    items = get_items(names, volumes, prices, volume, int(bag_volume))
-    named_items, optimal_price = get_optimal_prices_names(names,
-                                                          volumes,
-                                                          prices,
-                                                          items)
+        while bag_volume.isdigit() is False:
+            print('You can write only a number')
+            bag_volume = input()
 
-    print(f'Items that give optimal price:\n{named_items}\n'
-          f'optimal price is ${optimal_price}')
+    elif int(action) == 3:
+        volume = get_table(volumes, prices, int(bag_volume))
+        items = get_items(names, volumes, prices, volume, int(bag_volume))
+        named_items, optimal_price = get_optimal_prices_names(names,
+                                                              volumes,
+                                                              prices,
+                                                              items)
 
+        print(f'Items that give optimal price:\n{named_items}\n'
+              f'optimal price is ${optimal_price}')
+
+
+    elif int(action) == 4 and named_items == []:
+        print('Solve the taks firstly!')
+    
+    elif int(action) == 4:
+        print(named_items)
+
+    elif int(action) == 5:
+        file_path = input_file_path()
+
+
+    return file_path, names, volumes, prices, bag_volume, named_prices, named_items, optimal_price
 
 if __name__ == '__main__':
-    main()
+    file_path: str = None
+    names: list = []
+    volumes: list = []
+    prices: list = []
+    bag_volume: int = None
+    named_items: list = []
+    named_prices: list = []
+    optimal_price: int = None
+    
+    while True:
+        file_path, names, volumes, prices, bag_volume, named_prices, named_items, optimal_price = main(file_path,
+                                                                                                       names,
+                                                                                                       volumes,
+                                                                                                       prices,
+                                                                                                       bag_volume,
+                                                                                                       named_prices,
+                                                                                                       named_items,
+                                                                                                       optimal_price)
