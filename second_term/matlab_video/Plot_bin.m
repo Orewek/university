@@ -1,31 +1,43 @@
-
 clear
 clc
-% Import the data
+% import the data
 filename = "C:\Users\User\Desktop\Даннные в Метрики 1\первая_минута.xlsx";
 matrix = readmatrix(filename);
-[numRows, numCols] = size(matrix); % Получение размеров матрицы
 
-meanValues = mean(matrix); % Вычисление средних значений по столбцам
+% get the matrix size
+[num_rows, num_cols] = size(matrix);
 
-figure; % Создание нового графика
+% get the median values in columns
+mean_values = mean(matrix);
 
-for col = 1:numCols
-    y = abs(matrix(:, col) - meanValues(col)) > 0.1 * meanValues(col); % Бинаризация значений
+% creating a new graph
+figure;
+
+for col = 1:num_cols
+    % make binary values
+    y = abs(matrix(:, col) - mean_values(col)) > 0.1 * mean_values(col);
     
-    x = 1:numRows; % Номера строк
+    % line numbering
+    x = 1:num_rows;
     
-    plot(x, y, 'o', 'MarkerFaceColor', 'b'); % Построение бинаризированного графика
-  %  stem(x, y, 'Color', 'b', 'Marker', 'none'); % Отображение вертикальных линий
-    hold on; % Удержание текущего графика
+    % make a binary graph
+    plot(x, y, 'o', 'MarkerFaceColor', 'b');
+  
+  % draw vertical lines
+  % stem(x, y, 'Color', 'b', 'Marker', 'none');
+
+    % making a graph not disappearing
+    hold on;
 end
 
-hold off; % Отключение удержания графика
+hold off;
 
 xlabel('Номер строки');
 ylabel('Бинарное значение');
 title('Бинаризированный график с условием');
 
-ylim([-0.5, 1.5]); % Установка пределов для оси y
+% set a limits for y-axis
+ylim([-0.5, 1.5]);
 
-yticks([0, 1]); % Установка отметок на оси y
+% set a marks for y-axis
+yticks([0, 1]);

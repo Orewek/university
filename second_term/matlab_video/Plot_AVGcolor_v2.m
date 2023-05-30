@@ -1,23 +1,28 @@
 clear
 clc
-% Import the data
+% import the data
 filename = "C:\Users\User\Desktop\Даннные в Метрики 1\последняя_минута.xlsx";
 matrix = readmatrix(filename);
-[numRows, numCols] = size(matrix); % Получение размеров матрицы
+% get the matrix size
+[num_rows, num_cols] = size(matrix);
 
-figure; % Создание нового графика
+% creating a new graph
+figure;
 
-for col = 1:numCols
-    y = matrix(:, col); % Значения из столбца
-    x = 1:numRows; % Номера строк
+for col = 1:num_cols
+    % values from the columns
+    y = matrix(:, col);
+    % line numbering
+    x = 1:num_rows;
+   
+    % make a graph for each column
+    plot(x, y);
     
-    plot(x, y); % Построение графика для каждого столбца
-    
-    hold on; % Удержание текущего графика
-    
+    % making a graph not disappearing
+    hold on;    
 end
 
-hold off; % Отключение удержания графика
+hold off;
 
 xlabel('Номер строки');
 ylabel('Значение ячейки');
