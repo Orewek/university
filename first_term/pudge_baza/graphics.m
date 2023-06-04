@@ -24,7 +24,7 @@ hold off
 [X, Y] = meshgrid([-3:0.25:3], [-3:0.25:3]);
 Z = sin(X) .* sin(Y);
 
-%{
+
 colormap(bone)
 shading flat
 subplot(2, 3, 1);
@@ -50,7 +50,7 @@ zlabel('Pudge s momom')
 
 alpha(0)
 view(45, 45)
-%}
+
 
 %{
 u = linspace(0, 2 * pi, 40);
@@ -77,6 +77,7 @@ z = V * sin(U / 2);
 surf(x, y, z)
 %}
 
+%{
 hold on
 a = 10; b = 10;
 u = linspace(0, pi, 50);
@@ -100,6 +101,7 @@ y = b .* sin(U);
 z = r .* sin(V);
 
 surf(x, y, z)
+%}
 
 
 
