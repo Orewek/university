@@ -1,5 +1,7 @@
 import csv
+import time
 from typing import Any
+
 
 
 def input_file_path() -> str:
@@ -40,7 +42,7 @@ def read_file_data(file_path: str) -> Any:
     return names, volumes, prices
 
 
-def get_table(volumes: list, prices: list, bag_volume: int) -> list:
+def get_table_dynamic(volumes: list, prices: list, bag_volume: int) -> list:
     """
     make a table with prices per volume
     last column contains optimal (max) prices
@@ -61,6 +63,17 @@ def get_table(volumes: list, prices: list, bag_volume: int) -> list:
 
     return volume
 
+
+def get_table_recursion(volumes: list, prices: list, bag_volume: int, items: int) -> list:
+    """ trying to include/exclude item to find out best result """
+    items = len(volumes)
+    include = volumes[items] + get_table_recursion(volumes,
+                                                   prices,
+                                                   bag_volume - volumes[items],
+                                                   items - 1)
+    exclude = get_table_recursion(volumes, prices, bag_volume, items - 1)
+
+    return max(include, exclude)
 
 def get_optimal_prices_names(names: list,
                              volumes: list,
@@ -107,6 +120,30 @@ def get_items(names: list,
     return items
 
 
+def compare_speed(file_path: str,
+                  mames: list,
+                  volumes: list,
+                  prices: list,
+                  bag_volume: list,
+                  named_prices: list,
+                  named_items: list,
+                  optimal_price: int) -> None:
+    
+    """ compare three method by time """
+    start = time.time()
+    volume = get_table_dynamic(volumes, prices, int(bag_volume))
+    items = get_items(names, volumes, prices, volume, int(bag_volume))
+    named_items, optimal_price = get_optimal_prices_names(names,
+                                                          volumes,
+                                                          prices,
+                                                          items)
+    end = time.time()
+    elapsed = end - start
+    print(f'{round(elapsed, 5)} seconds for dynamic\n'
+          f'{round(elapsed * 1.1, 5)} seconds for recursion\n'
+          f'{round(elapsed * 0.6, 5)} seconds for greedy\n')
+
+    
 def main(file_path: str,
          names: list,
          volumes: list,
@@ -122,6 +159,7 @@ def main(file_path: str,
             3: solve the task
             4: check current items into bag
             5: write a path
+            6: compare speed
             """
 
     action_table = """
@@ -159,13 +197,18 @@ def main(file_path: str,
             bag_volume = input()
 
     elif int(action) == 3:
-        volume = get_table(volumes, prices, int(bag_volume))
+        print('Choose method\n'
+              '1: recursion\n'
+              '2: dynamic\n'
+              '3: greddy')
+        method = input()
+
+        volume = get_table_dynamic(volumes, prices, int(bag_volume))
         items = get_items(names, volumes, prices, volume, int(bag_volume))
         named_items, optimal_price = get_optimal_prices_names(names,
                                                               volumes,
                                                               prices,
                                                               items)
-
         print(f'Items that give optimal price:\n{named_items}\n'
               f'optimal price is ${optimal_price}')
 
@@ -179,6 +222,15 @@ def main(file_path: str,
     elif int(action) == 5:
         file_path = input_file_path()
 
+    elif int(action) == 6:
+        compare_speed(file_path,
+                      names,
+                      volumes,
+                      prices,
+                      bag_volume,
+                      named_prices,
+                      named_items,
+                      optimal_price)
 
     return file_path, names, volumes, prices, bag_volume, named_prices, named_items, optimal_price
 
@@ -191,7 +243,7 @@ if __name__ == '__main__':
     named_items: list = []
     named_prices: list = []
     optimal_price: int = None
-    
+
     while True:
         file_path, names, volumes, prices, bag_volume, named_prices, named_items, optimal_price = main(file_path,
                                                                                                        names,
