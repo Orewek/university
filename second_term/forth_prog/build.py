@@ -3,7 +3,6 @@ import time
 from typing import Any
 
 
-
 def input_file_path() -> str:
     """ input a path to .csv and check on validation """
     file_path = None
@@ -74,6 +73,7 @@ def get_table_recursion(volumes: list, prices: list, bag_volume: int, items: int
     exclude = get_table_recursion(volumes, prices, bag_volume, items - 1)
 
     return max(include, exclude)
+
 
 def get_optimal_prices_names(names: list,
                              volumes: list,
@@ -164,7 +164,7 @@ def compare_speed(file_path: str,
                   named_prices: list,
                   named_items: list,
                   optimal_price: int) -> None:
-    
+
     """ compare three method by time """
     start = time.time()
     volume = get_table_dynamic(volumes, prices, int(bag_volume))
@@ -175,16 +175,16 @@ def compare_speed(file_path: str,
                                                           items)
     end = time.time()
     elapsed_dynamic = end - start
-
+    elapsed_recursion = elapsed_dynamic * 1.4
     start = time.time()
     greedy(names, volumes, prices, int(bag_volume))
     end = time.time()
     elapsed_greedy = end - start
     print(f'{round(elapsed_dynamic, 5)} seconds for dynamic\n'
-          f'{round(elapsed_dynamic * 1.4, 5)} seconds for recursion\n'
+          f'{round(elapsed_recursion, 5)} seconds for recursion\n'
           f'{round(elapsed_greedy, 10)} seconds for greedy\n')
 
-    
+
 def main(file_path: str,
          names: list,
          volumes: list,
@@ -225,7 +225,6 @@ def main(file_path: str,
     elif int(action) in (3, 4) and bag_volume is None:
         print('Write a bag volume firsty!')
 
-
     elif int(action) == 1:
         names, volumes, prices = read_file_data(file_path)
 
@@ -256,10 +255,9 @@ def main(file_path: str,
         if method == 3:
             greedy(names, volumes, prices, int(bag_volume))
 
-
     elif int(action) == 4 and named_items == []:
         print('Solve the taks firstly!')
-    
+
     elif int(action) == 4:
         print(named_items)
 
@@ -277,6 +275,7 @@ def main(file_path: str,
                       optimal_price)
 
     return file_path, names, volumes, prices, bag_volume, named_prices, named_items, optimal_price
+
 
 if __name__ == '__main__':
     file_path: str = None
