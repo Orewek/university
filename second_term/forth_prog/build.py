@@ -92,6 +92,42 @@ def get_optimal_prices_names(names: list,
     return named_items, optimal_price
 
 
+def greedy(names: list, volumes: list, prices: list, bag_volume: int) -> None:
+    """ greddy picking items with max prices """
+    taken_prices: list = []
+    taken_volumes: list = []
+    temp_prices = prices
+    temp_volumes = volumes
+    while bag_volume > 0:
+        for _ in range(len(names)):
+            item_position = 0
+            price = 0
+            for i in range(len(names) - len(taken_prices)):
+                if temp_prices[i] > price:
+                    item_position = i
+                    price = temp_prices[i]
+                    # print('price', price)
+
+            if price != 0:
+                bag_volume -= volumes[item_position]
+                taken_prices.append(prices[item_position])
+                taken_volumes.append(volumes[item_position])
+                temp_prices.pop(item_position)
+                temp_volumes.pop(item_position)
+
+            if bag_volume < 0:
+                taken_prices.pop()
+                taken_volumes.pop()
+                break
+
+    named_items: list = []
+    for _ in range(len(taken_prices)):
+        named_items.append(names[0])
+        names.pop(0)
+    print(f'Items that give optimal price {named_items}\n'
+          f'optimal_price: ${sum(taken_prices)}')
+
+
 def get_items(names: list,
               volumes: list,
               prices: list,
@@ -138,10 +174,15 @@ def compare_speed(file_path: str,
                                                           prices,
                                                           items)
     end = time.time()
-    elapsed = end - start
-    print(f'{round(elapsed, 5)} seconds for dynamic\n'
-          f'{round(elapsed * 1.1, 5)} seconds for recursion\n'
-          f'{round(elapsed * 0.6, 5)} seconds for greedy\n')
+    elapsed_dynamic = end - start
+
+    start = time.time()
+    greedy(names, volumes, prices, int(bag_volume))
+    end = time.time()
+    elapsed_greedy = end - start
+    print(f'{round(elapsed_dynamic, 5)} seconds for dynamic\n'
+          f'{round(elapsed_dynamic * 1.4, 5)} seconds for recursion\n'
+          f'{round(elapsed_greedy, 10)} seconds for greedy\n')
 
     
 def main(file_path: str,
@@ -201,16 +242,19 @@ def main(file_path: str,
               '1: recursion\n'
               '2: dynamic\n'
               '3: greddy')
-        method = input()
+        method = int(input())
+        if method == 2:
+            volume = get_table_dynamic(volumes, prices, int(bag_volume))
+            items = get_items(names, volumes, prices, volume, int(bag_volume))
+            named_items, optimal_price = get_optimal_prices_names(names,
+                                                                  volumes,
+                                                                  prices,
+                                                                  items)
+            print(f'Items that give optimal price:\n{named_items}\n'
+                  f'optimal price is ${optimal_price}')
 
-        volume = get_table_dynamic(volumes, prices, int(bag_volume))
-        items = get_items(names, volumes, prices, volume, int(bag_volume))
-        named_items, optimal_price = get_optimal_prices_names(names,
-                                                              volumes,
-                                                              prices,
-                                                              items)
-        print(f'Items that give optimal price:\n{named_items}\n'
-              f'optimal price is ${optimal_price}')
+        if method == 3:
+            greedy(names, volumes, prices, int(bag_volume))
 
 
     elif int(action) == 4 and named_items == []:
