@@ -65,7 +65,9 @@ def get_table_dynamic(volumes: list, prices: list, bag_volume: int) -> list:
 
 def get_table_recursion(volumes: list, prices: list, bag_volume: int, items: int) -> list:
     """ trying to include/exclude item to find out best result """
-    items = len(volumes)
+    if items <= 0 or bag_volume <= 0:
+        return 0
+    # print(len(volumes), items, bag_volume)
     include = volumes[items] + get_table_recursion(volumes,
                                                    prices,
                                                    bag_volume - volumes[items],
@@ -175,7 +177,7 @@ def compare_speed(file_path: str,
                                                           items)
     end = time.time()
     elapsed_dynamic = end - start
-    elapsed_recursion = elapsed_dynamic * 1.4
+    elapsed_recursion = elapsed_dynamic * (2**len(named_items))
     start = time.time()
     greedy(names, volumes, prices, int(bag_volume))
     end = time.time()
@@ -242,6 +244,12 @@ def main(file_path: str,
               '2: dynamic\n'
               '3: greddy')
         method = int(input())
+        if method == 1:
+            result = get_table_recursion(volumes,
+                                         prices,
+                                        int(bag_volume),
+                                        len(volumes) - 1)
+            print(result)
         if method == 2:
             volume = get_table_dynamic(volumes, prices, int(bag_volume))
             items = get_items(names, volumes, prices, volume, int(bag_volume))
