@@ -1,7 +1,7 @@
 clear
 clc
 % import the data
-filename = "csv/Metric_last.csv";
+filename = "csv_2/Metric_last.csv";
 matrix = readmatrix(filename);
 % get the matrix size
 [num_rows, num_cols] = size(matrix);
@@ -9,7 +9,7 @@ matrix = readmatrix(filename);
 % creating a new graph
 figure;
 
-for col = 1:num_cols
+for col = 10:25:70
     % values from the columns
     y = matrix(:, col);
     % line numbering

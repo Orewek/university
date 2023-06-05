@@ -1,7 +1,7 @@
 clear
 clc
 % import the data
-filename = "csv/Metric_first.csv";
+filename = "csv_2/Metric_first.csv";
 matrix = readmatrix(filename);
 
 % get the matrix size
@@ -13,7 +13,7 @@ mean_values = mean(matrix);
 % creating a new graph
 figure;
 
-for col = 1:3
+for col = 10:25:70
     % make binary values
     y = abs(matrix(:, col) - mean_values(col)) > 0.1 * mean_values(col);
     
@@ -21,7 +21,8 @@ for col = 1:3
     x = 1:num_rows;
     
     % make a binary graph
-    plot(x, y, 'o', 'MarkerFaceColor', 'b');
+    line(x, y)
+    plot(x, y,'MarkerFaceColor', 'b');
   
   % draw vertical lines
   % stem(x, y, 'Color', 'b', 'Marker', 'none');

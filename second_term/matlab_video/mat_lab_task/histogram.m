@@ -2,7 +2,7 @@
 clear
 clc
 % import the data
-filename = "csv\FilteredDetections.csv";
+filename = "csv_2\FilteredDetections.csv";
 matrix = readmatrix(filename);
 
 % length of vectors from one's
@@ -16,7 +16,7 @@ for i = 1:length(target_length)
     counts{i} = struct('Length', target_length(i), 'Count', 0);
 end
 
-for col = 10:25:70
+for col = 10:25:70  
     % count the sqeuence of one's
     one_sequence = zeros(size(target_length));
     for row = 1:num_rows
