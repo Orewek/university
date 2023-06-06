@@ -1,9 +1,0 @@
-\babel@toc {russian}{}\relax 
-\contentsline {section}{Входные данные}{2}{section*.2}%
-\contentsline {section}{Настройка детектеров}{2}{Item.4}%
-\contentsline {section}{Запуск ViDeS}{3}{section*.4}%
-\contentsline {section}{Построение гистограммы длин автомобилей}{4}{section*.5}%
-\contentsline {section}{Построение графиков среднего цвета}{4}{section*.6}%
-\contentsline {section}{Построение бинаризированных графиков}{5}{section*.7}%
-\contentsline {section}{Построение совмещенных графиков}{6}{section*.8}%
-\contentsline {section}{Вывод}{7}{section*.9}%
