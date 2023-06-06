@@ -29,14 +29,13 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 
 
 \section*{Настройка детектеров}
-\includegraphics[width=0.8\textwidth]{detector_settings.jpg}
 \begin{center}
 Подбираем оптимальные данные для детектеров
 \end{center}
 \begin{enumerate}
     \item detector height: 20
     \item detector width: 50
-    \item activation avg color delta 1.75
+    \item activation avg color delta: 1.75
     \item frames unite: 10
 \end{enumerate}
 \begin{center}
@@ -44,7 +43,7 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 \end{center}
 Смотрим изменения цвета на детекторе это количество говорит нам сколько машин проехало
 \begin{center}
-\includegraphics[width=0.9\textwidth]{detector_code.jpg}
+\includegraphics[width=0.9\textwidth]{detector_code.png}
 \end{center}
 \addcontentsline{toc}{section}{Настройка детектеров}
 
@@ -54,7 +53,7 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 Для обработки видео, записанные в 30 кадров/сек, будем использовать "ViDeS"\\
 Устанавливаем детекторы, примерно по 30 штук на каждую полосу, всего 89 штук
 \begin{center}
-\includegraphics[width=0.9\textwidth]{vides_30_detectors.jpg}
+\includegraphics[width=0.8\textwidth]{vides_89_detectors.jpg}
 \end{center}
 После завершения программы, получаем .csv файлы с заполненными данными
 Пример данных, содержащиеся в MetricValues.csv
@@ -68,8 +67,8 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 \section*{Построение гистограммы длин автомобилей}
 Для построения всех графиков мы будем использовать полученные данные и пакет математических программ Matlab
 
-Построили гистограмму для транспортных средств, который показывает, сколько кадров машина находилась на детекторе\\
-Благодоря этому мы может отследить скорость машины и всего потока в целом
+Построили гистограмму для транспортных средств, которая показывает, сколько кадров машина находилась на детекторе\\
+Благодоря этому мы может определить скорость машины и всего потока в целом
 \begin{center}
 \includegraphics[width=0.9\textwidth]{histogram.jpg}
 \end{center}
@@ -80,8 +79,8 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 
 \newpage
 \section*{Построение графиков среднего цвета}
-Для трех детекторов, находящийхся на разных линиях, строим график среднего цвета,
-для первой и последней минуты. Благодоря этому мы можем отследить динамику
+Для трех детекторов строим график среднего цвета, для первой и последней минуты.
+По графику мы можем отследить динамику изменения цвета
 \begin{center}
 \includegraphics[width=0.9\textwidth]{median_color_first.png}
 \end{center}
@@ -99,7 +98,8 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 
 \newpage
 \section*{Построение бинаризированных графиков}
-Для этих же датчиков строим бинаризированные графики, для первой и последней минуты
+Для этих же датчиков строим бинаризированные графики, для первой и последней минуты\\
+По ним мы сможем определить, в каких кадрах детекторы фиксировали машину
 \begin{center}
 \includegraphics[width=0.9\textwidth]{binary_first.png}
 \end{center}
@@ -118,7 +118,7 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 \newpage
 \section*{Построение совмещенных графиков}
 Построение совмещенных графиков, которые содержат в себе графики среднего цвета,
-а также графики бинаризированные. В бинаризированном графики значения
+а также графики бинаризированные. В бинаризированных графиках значения
 параметра 'y' были расширены с [0; 1] до [0; 255], для улучшения наглядности
 \begin{center}
 \includegraphics[width=0.9\textwidth]{merge_first.png}
@@ -137,8 +137,8 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 
 \newpage
 \section*{Вывод}
-В результате проделанной работы удалось выяснить принциип работы детекторов, а также их точность.
-При помощи ручной и автоматической оценки мы смогли оценить точно детекторов.\\
+В результате проделанной работы удалось выяснить принципы работы детекторов, а также их точность.
+При помощи ручной и автоматической оценки мы смогли оценить погрешность детекторов.\\
 Построенные гистограммы длин автомобилей помогают оценить скороть транспортных средств,
 а бинаризированные и совмещенные графики показывают плотность траффика.\\
 Благодоря этим данным мы может проектировать будущие потоки, и избегать пробок
