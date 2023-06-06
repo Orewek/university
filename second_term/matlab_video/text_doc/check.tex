@@ -49,7 +49,7 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 
 
 \newpage
-\section*{Запуск "ViDeS"}
+\section*{Настройка "ViDeS"}
 Для обработки видео, записанные в 30 кадров/сек, будем использовать "ViDeS"\\
 Устанавливаем детекторы, примерно по 30 штук на каждую полосу, всего 89 штук
 \begin{center}
@@ -60,10 +60,29 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 \begin{center}
 \includegraphics[width=0.9\textwidth]{images/vides_data.jpg}
 \end{center}
-\addcontentsline{toc}{section}{Запуск ViDeS}
+\addcontentsline{toc}{section}{Настройка ViDeS}
+
 
 
 \newpage
+\section*{Первоначальный запуск "ViDeS"}
+Перед запуском нужно поместить видеофайлы для обработки в папку Videos
+и установить рекомендуемые параметры
+\begin{enumerate}
+    \item drawing: True
+    \item createMedianFrame: True
+    \item setDetectorsByHand: True
+    \item metric: 1
+\end{enumerate}
+После завершения обработки программа заполняет файлы данными
+\begin{enumerate}
+    \item MetricValues.csv: значения выбранной метрики для каждого детектора для каждой полосы и каждой кадрах
+    \item RawDetections.csv: неотфильтрованные значения активации каждого детектора, каждой полосы и кадра
+    \item FilteredDetections.csv: отфильтрованные значения активации детектора для frameUnits
+\end{enumerate}
+\addcontentsline{toc}{section}{Первоначальный запуск ViDeS}
+
+
 \section*{Построение гистограммы длин автомобилей}
 Для построения всех графиков мы будем использовать полученные данные и пакет математических программ Matlab
 
