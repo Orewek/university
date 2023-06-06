@@ -5,9 +5,10 @@
 \usepackage[cp1251, utf8]{inputenc}
 \usepackage{movie15}
 \usepackage{graphicx}
-\usepackage{amssymb, amsfonts, amsmath, indentfirst, enumerate, cite }
+\usepackage{amssymb, amsfonts, amsmath, indentfirst, enumerate, cite}
 \usepackage{geometry}
 \usepackage{hyperref}
+\usepackage{tabularx}
 %\graphicxpath{{//}}%путь к папке с картинками
 
 \geometry{left=2cm}
@@ -31,6 +32,41 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 \section*{Настройка детектеров}
 \begin{center}
 Подбираем оптимальные данные для детектеров
+\end{center}
+\begin{center}
+\begin{tabularx}
+{0.8\textwidth}{
+    | >
+    {\centering\arraybackslash}X
+    | >
+    {\centering\arraybackslash}X
+    | >
+    {\centering\arraybackslash}X
+    | >
+    {\centering\arraybackslash}X
+    | >
+    {\centering\arraybackslash}X
+    | }    
+    \hline
+    Ручной подсчет & Программый подсчет & Размер детектора & Разница в процентах
+\\
+    \hline
+    10 & 17 & 70/40 & 0.75
+\\
+    \hline
+    10 & 15 & 70/30 & 1
+\\
+    \hline
+    10 & 14 & 60/30 & 1.25
+\\
+    \hline
+    10 & 12 & 50/30 & 1.5
+\\
+    \hline
+    10 & 10 & 50/20 & 1.75
+\\
+\hline
+\end{tabularx}
 \end{center}
 \begin{enumerate}
     \item detector height: 20
