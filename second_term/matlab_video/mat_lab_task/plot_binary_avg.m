@@ -1,7 +1,7 @@
 clear
 clc
 % import the data
-filename = "csv/Metric_first.csv";
+filename = "csv_2/Metric_last.csv";
 matrix = readmatrix(filename);
 
 % get the matrix size
@@ -10,7 +10,7 @@ matrix = readmatrix(filename);
 % creating a new graph
 figure;
 
-for col = 1:num_cols
+for col = 10:25:70
     % values from the column
     y = matrix(:, col);
     
@@ -27,7 +27,7 @@ end
 
 % get the median values in columns
 mean_values = mean(matrix);
-for col = 1:num_cols
+for col = 1:3
     % make a binary values
     y = abs(matrix(:, col) - mean_values(col)) > 0.1 * mean_values(col);
     y = 255 * y;
@@ -36,7 +36,8 @@ for col = 1:num_cols
     x = 1:num_rows;
     
     % making a binary graph
-    plot(x, y, 'o', 'MarkerFaceColor', 'b');
+    line(x, y)
+    plot(x, y, 'MarkerFaceColor', 'b');
   % draw vercical lines
   % stem(x, y, 'Color', 'b', 'Marker', 'none');
 end

@@ -1,7 +1,7 @@
 clear
 clc
 % import the data
-filename = "csv_2/Metric_last.csv";
+filename = "csv_2/Metric_first.csv";
 matrix = readmatrix(filename);
 % get the matrix size
 [num_rows, num_cols] = size(matrix);

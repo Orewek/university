@@ -1,7 +1,7 @@
 clear
 clc
 % import the data
-filename = "csv_2/Metric_first.csv";
+filename = "csv_2/Metric_last.csv";
 matrix = readmatrix(filename);
 
 % get the matrix size
@@ -22,7 +22,7 @@ for col = 10:25:70
     
     % make a binary graph
     line(x, y)
-    plot(x, y,'MarkerFaceColor', 'b');
+    plot(x, y, 'MarkerFaceColor', 'b');
   
   % draw vertical lines
   % stem(x, y, 'Color', 'b', 'Marker', 'none');
