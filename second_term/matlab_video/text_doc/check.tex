@@ -79,12 +79,16 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 \end{center}
 Смотрим изменения цвета на детекторе это количество говорит нам сколько машин проехало
 \begin{center}
+\includegraphics*[width=0.6\textwidth]{images/one_detector.jpg}
+\end{center}
+\begin{center}
+    детектор, на котором делались замеры
+\end{center}
+\begin{center}
 \includegraphics[width=0.9\textwidth]{images/detector_code.png}
 \end{center}
 \addcontentsline{toc}{section}{Настройка детектеров}
 
-
-\newpage
 \section*{Настройка "ViDeS"}
 Для обработки видео, записанные в 30 кадров/сек, будем использовать "ViDeS"\\
 Устанавливаем детекторы, примерно по 30 штук на каждую полосу, всего 89 штук
@@ -98,9 +102,6 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 \end{center}
 \addcontentsline{toc}{section}{Настройка ViDeS}
 
-
-
-\newpage
 \section*{Первоначальный запуск "ViDeS"}
 Перед запуском нужно поместить видеофайлы для обработки в папку Videos
 и установить рекомендуемые параметры
@@ -118,7 +119,7 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 \end{enumerate}
 \addcontentsline{toc}{section}{Первоначальный запуск ViDeS}
 
-
+\newpage
 \section*{Построение гистограммы длин автомобилей}
 Для построения всех графиков мы будем использовать полученные данные и пакет математических программ Matlab
 
@@ -136,18 +137,49 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 \section*{Построение графиков среднего цвета}
 Для трех детекторов строим график среднего цвета, для первой и последней минуты.
 По графику мы можем отследить динамику изменения цвета
+
 \begin{center}
-\includegraphics[width=0.9\textwidth]{images/median_color_first.png}
+\includegraphics[width=0.9\textwidth]{images/median/median_color_first_1.png}
 \end{center}
 \begin{center}
-График первой минуты
+График первой минуты, первый детектор
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{images/median/median_color_first_2.png}
 \end{center}
 \begin{center}
-\includegraphics[width=0.9\textwidth]{images/median_color_last.png}
+График первой минуты, второй детектор
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{images/median/median_color_first_3.png}
 \end{center}
 \begin{center}
-График последней минуты
+График первой минуты, третий детектор
 \end{center}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{images/median/median_color_last_1.png}
+\end{center}
+\begin{center}
+График последней минуты, первый детектор
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{images/median/median_color_last_2.png}
+\end{center}
+\begin{center}
+График последней минуты, второй детектор
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.9\textwidth]{images/median/median_color_last_3.png}
+\end{center}
+\begin{center}
+График последней минуты, третий детектор
+\end{center}
+
 \addcontentsline{toc}{section}{Построение графиков среднего цвета}
 
 
@@ -155,17 +187,47 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 \section*{Построение бинаризированных графиков}
 Для этих же датчиков строим бинаризированные графики, для первой и последней минуты\\
 По ним мы сможем определить, в каких кадрах детекторы фиксировали машину
+
 \begin{center}
-\includegraphics[width=0.9\textwidth]{images/binary_first.png}
+\includegraphics[width=0.8\textwidth]{images/binary/binary_first_1.png}
 \end{center}
 \begin{center}
-График первой минуты
+График первой минуты, первый детектор
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/binary/binary_first_2.png}
 \end{center}
 \begin{center}
-\includegraphics[width=0.9\textwidth]{images/binary_last.png}
+График первой минуты, второй детектор
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/binary/binary_first_3.png}
 \end{center}
 \begin{center}
-График последней минуты 
+График первой минуты, третий детектор
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/binary/binary_last_1.png}
+\end{center}
+\begin{center}
+График последней минуты, первый детектор
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/binary/binary_last_2.png}
+\end{center}
+\begin{center}
+График последней минуты, второй детектор
+\end{center}
+
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/binary/binary_last_3.png}
+\end{center}
+\begin{center}
+График последней минуты, третий детектор
 \end{center}
 \addcontentsline{toc}{section}{Построение бинаризированных графиков}
 
@@ -176,13 +238,13 @@ the method of virtual detectors - "ViDeS" (Virtual Detectors System)
 а также графики бинаризированные. В бинаризированных графиках значения
 параметра 'y' были расширены с [0; 1] до [0; 255], для улучшения наглядности
 \begin{center}
-\includegraphics[width=0.9\textwidth]{images/merge_first.png}
+\includegraphics[width=0.9\textwidth]{images/merge/merge_first.png}
 \end{center}
 \begin{center}
 Совмещенные графики первой минуты
 \end{center}
 \begin{center}
-\includegraphics[width=0.9\textwidth]{images/merge_last.png}
+\includegraphics[width=0.9\textwidth]{images/merge/merge_last.png}
 \end{center}
 \begin{center}
 Совмещенные графики последней минуты 
