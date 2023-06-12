@@ -35,6 +35,10 @@
 \usepackage{xcolor}
 \usepackage{longtable,booktabs,array}
 \usepackage{multirow}
+\usepackage{fdsymbol}
+\usepackage{newunicodechar}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -77,11 +81,6 @@
 
 \begin{document}
 
-\includegraphics[width=8.26389in,height=11.69444in]{vertopal_57315ae0b2f0436aaa13d5551c0ac945/media/image1.png}
-
-\begin{quote}
-Math-Net.Ru
-\end{quote}
 
 Общероссийский математический портал
 
