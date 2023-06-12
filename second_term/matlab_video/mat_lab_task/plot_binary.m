@@ -1,7 +1,7 @@
 clear
 clc
 % import the data
-filename = "csv_2/Metric_last.csv";
+filename = "csv_2/Metric_first.csv";
 matrix = readmatrix(filename);
 
 % get the matrix size
@@ -13,7 +13,7 @@ mean_values = mean(matrix);
 % creating a new graph
 figure;
 
-for col = 10:25:70
+for col = 60
     % make binary values
     y = abs(matrix(:, col) - mean_values(col)) > 0.1 * mean_values(col);
     
