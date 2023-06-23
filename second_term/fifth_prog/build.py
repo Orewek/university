@@ -1,4 +1,9 @@
 import os
+from collections import Counter
+from heapq import heapify, heappop, heappush
+from string import hexdigits
+from io import StringIO
+
 
 def input_file_path(file_path: str) -> str:
     """ input a path to .csv and check on validation """
@@ -21,7 +26,7 @@ def input_file_path(file_path: str) -> str:
 def show_file_content(file_path: str) -> str:
     with open(file_path, 'r') as f:
         print(f.read())
-    
+
     return file_path
 
 
@@ -50,10 +55,6 @@ def show_code_table_const(file_path: str) -> str:
     return file_path
 
 
-def show_code_huffman(file_path: str) -> str:
-    return file_path
-
-
 def compress_constant(file_path: str) -> str:
     string = ''
     with open(file_path, 'r') as f:
@@ -61,14 +62,11 @@ def compress_constant(file_path: str) -> str:
 
     bin_string = str.encode(string)
 
-    with open(f'constant_len.bin', 'wb') as new_f:
+    with open('constant_len.bin', 'wb') as new_f:
         new_f.write(bin_string)
 
     return file_path
 
-
-def compress_huffman(file_path: str) -> str:
-    return file_path
 
 
 def compare_sizes(file_path: str) -> str:
@@ -82,15 +80,119 @@ def compare_sizes(file_path: str) -> str:
     return file_path
 
 
+class Node:
+    """
+    showing list of elements in freq first, unicode code in secondly
+    """
+
+    def __init__(self, letter=None, freq=0, children=None):
+        self.letter = letter
+        self.freq = freq
+        self.children = children or []
+
+    def tuple(self):
+        return (self.freq, ord(self.letter) if self.letter else -1)
+
+    def __lt__(self, other):
+        return self.tuple() < other.tuple()
+
+    def __eq__(self, other):
+        return self.tuple() == other.tuple()
+
+
+def encoding_table(node, code=''):
+    """
+    making a tree
+    """
+
+    if node.letter is None:
+        mapping = {}
+        for child, digit in zip(node.children, hexdigits):
+            mapping.update(encoding_table(child, code + digit))
+        return mapping
+    else:
+        return {node.letter: code}
+
+
+
+def huffman_encode_code(text: str) -> str:
+    """ param text to encode return: (tree, binary str) """
+    text = ''
+    with open(file_path, 'r') as f:
+        text += f.read()
+
+    nodes = [Node(letter, freq) for letter, freq in Counter(text).items()]
+    heapify(nodes)
+
+    # Строит n-арное дерево
+    while len(nodes) > 1:
+        list_children = [heappop(nodes) for _ in range(2)]
+        freq = sum([node.freq for node in list_children])
+
+        node = Node(None, freq)
+        node.children = list_children
+
+        heappush(nodes, node)
+
+    root = nodes[0]
+    codes = encoding_table(root)
+    print(codes)
+    return file_path
+
+
+def huffman_encode_compress(text: str) -> str:
+    """ param text to encode return: (tree, binary str) """
+    text = ''
+    with open(file_path, 'r') as f:
+        text += f.read()
+        
+
+    nodes = [Node(letter, freq) for letter, freq in Counter(text).items()]
+    heapify(nodes)
+
+    # Строит n-арное дерево
+    while len(nodes) > 1:
+        list_children = [heappop(nodes) for _ in range(2)]
+        freq = sum([node.freq for node in list_children])
+
+        node = Node(None, freq)
+        node.children = list_children
+
+        heappush(nodes, node)
+
+    root = nodes[0]
+    codes = encoding_table(root)
+    res = ''.join([codes[letter] for letter in text])
+    print(res)
+
+    with open('huffman_len.bin', 'wb') as f:
+        sio = StringIO(res)
+        while 1:
+                # Grab the next 8 bits
+                b = sio.read(8)
+                # Bail if we hit EOF
+                if not b:
+                    break
+                # If we got fewer than 8 bits, pad with zeroes on the right
+                if len(b) < 8:
+                    b = b + '0' * (8 - len(b))
+                # Convert to int
+                i = int(b, 2)
+                # Write
+                f.write(i.to_bytes(1, byteorder='big'))
+
+    return file_path
+
+
 def main_menu(file_path: str, action: int) -> str:
     switcher = {
         1: input_file_path,
         2: show_file_content,
         3: count_letters_occurence,
         4: show_code_table_const,
-        5: show_code_huffman,
+        5: huffman_encode_code,
         6: compress_constant,
-        7: compress_huffman,
+        7: huffman_encode_compress,
         8: compare_sizes,
     }
     file_path = switcher[action](file_path)
