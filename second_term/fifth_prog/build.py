@@ -1,8 +1,8 @@
 import os
 from collections import Counter
 from heapq import heapify, heappop, heappush
-from string import hexdigits
 from io import StringIO
+from string import hexdigits
 
 
 def input_file_path(file_path: str) -> str:
@@ -68,7 +68,6 @@ def compress_constant(file_path: str) -> str:
     return file_path
 
 
-
 def compare_sizes(file_path: str) -> str:
     default_size = os.stat('code.txt').st_size
     const_size = os.stat('constant_len.bin').st_size
@@ -114,7 +113,6 @@ def encoding_table(node, code=''):
         return {node.letter: code}
 
 
-
 def huffman_encode_code(text: str) -> str:
     """ param text to encode return: (tree, binary str) """
     text = ''
@@ -145,7 +143,6 @@ def huffman_encode_compress(text: str) -> str:
     text = ''
     with open(file_path, 'r') as f:
         text += f.read()
-        
 
     nodes = [Node(letter, freq) for letter, freq in Counter(text).items()]
     heapify(nodes)
@@ -168,18 +165,18 @@ def huffman_encode_compress(text: str) -> str:
     with open('huffman_len.bin', 'wb') as f:
         sio = StringIO(res)
         while 1:
-                # Grab the next 8 bits
-                b = sio.read(8)
-                # Bail if we hit EOF
-                if not b:
-                    break
-                # If we got fewer than 8 bits, pad with zeroes on the right
-                if len(b) < 8:
-                    b = b + '0' * (8 - len(b))
-                # Convert to int
-                i = int(b, 2)
-                # Write
-                f.write(i.to_bytes(1, byteorder='big'))
+            # Grab the next 8 bits
+            b = sio.read(8)
+            # Bail if we hit EOF
+            if not b:
+                break
+            # If we got fewer than 8 bits, pad with zeroes on the right
+            if len(b) < 8:
+                b = b + '0' * (8 - len(b))
+            # Convert to int
+            i = int(b, 2)
+            # Write
+            f.write(i.to_bytes(1, byteorder='big'))
 
     return file_path
 
