@@ -1,11 +1,13 @@
 import csv
-from openpyxl import load_workbook
-import pandas as pd
 
 from get_median_frame import make_frame
 
 from hist_median_frame import make_hist
 
+
+from openpyxl import load_workbook
+
+import pandas as pd
 
 
 def get_data(list_min, list_hour, list_folders, bad_videos):
@@ -43,7 +45,7 @@ def input_to_excel(excel_file, csv_file):
 
         for row in csv_reader:
             available_status = ws4.cell(row=start_row, column=10).value
-            while (available_status != None):
+            while (available_status is not None):
                 start_row += 1
                 available_status = ws4.cell(row=start_row, column=10).value
 
@@ -59,13 +61,19 @@ def input_to_excel(excel_file, csv_file):
 
     workbook.save(excel_file)
 
+
 if __name__ == '__main__':
-    # list_min = ['00', '05', '10', '15', '20', '25', '30', '35', '40', '45', '50', '55', '00']
-    # list_hour = ['08', '09', '10', '11']
-    # list_folders = ['8.00-9.00 06.07.2023', '9.00-10.00 06.07.2023', '10.00-11.00 06.07.2023', '11.00-12.00 06.07.2023']
-    # bad_videos = ['08.05', '08.35', '08.40', '09.35', '09.40', '09.45', '09.55', '10.40', '10.45', '11.55']
-    # header = ['math expect, disperc, sqrt mean, max_x, max_y, min_x, min_y']
-    # get_data(list_min, list_hour, list_folders, bad_videos)
+    list_min = ['00', '05', '10', '15', '20', '25', '30',
+                '35', '40', '45', '50', '55', '00']
+    list_hour = ['08', '09', '10', '11']
+    list_folders = ['8.00-9.00 06.07.2023',
+                    '9.00-10.00 06.07.2023',
+                    '10.00-11.00 06.07.2023',
+                    '11.00-12.00 06.07.2023']
+    bad_videos = ['08.05', '08.35', '08.40', '09.35', '09.40',
+                  '09.45', '09.55', '10.40', '10.45', '11.55']
+    header = ['math expect, disperc, sqrt mean, max_x, max_y, min_x, min_y']
+    get_data(list_min, list_hour, list_folders, bad_videos)
 
     excel_file = '8.00-12.00 06.07.2023\Разметка видео.xlsx'
     input_to_excel(excel_file, 'data.csv')
