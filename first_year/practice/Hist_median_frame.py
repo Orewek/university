@@ -6,30 +6,43 @@ import numpy as np
 
 from scipy import ndimage
 
-img = cv2.imread('median_frame.png', 0)
 
-image_array = np.array(img)
+def make_hist(file_name, frame_folder):
+    img = cv2.imread(f'median_frames/{frame_folder}/median_frame_{file_name}.png', 0)
+    data_list = []
 
-# Calculate the expectation (mean) and variance
-expectation = np.mean(image_array)
-variance = np.var(image_array)
+    image_array = np.array(img)
 
-print("Мат. ожидание:", expectation)
-print("Дисперсия:", variance)
-print("Ср.кв. отклонение:", np.sqrt(variance))
+    # Calculate the expectation (mean) and variance
+    expectation = np.mean(image_array)
+    variance = np.var(image_array)
 
-hist, bins = np.histogram(img.flatten(), 256, [0, 256])
+    # print("Мат. ожидание:", round(expectation), 14)
+    # print("Дисперсия:", round(variance, 8))
+    # print("Ср.кв. отклонение:", round(np.sqrt(variance), 7))
+    data_list.append(round(expectation, 14))
+    data_list.append(round(variance, 8))
+    data_list.append(round(np.sqrt(variance), 7))
 
-max_value_y = np.max(hist)
-min_value_y = np.min(hist)
-max_value_x = np.argmax(hist)
-min_value_x = np.argmin(hist)
-print("Максимум (", max_value_x, ";", max_value_y, ")")
-print("Минимум (", min_value_x, ";", min_value_y, ")")
+    hist, bins = np.histogram(img.flatten(), 256, [0, 256])
 
-plt.hist(img.flatten(), 256, [0, 256], color='r')
-plt.xlabel('Значение пикселя')
-plt.ylabel('Частота')
-plt.title('Гистограмма медианного кадра')
-plt.xlim([0, 256])
-plt.show()
+    max_value_y = np.max(hist)
+    min_value_y = np.min(hist)
+    max_value_x = np.argmax(hist)
+    min_value_x = np.argmin(hist)
+    # print("Максимум (", max_value_x, ";", max_value_y, ")")
+    # print("Минимум (", min_value_x, ";", min_value_y, ")")
+    data_list.append(max_value_x)
+    data_list.append(max_value_y)
+    data_list.append(min_value_x)
+    data_list.append(min_value_y)
+
+    plt.hist(img.flatten(), 256, [0, 256], color='r')
+    plt.xlabel('Значение пикселя')
+    plt.ylabel('Частота')
+    plt.title('Гистограмма медианного кадра')
+    plt.xlim([0, 256])
+    plt.savefig(f'8.00-12.00 06.07.2023/{frame_folder}/hist_{file_name}.png')
+    # plt.show()
+
+    return data_list
