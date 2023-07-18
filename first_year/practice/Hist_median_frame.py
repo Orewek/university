@@ -7,8 +7,8 @@ import numpy as np
 from scipy import ndimage
 
 
-def make_hist(file_name, frame_folder):
-    img = cv2.imread(f'median_frames/{frame_folder}/median_frame_{file_name}.png', 0)
+def make_hist(file_name, frame_folder, mega_frame):
+    img = cv2.imread(f'median_frames/{mega_frame}/{frame_folder}/median_frame_{file_name}.png', 0)
     data_list = []
 
     image_array = np.array(img)
@@ -42,7 +42,7 @@ def make_hist(file_name, frame_folder):
     plt.ylabel('Частота')
     plt.title('Гистограмма медианного кадра')
     plt.xlim([0, 256])
-    plt.savefig(f'8.00-12.00 06.07.2023/{frame_folder}/hist_{file_name}.png')
+    plt.savefig(f'{mega_frame}/{frame_folder}/hist_{file_name}.png')
     # plt.show()
 
     return data_list

@@ -8,7 +8,7 @@ import numpy as np
 def median_frame(filename):
     file_path = filename
     video = cv.VideoCapture(file_path)
-    FOI = video.get(cv.CAP_PROP_FRAME_COUNT) * np.random.uniform(size=1)
+    FOI = video.get(cv.CAP_PROP_FRAME_COUNT) * np.random.uniform(size=50)
     frames = []
     for frameOI in FOI:
         video.set(cv.CAP_PROP_POS_FRAMES, frameOI)
@@ -18,11 +18,11 @@ def median_frame(filename):
     return result
 
 
-def make_frame(path, frame_folder, video_folder):
+def make_frame(path, frame_folder, mega_frame, video_folder):
     result = median_frame(f'{video_folder}/{path}.mp4')
     cv.imwrite(f'median_frame_{path}.png', result)
     try:
-        os.rename(f'median_frame_{path}.png', f'median_frames/{frame_folder}/median_frame_{path}.png')
+        os.rename(f'median_frame_{path}.png', f'median_frames/{mega_frame}/{frame_folder}/median_frame_{path}.png')
     except:
         os.remove(f'median_frame_{path}.png')
     cv.namedWindow('Median filtering result', cv.WINDOW_NORMAL)
