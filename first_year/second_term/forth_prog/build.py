@@ -5,31 +5,31 @@ from typing import Any
 
 def input_file_path() -> str:
     """ input a path to .csv and check on validation """
-    file_path = None
+    file_path: None = None
     print('Choose file')
 
     while file_path is None:
-        file_path = str(input())
+        file_path: str = str(input())
 
         try:
             with open(file_path, 'r'):
                 pass
         except:
             print('Cannot open a file on this destination')
-            file_path = None
+            file_path: None = None
 
     return file_path
 
 
 def read_file_data(file_path: str) -> Any:
     """ parse to lists each el in text"""
-    names = []
-    volumes = []
-    prices = []
+    names: list = []
+    volumes: list = []
+    prices: list = []
     with open(file_path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
 
-        lines = 0
+        lines: list = 0
         for row in csv_reader:
             if lines > 0 and row != []:
                 names.append(row[0])
@@ -46,7 +46,7 @@ def get_table_dynamic(volumes: list, prices: list, bag_volume: int) -> list:
     make a table with prices per volume
     last column contains optimal (max) prices
     """
-    volume = [[0 for x in range(bag_volume + 1)] for y in range(len(prices) + 1)]
+    volume: list = [[0 for x in range(bag_volume + 1)] for y in range(len(prices) + 1)]
 
     for x in range(len(prices) + 1):
         for y in range(bag_volume + 1):
@@ -54,8 +54,7 @@ def get_table_dynamic(volumes: list, prices: list, bag_volume: int) -> list:
                 volume[x][y] = 0
 
             elif volumes[x - 1] <= y:
-                volume[x][y] = max(prices[x - 1] + volume[x - 1][y - volumes[x - 1]],
-                                   volume[x - 1][y])
+                volume[x][y] = max(prices[x - 1] + volume[x - 1][y - volumes[x - 1]], volume[x - 1][y])
 
             else:
                 volume[x][y] = volume[x - 1][y]
@@ -63,7 +62,10 @@ def get_table_dynamic(volumes: list, prices: list, bag_volume: int) -> list:
     return volume
 
 
-def get_table_recursion(volumes: list, prices: list, bag_volume: int, items: int) -> list:
+def get_table_recursion(volumes: list,
+                        prices: list,
+                        bag_volume: int,
+                        items: int) -> list:
     """ trying to include/exclude item to find out best result """
     if items <= 0 or bag_volume <= 0:
         return 0
@@ -82,8 +84,8 @@ def get_optimal_prices_names(names: list,
                              prices: list,
                              items: list) -> Any:
     """ convert lists with [volume, price] to item_name """
-    named_items = []
-    optimal_price = 0
+    named_items: list = []
+    optimal_price: int = 0
     print(items)
     for i in range(len(names)):
         if [volumes[i], prices[i]] in items:
@@ -102,12 +104,12 @@ def greedy(names: list, volumes: list, prices: list, bag_volume: int) -> None:
     temp_volumes = volumes
     while bag_volume > 0:
         for _ in range(len(names)):
-            item_position = 0
-            price = 0
+            item_position: int = 0
+            price: int = 0
             for i in range(len(names) - len(taken_prices)):
                 if temp_prices[i] > price:
-                    item_position = i
-                    price = temp_prices[i]
+                    item_position: int = i
+                    price: int = temp_prices[i]
                     # print('price', price)
 
             if price != 0:
@@ -141,7 +143,7 @@ def get_items(names: list,
     """
 
     res = volume[len(prices)][bag_volume]
-    items = []
+    items: list = []
 
     for i in range(len(prices), 0, -1):
         if res <= 0:
@@ -196,7 +198,7 @@ def main(file_path: str,
          named_items: list,
          optimal_price: int) -> str:
 
-    table = """
+    table: str = """
             1: read a file
             2: write a bag volume
             3: solve the task
@@ -205,13 +207,13 @@ def main(file_path: str,
             6: compare speed
             """
 
-    action_table = """
+    action_table: str = """
                    U can write only one digit.
                    After operation u can continue working with massive
                    write -table to see the options
                    """
     print(table)
-    action = input()
+    action: str = input()
 
     while action.isdigit is False or (not (1 <= int(action) <= 9)):
         if action != '-table':
@@ -219,7 +221,7 @@ def main(file_path: str,
         else:
             print(table)
 
-        action = input()
+        action: str = input()
 
     if int(action) != 5 and file_path is None:
         print('Firstly read a file!')
@@ -232,23 +234,23 @@ def main(file_path: str,
 
     elif int(action) == 2:
         print('Write a bag volume')
-        bag_volume = input()
+        bag_volume: str = input()
 
         while bag_volume.isdigit() is False:
             print('You can write only a number')
-            bag_volume = input()
+            bag_volume: str = input()
 
     elif int(action) == 3:
         print('Choose method\n'
               '1: recursion\n'
               '2: dynamic\n'
               '3: greddy')
-        method = int(input())
+        method: int = int(input())
         if method == 1:
             result = get_table_recursion(volumes,
                                          prices,
-                                        int(bag_volume),
-                                        len(volumes) - 1)
+                                         int(bag_volume),
+                                         len(volumes) - 1)
             print(result)
         if method == 2:
             volume = get_table_dynamic(volumes, prices, int(bag_volume))

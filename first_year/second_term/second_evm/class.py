@@ -4,10 +4,10 @@ import csv
 class City_17(object):
     """ a class with some methods and arguments """
     def __init__(self, ppl: int, mayor: str, age: int, name: str) -> None:
-        self.population = ppl
-        self.mayor = mayor
-        self.age = age
-        self.name = name
+        self.population: int = ppl
+        self.mayor: str = mayor
+        self.age: int = age
+        self.name: str = name
 
     def greetings(self) -> str:
         return (f'Welcome to {self.name}!')
@@ -22,25 +22,25 @@ class City_17(object):
 def add_city(cities: list) -> list:
     """ add a new city with some properties to list of cities """
     print('Write a name of city')
-    name = str(input())
+    name: str = str(input())
 
     print('How many ppl r living in this city')
-    population = input()
+    population: int = input()
     while population.isdigit() is False:
         print('You can write only digits in population category')
-        population = input()
+        population: int = input()
 
     print('Whos the mayor of that city')
-    mayor = str(input())
+    mayor: str = str(input())
 
     print('How many years this city exist')
-    age = input()
+    age: int = input()
 
     while age.isdigit() is False:
         print('You can write only digits in age category')
-        age = input()
+        age: str = input()
 
-    city_name = City_17(int(population), mayor, int(age), name.capitalize())
+    city_name: str = City_17(int(population), mayor, int(age), name.capitalize())
     cities.append(city_name)
     print(f'{city_name.name} was succsessfully added')
 
@@ -54,11 +54,11 @@ def delete_city(cities: list) -> list:
 
     print('Write a number next to the city which we should delete')
 
-    action = input()
+    action: int = input()
 
     while action.isdigit is False or (not (1 <= int(action) <= len(cities))):
         print('You can write only a number or number <= 0 / >= last city')
-        action = input()
+        action: int = input()
 
     del cities[int(action) - 1]
 
@@ -70,16 +70,16 @@ def delete_city(cities: list) -> list:
 def action_menu(action_city: str, city: City_17, new_info: str) -> None:
     """ change some atribute in city """
     if int(action_city) == 1:
-        city.name = new_info
+        city.name: str = new_info
 
     if int(action_city) == 2:
-        city.age = int(new_info)
+        city.age: int = int(new_info)
 
     if int(action_city) == 3:
-        city.population = int(new_info)
+        city.population: int = int(new_info)
 
     if int(action_city) == 4:
-        city.mayor = new_info
+        city.mayor: str = new_info
 
 
 def change_smth_city(cities: list) -> list:
@@ -89,17 +89,17 @@ def change_smth_city(cities: list) -> list:
 
     print('Choose in which city we should change info')
 
-    action = input()
+    action: int = input()
 
     while action.isdigit is False or (not (1 <= int(action) <= len(cities))):
         print('You can write only a number or number <= 0 / >= last city')
-        action = input()
+        action: int = input()
 
-    city = cities[int(action) - 1]
+    city: str = cities[int(action) - 1]
 
     print('Choose what exactly should we change in this city')
 
-    table = """
+    table: str = """
             1: name
             2: age
             3: population
@@ -108,19 +108,19 @@ def change_smth_city(cities: list) -> list:
 
     print(table)
 
-    action_city = input()
+    action_city: int = input()
 
     while action_city.isdigit is False or (not (1 <= int(action_city) <= 4)):
         print('You can write only a number or number <= 0 / > 4')
-        action_city = input()
+        action_city: int = input()
 
     print('Write updated info')
 
-    new_info = input()
+    new_info: int = input()
 
     while (2 <= int(action_city) <= 3) and new_info.isdigit() is False:
         print('You can write only digits to age and population')
-        new_info = input()
+        new_info: int = input()
 
     action_menu(action_city, city, new_info)
 
@@ -134,13 +134,13 @@ def show_city_info(cities: list) -> list:
 
     print('Write number next to city, to see info about')
 
-    action = input()
+    action: int = input()
 
     while action.isdigit() is False or (not (1 <= int(action) <= len(cities))):
         print('You can write only a number or number <= 0 / >= last city')
         action = input()
 
-    city = cities[int(action) - 1]
+    city: str = cities[int(action) - 1]
     print(f'name: {city.name}\n'
           f'population: {city.population}\n'
           f'age: {city.age}\n'
@@ -152,14 +152,14 @@ def show_city_info(cities: list) -> list:
 def cities_satisty_filter(action_city: str, less_big: str, border: str) -> None:
     """ print cities that satisfy the filter """
     if int(action_city) == 2 and int(less_big) == 1:
-            for city in cities:
-                if city.age < int(border):
-                    print(city.name, city.age)
+        for city in cities:
+            if city.age < int(border):
+                print(city.name, city.age)
 
     if int(action_city) == 2 and int(less_big) == 2:
-            for city in cities:
-                if city.age > int(border):
-                    print(city.name, city.age)
+        for city in cities:
+            if city.age > int(border):
+                print(city.name, city.age)
 
     if int(action_city) == 3 and int(less_big) == 1:
         for city in cities:
@@ -176,7 +176,7 @@ def city_filter(cities: list) -> list:
     """ ouput all cities that satisfy the filter """
     print('Choose which parameter should we use')
 
-    table = """
+    table: str = """
             1: name
             2: age
             3: population
@@ -185,24 +185,24 @@ def city_filter(cities: list) -> list:
 
     print(table)
 
-    action_city = input()
+    action_city: int = input()
 
     while action_city.isdigit() is False or (not (2 <= int(action_city) <= 3)):
         print('You can make age/population filter')
-        action_city = input()
+        action_city: int = input()
 
     print('less 1; bigger 2')
-    less_big = input()
+    less_big: int = input()
     while less_big.isdigit() is False or (not (1 <= int(less_big) <= 2)):
         print('You can write only 1 or 2')
-        less_big = input()
+        less_big: int = input()
 
     print('Write number, with that we will compare rest')
-    border = input()
+    border: int = input()
 
     while border.isdigit() is False:
         print('You can write only a number')
-        border = input()
+        border: int = input()
 
     cities_satisty_filter(action_city, less_big, border)
 
@@ -228,7 +228,7 @@ def city_counter(cities: list) -> list:
 
 
 def main_menu(cities: list, action: int) -> list:
-    switcher = {
+    switcher: dict = {
         1: add_city,
         2: delete_city,
         3: change_smth_city,
@@ -244,7 +244,7 @@ def main_menu(cities: list, action: int) -> list:
 
 def main(cities: list) -> list:
 
-    table = """
+    table: str = """
             1: add city
             2: delete city
             3: change smth in city
@@ -255,7 +255,7 @@ def main(cities: list) -> list:
             8: exit
             """
 
-    action_table = """
+    action_table: str = """
                    U can write only one digit.
                    After operation u can continue working with massive
                    write -table to see the options
@@ -263,7 +263,7 @@ def main(cities: list) -> list:
 
     print(table)
 
-    action = input()
+    action: int = input()
 
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
@@ -272,7 +272,7 @@ def main(cities: list) -> list:
             print(action_table)
         else:
             print(table)
-        action = input()
+        action: int = input()
 
     if int(action) == 8:
         exit()
@@ -282,11 +282,11 @@ def main(cities: list) -> list:
 
 
 if __name__ == '__main__':
-    cities = []
-    file_path = None
+    cities: list = []
+    file_path: None = None
     print('Choose the file')
     while file_path is None:
-        file_path = str(input())
+        file_path: str = str(input())
 
         try:
             with open(file_path, 'r'):
@@ -294,12 +294,12 @@ if __name__ == '__main__':
 
         except:
             print('cannot open file on this destination')
-            file_path = None
+            file_path: None = None
 
     with open(file_path) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
 
-        lines = 0
+        lines: int = 0
         for row in csv_reader:
             if lines > 0 and row != []:
                 city_name = City_17(int(row[0]), row[1], int(row[2]), row[3])
@@ -318,6 +318,6 @@ if __name__ == '__main__':
 
             for city in cities:
                 writer.writerow({'population': f'{city.population}',
-                                'mayor': f'{city.mayor}',
-                                'age': f'{city.age}',
-                                'name': f'{city.name}'})
+                                 'mayor': f'{city.mayor}',
+                                 'age': f'{city.age}',
+                                 'name': f'{city.name}'})
