@@ -4,12 +4,13 @@
 
 ##### Средне-арифмитическое. Складываем все эллементы и делим на кол-во
 ```py
+@str2int_before
 def mean_arif(mas: list) -> list:
-    el_sum = 0
+    el_sum: int = 0
     for i in range(len(mas)):
-        el_sum += int(mas[i])
+        el_sum += mas[i]
 
-    arif_sum = el_sum / len(mas)
+    arif_sum: float = el_sum / len(mas)
     print(f'Arifmetical sum = {arif_sum}')
 
     return mas
@@ -39,9 +40,9 @@ def max_el(mas: list) -> list:
 
 ##### Посмотрим на остатки двух соседних цифр, после чего выведим `1: подоходит` `0: не подходит`
 ```py
-def chered_checker(number: int, num_len: int) -> str:
-    for i in range(num_len - 1):
-        if number % 2 == (number // 10) % 2:
+def chered_checker(number: int, divide: int) -> str:
+    while (number // 10) > 0:
+        if number % divide == (number // 10) % divide:
             return '0'
         number //= 10
     return '1'
@@ -71,9 +72,9 @@ print(amount_numbers)
     * `0` если да
 
 ```py
-def chered_checker(number: int, num_len: int) -> str:
-    for i in range(num_len - 1):
-        if number % 10 == (number // 10) % 10:
+def chered_checker(number: int, divide: int) -> str:
+    while (number // 10) > 0:
+        if number % divide == (number // 10) % divide:
             return '0'
         number //= 10
     return '1'
@@ -81,9 +82,9 @@ def chered_checker(number: int, num_len: int) -> str:
 
 ##### Посмотрим, равны ли две соседние цифры, после чего выведим `11: подоходит` `00: не подходит`
 ```py
-def chered_checker(number: int, num_len: int) -> str:
-    for i in range(num_len - 1):
-        if number % 10 == (number // 10) % 10:
+def chered_checker(number: int, divide: int) -> str:
+    while (number // 10) > 0:
+        if number % divide == (number // 10) % divide:
             return '0'
         number //= 10
     return '1'
@@ -91,27 +92,28 @@ def chered_checker(number: int, num_len: int) -> str:
 
 ##### Находим максимальную последовательность `11` и `00` в массиве с результатами
 ```py
-def consecutive_result(mas_len: int, result_mas: list) -> list:
-    count = 1
+@int2str_before
+def consecutive_result(result_mas: list) -> tuple:
+    count1: int = 1
+    count0: int = 1
 
-    res1 = 0
-    res0 = 0
+    res1: int = 0
+    res0: int = 0
 
-    for i in range(mas_len - 1):
-        if result_mas[i] == result_mas[i + 1] and result_mas[i] == '1':
-            count += 1
+    for i in range(len(result_mas) - 1):
+        if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '1':
+            count1 += 1
+
         else:
-            res1 = max(res1, count)
-            count = 1
+            res1: int = max(res1, count1)
+            count1: int = 1
 
-    count = 1
+        if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '0':
+            count0 += 1
 
-    for i in range(mas_len - 1):
-        if result_mas[i] == result_mas[i + 1] and result_mas[i] == '0':
-            count += 1
         else:
-            res0 = max(res0, count)
-            count = 1
+            res0: int = max(res0, count0)
+            count0: int = 1
 
     return res1, res0
 ```
@@ -143,16 +145,17 @@ def consecutive_result(mas_len: int, result_mas: list) -> list:
 ```
 
 ```py
+@count_time
 def selection_sort(mas: list) -> list:
-    perma_el = 0
+    perma_el: int = 0
     for _ in range(len(mas)):
-        max_el = mas[0]
+        max_el: int = mas[0]
         for i in range(len(mas) - perma_el):
             if mas[i] > max_el:
-                max_el = mas[i]
-                index_el = i
+                max_el: int = mas[i]
+                index_el: int = i
 
-        mas = swap_el(index_el, perma_el, mas)
+        mas: int = swap_el(index_el, perma_el, mas)
         perma_el += 1
 
     return mas
@@ -161,7 +164,7 @@ def selection_sort(mas: list) -> list:
 
 ```py
 def swap_el(index_max: int, perma_el: int, mas: list) -> list:
-    index_last = len(mas) - perma_el - 1
+    index_last: int = len(mas) - perma_el - 1
     mas[index_last], mas[index_max] = mas[index_max], mas[index_last]
 
     return mas
@@ -176,13 +179,14 @@ def swap_el(index_max: int, perma_el: int, mas: list) -> list:
 В результате получается отсортированный массива
 ```
 ```py
+@str2int_before
 def quick_sort(mas: list) -> list:
-    less = []
-    equal = []
-    greater = []
+    less: list = []
+    equal: list = []
+    greater: list = []
 
     if len(mas) > 1:
-        pivot = mas[0]
+        pivot: int = mas[0]
         for el in mas:
             if el < pivot:
                 less.append(el)
@@ -203,20 +207,21 @@ def quick_sort(mas: list) -> list:
 
 ```py
 def sum_max2_min1(mas: list) -> list:
-    min_odd = 10**10
-    max_even = - 1
+    min_odd: int = 10**10
+    max_even: int = - 1
 
     for el in mas:
         if el % 2 == 0 and el > max_even:
-            max_even = el
+            max_even: int = el
         if el % 2 != 0 and el < min_odd:
-            min_odd = el
+            min_odd: int = el
 
     if ((min_odd + max_even) in mas) is True:
         print(f'maximum even + minimum odd in massive!\n'
               f'{max_even} + {min_odd} = {max_even + min_odd}')
     else:
         print('maximum even + minimum odd not in massive!')
+
     return mas
 ```
 
@@ -225,13 +230,9 @@ def sum_max2_min1(mas: list) -> list:
 ##### Найти чет-нечет / нечет-чет пары
 
 ```py
+@str2int_before
 def chered_odd(mas: list) -> list:
-    """
-    pair - x'th and (x + 1)'th
-    x'th % 2 != (x + 1)'th % 2 => count += 1
-    so, even_odd or odd_even += 1
-    """
-    count_odd_pairs = 0
+    count_odd_pairs: int = 0
     for i in range(len(mas) - 1):
         if mas[i] % 2 != mas[i + 1] % 2:
             count_odd_pairs += 1
@@ -246,6 +247,8 @@ def chered_odd(mas: list) -> list:
 ## Последовательный поиск
 ##### Просто перебираем эллементы в массиве
 ```py
+@count_time
+@str2int_before
 def consistent_search(mas: list, find_el: int) -> int:
     for i in range(len(mas)):
         if mas[i] == find_el:
@@ -263,22 +266,24 @@ def consistent_search(mas: list, find_el: int) -> int:
 В конце остается один эллемент, если и он не совпадает, в след шаге массив будет пустым, а low = high, значит вернет -1
 ```
 ```py
+@count_time
+@str2int_before
 def binary_search(mas: list, find_el: int) -> int:
-    mas = sorted(mas)
-    low = 0
-    mid = 0
-    high = len(mas) - 1
+    mas: list = sorted(mas)
+    low: int = 0
+    mid: int = 0
+    high: int = len(mas) - 1
 
     while low < high:
-        mid = (low + high) // 2
+        mid: int = (low + high) // 2
         if mas[mid] < find_el:
-            low = mid
+            low: int = mid
 
         if mas[mid] == find_el:
             return mid + 1
 
         if mas[mid] > find_el:
-            high = mid
+            high: int = mid
 
     return - 1
 ```
@@ -294,10 +299,11 @@ def binary_search(mas: list, find_el: int) -> int:
 ```
 
 ```py
+@str2int_before
 def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
-    mas = sorted(mas)
-    fib_index_1 = 1
-    fib_index_2 = 1
+    mas: list = sorted(mas)
+    fib_index_1: int = 1
+    fib_index_2: int = 1
 
     while fib_index_2 <= len(mas) - 1 and mas[fib_index_2] <= find_el:
         # For example
@@ -309,8 +315,8 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
         # Heres might be 4 els in mas, but 2 + 3 = 5
         # So fib_index_2 = 5, whichs > len(mas)
         if fib_index_2 > len(mas):
-            fib_index_1 = fib_index_2 - fib_index_1
-            fib_index_2 = len(mas)
+            fib_index_1: int = fib_index_2 - fib_index_1
+            fib_index_2: int = len(mas)
             break
 
     # Now find_el <= fib_i_2
@@ -321,13 +327,13 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
         to >>>
         fib (n - 1)'th and fib n'th
         """
-        type_var = fib_index_2
-        fib_index_2 = fib_index_1
-        fib_index_1 = type_var - fib_index_1
+        type_var: int = fib_index_2
+        fib_index_2: int = fib_index_1
+        fib_index_1: int = type_var - fib_index_1
 
     # Now fib_i_1 <= find_el <= fib_i_2
     # Heres might be diff fib_i_2 than in prev while
-    new_mas = []
+    new_mas: list = []
     # Cutting new mas
     for i in range(fib_index_1, fib_index_2):
         new_mas.append(mas[i])
@@ -347,26 +353,28 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
 ## Интерполяционный поиск
 
 ```py
+@count_time
+@str2int_before
 def interpolation_search(mas: list, find_el: int) -> int:
-    mas = sorted(mas)
-    left = 0
-    right = len(mas) - 1
+    mas: list = sorted(mas)
+    l: int = 0
+    r: int = len(mas) - 1
 
     # If mas[0] == mas[-1] means that whole mas contains same el
     if mas[0] == mas[-1]:
         return 0
 
-    while mas[left] <= find_el <= mas[right]:
-        mid = left + int((find_el - mas[left]) / (mas[right] - mas[left]) * (right - left))
+    while mas[l] <= find_el <= mas[r]:
+        mid: int = l + int((find_el - mas[l]) / (mas[r] - mas[l]) * (r - l))
 
         if find_el < mas[mid]:
-            right = mid - 1
+            r: int = mid - 1
 
         if find_el == mas[mid]:
             return mid + 1
 
         if find_el > mas[mid]:
-            left = mid - 1
+            l: int = mid - 1
 
     return - 1
 ```
@@ -376,28 +384,30 @@ def interpolation_search(mas: list, find_el: int) -> int:
 Найти минимальное симметричное число, и перевернуть все числа с длиной равной три
 ```
 ```py
+@negative_positive_logic
+@str2int_before
 def laba_3_b8(mas: list) -> list:
-    max_number = 10 ** 10
+    max_num: int = 10 ** 10
     for i in range(len(mas)):
-        if symmetrical_number(mas[i]) is True and max_number > mas[i] and mas[i] > 100:
-            max_number = mas[i]
+        if symmetrical_number(mas[i]) is True and max_num > mas[i] and mas[i] > 100:
+            max_num: int = mas[i]
 
-    if max_number == 10 ** 10:
+    if max_num == 10 ** 10:
         print('0 symmetrical numbers have found')
 
     else:
-        print(f'{max_number} is the lowest symmetrical number')
+        print(f'{max_num} is the lowest symmetrical number')
 
     for i in range(len(mas)):
         if len(str(mas[i])) == 3:
-            mas[i] = reverse_number(mas[i])
+            mas[i]: int = reverse_number(mas[i])
 
     return mas
 ```
 ##### Нахождеие симметричного числа
 ```py
 def symmetrical_number(number: int) -> bool:
-    digits_of_num = []
+    digits_of_num: list = []
     while number != 0:
         digits_of_num.append(number % 10)
         number //= 10
@@ -406,19 +416,17 @@ def symmetrical_number(number: int) -> bool:
         if digits_of_num[i] != digits_of_num[len(digits_of_num) - 1 - i]:
             return False
 
-    # if u wanna see whole symmetrical numbers in mas
-    # print(digits_of_num)
     return True
 ```
 ##### Переворт числа
 ```py
 def reverse_number(number: int) -> int:
-    digits_of_num = []
+    digits_of_num: list = []
     while number != 0:
         digits_of_num.append(number % 10)
         number //= 10
 
-    reversed_number = 0
+    reversed_number: int = 0
     for i in range(len(digits_of_num)):
         reversed_number += digits_of_num[i] * (10 ** i)
 
@@ -431,25 +439,27 @@ def reverse_number(number: int) -> int:
 Отсортировать все нечетные числа, при этом не трогая четные
 ```
 ```py
+@negative_positive_logic
+@str2int_before
 def laba_3_c5(mas: list) -> list:
     # Removing prime numbers which doesnt contain digit 5
-    new_mas = []
+    new_mas: list = []
     for i in range(len(mas)):
         if not(check_contain_5(mas[i]) is False and prime_number(mas[i]) is True):
             new_mas.append(mas[i])
 
-    mas = new_mas
+    mas: list = new_mas
 
-    odd_els = []
+    odd_els: list = []
     for i in range(len(mas)):
         if mas[i] % 2 == 1:
             odd_els.append(mas[i])
 
-    odd_els = sorted(odd_els)
+    odd_els: list = sorted(odd_els)
     print(odd_els)
     for i in range(len(mas)):
         if mas[i] % 2 == 1:
-            mas[i] = odd_els[0]
+            mas[i]: int = odd_els[0]
             odd_els.pop(0)
 
     return mas

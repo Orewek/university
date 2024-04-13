@@ -28,7 +28,7 @@ def clear_mas(mas: list) -> list:
     """
     clearing massive (reinitialization)
     """
-    mas = []
+    mas.clear()
     return mas
 
 

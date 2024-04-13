@@ -6,21 +6,22 @@
 
 ##### Пользователь вводит поэлементно
 ```py
-def add_elements(mas: tuple) -> tuple:
-    el_mas = input()
+@str2int_after
+def add_elements(mas: list) -> list:
+    el_mas: str = input()
     while el_mas != '':
         if el_mas.isdigit() is True:
             mas.append(el_mas)
-        el_mas = input()
+        el_mas: str = input()
 
     return mas
 ```
 
 ##### Работает генератор
 ```py
-def generate_el(mas: tuple, amount_elements: int) -> tuple:
+def generate_el(mas: list, amount_elements: int) -> list:
     for _ in range(amount_elements):
-        number = randint(-1000, 1000)
+        number: int = randint(-1000, 1000)
         mas.append(number)
 
     return mas

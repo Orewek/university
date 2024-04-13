@@ -8,29 +8,29 @@
 ##### Сначала мы показываем пользователю занумерованные элементы массива
 ###### Нумеруем их с единицы, то есть `i + 1`
 ```py
-def show_elements(mas: tuple):
-    for count, ma in enumerate(mas):
-        print(f'{count + 1}: {ma}')
+def show_elements(mas: list) -> list:
+    for count, item in enumerate(mas):
+        print(f'{count + 1}: {item}')
 ```
 ##### После позователь записывает построчно индексы элементов, которые надо поменять
 ```py
-def change_elements(mas: tuple, change_mas: tuple) -> tuple:
+def change_elements(mas: list, change_mas: list) -> list:
     for i in range(len(mas)):
         if i in change_mas:
             print(f'{i + 1}: {mas[i]}. Type new element for this cell')
 
-            replace_cell = input()
-            mas[i] = replace_cell
+            replace_cell: str = check_int(input())
+            mas[i]: int = replace_cell
     return mas
 ```
 ##### Очистить массив и узнать его длину
 ```py
-def clear_mas(mas: tuple) -> tuple:
-    mas = []
+def clear_mas(mas: list) -> list:
+    mas.clear()
     return mas
 
 
-def len_mas(mas: tuple) -> str:
-    ans = f'{len(mas)} - length of massive'
+def len_mas(mas: list) -> str:
+    ans: str = f'{len(mas)} - length of massive'
     return ans
 ```

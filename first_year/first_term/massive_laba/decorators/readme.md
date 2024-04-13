@@ -5,7 +5,6 @@
 * `str_to_int` - для целочисленных операций
 * `count_time` - фиксируем время до операции, и после. end - start = время работы функции
 * `negative_positive` - Берем все числа по модулю
-* `complete_bar` - шкала прогресса при обработке массива. Помогает понять, сколько еще осталось ждать
 
 #### Также существуют `name_logic` декораторы
 #### Они выполняют какую-либо функции, не выводя что-либо на экан
@@ -25,14 +24,14 @@ def mas_before_after(func):
 
 `str_to_int`
 ```py
-def str_to_int(func):
-    def wrapper(*args):
-        str_count = 0
-        str_el = []
+def str_to_int(func: Callable[[Iterable[Any]], Any]):
+    def wrapper(*args: Any):
+        str_count: int = 0
+        str_el: list = []
 
         for i in range(len(args[0])):
             if type(args[0][i]) is str:
-                args[0][i] = int(args[0][i])
+                args[0][i]: int = int(args[0][i])
                 str_count += 1
                 str_el.append(args[0][i])
 
@@ -42,7 +41,7 @@ def str_to_int(func):
                   f'This elements were str {str_el}\n'
                   f'===STRING_TO_INT===STRING_TO_INT===STRING_TO_INT')
 
-        result = func(args[0], *args[1:])
+        result = func(*args)
 
         return result
     return wrapper
@@ -50,7 +49,7 @@ def str_to_int(func):
 
 `count_time`
 ```py
-def count_time(func):
+def count_time(func: Callable[[Iterable[Any]], Any]):
     def wrapper(*args):
         start_time = time.time()
         result = func(*args)
@@ -66,31 +65,18 @@ def count_time(func):
 ```
 `negative_positive`
 ```py
-def negative_positive(func):
-    def wrapper(*args):
-        neg_count = 0
-        for x in range(len(args[0])):
-            if x < 0:
-                x = abs(x)
+def negative_positive(func: Callable[[Iterable[Any]], Any]):
+    def wrapper(*args: Any):
+        neg_count: int = 0
+        for el in range(len(args[0])):
+            if el < 0:
+                el: int = abs(el)
                 neg_count += 1
 
         if neg_count > 0:
             print(f'{neg_count} elements were changed: negative -> positive')
 
-        result = func(args[0], *args[1:])
-
-        return result
-    return wrapper
-```
-`complete_bar`
-```py
-def complete_bar(func):
-    def wrapper(*args):
-        bar = Bar('Processing', max=len(args[0]))
-        for i in range(len(args[0])):
-            result = func(*args)
-            bar.next()
-        bar.finish()
+        result = func(*args)
 
         return result
     return wrapper
