@@ -1,3 +1,6 @@
+from typing import List
+
+
 def consistent_search(user_str: str, find_str: str) -> int:
     for i in range(len(user_str) - len(find_str)):
         if user_str[i:i + len(find_str)] == find_str:
@@ -7,16 +10,16 @@ def consistent_search(user_str: str, find_str: str) -> int:
 
 
 def kmp_logic(user_str: str, find_el: str) -> list:
-    status = set_status(find_el)
+    status: dict = set_status(find_el)
     key_set = set(status.keys())
-    match = []
+    match: list = []
     # Havent found good name for var j
-    j = 0
+    j: int = 0
     for i in range(len(user_str)):
-        j = status[user_str[i]][j] if user_str[i] in key_set else 0
+        j: int = status[user_str[i]][j] if user_str[i] in key_set else 0
         if j == len(find_el):
             match.append(i - len(find_el) + 1)
-            j = 0
+            j: int = 0
     return match
 
 
@@ -25,15 +28,12 @@ def set_status(find_el: str) -> dict:
     Checking, might be that find_el contains same letters
     for example in "apple" heres 2 'p'
     """
-    status = {el: [0 for _ in range(len(find_el))] for el in set(find_el)}
+    status: dict = {el: [0 for _ in range(len(find_el))] for el in set(find_el)}
     for i in range(len(find_el)):
         for j in range(i + 1):
             if find_el[i - j:i] == find_el[0:j]:
                 status[find_el[j]][i] = j + 1
     return status
-
-
-from typing import List
 
 
 def letters_jump(user_str: str, find_el: str) -> list:
@@ -43,12 +43,12 @@ def letters_jump(user_str: str, find_el: str) -> list:
     rest letters in ASCII will have [letter, len(find_el)]
     """
     # creating this [letter, len(find_el)]
-    prefix = [[i, len(find_el)] for i in range(255)]
+    prefix: list = [[i, len(find_el)] for i in range(255)]
     # numeric this vpo
-    find_el_index = [[ord(find_el[::-1][i]), i] for i in range(len(find_el))]
+    find_el_index: list = [[ord(find_el[::-1][i]), i] for i in range(len(find_el))]
 
     # if letter was before, it must have same index as last one
-    find_el_index = same_letters_find_el(find_el_index)
+    find_el_index: list = same_letters_find_el(find_el_index)
     # replacing this vpo stuff into prefix
     # so, for vpo [v, len(find_el)] ([v, 3]) => [v, 2]
     for i in range(len(find_el_index)):
@@ -89,27 +89,28 @@ def boiera_mura_search(user_str: str, find_el: str) -> list:
     same for [k, 3] to 6
     user_str[6] is p, which is [p, 1] in prefix, so go to 7
     in prefix [o, 0] so we check, does {
-      user_str[user_str_index - len(find_el) + 1: user_str_index + 1] == find_el
+      user_str[user_index - len(find_el) + 1: user_index + 1] == find_el
     }
     after we decide does that equal, we make += len(find_el)
     and like that to the end
     """
     # making this prefix
-    prefix = letters_jump(user_str, find_el)
-    user_str_index = 0
+    prefix: list = letters_jump(user_str, find_el)
+    user_index: int = 0
     result: List[int] = []
-    # by user_str_index we will make a jump
-    while user_str_index < len(user_str):
-        if prefix[ord(user_str[user_str_index])][1] != 0:
+    # by user_index we will make a jump
+    while user_index < len(user_str):
+        if prefix[ord(user_str[user_index])][1] != 0:
             # Adding this for jump
-            user_str_index += prefix[ord(user_str[user_str_index])][1]
+            user_index += prefix[ord(user_str[user_index])][1]
         else:
             # Here our jump equal to 0
-            if user_str[user_str_index - len(find_el) + 1: user_str_index + 1] == find_el:
-                result.append(user_str_index - len(find_el) + 1)
-            user_str_index += len(find_el)
+            if user_str[user_index - len(find_el) + 1: user_index + 1] == find_el:
+                result.append(user_index - len(find_el) + 1)
+            user_index += len(find_el)
 
     return result
+
 
 if __name__ == '__main__':
     print('You cant run this file as main')

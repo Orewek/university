@@ -31,17 +31,17 @@ def input_string_io(user_str: str) -> str:
     # -talbe: user can void a talbe with options
     action: int = check_action(input(), action_table, input_table)
 
-    user_str = input_menu(user_str, action)
+    user_str: str = input_menu(user_str, action)
 
     return user_str
 
 
 def input_generate_io(user_str: str) -> str:
     print('Write how many letter you wanna add')
-    amount_of_els = input()
+    amount_of_els: str = input()
     check_int(amount_of_els)
 
-    user_str = input_generate(user_str, int(amount_of_els))
+    user_str: str = input_generate(user_str, int(amount_of_els))
     return user_str
 
 
