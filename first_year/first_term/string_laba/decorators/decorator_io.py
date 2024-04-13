@@ -1,8 +1,6 @@
 import time
 from typing import Any, Callable, Iterable
 
-from progress.bar import Bar
-
 
 def count_time(func: Callable[[Iterable[Any]], Any]):
     """

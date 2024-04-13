@@ -6,6 +6,8 @@ from search_string.search_io import input_find_ed
 
 from task.tasks import task_b9
 
+from Unit_tests.some_checks import check_action
+
 
 def main_menu(user_str: str, action: int) -> str:
     switcher = {
@@ -37,18 +39,11 @@ def main(user_str: str) -> str:
 
     print(table)
 
-    action = input()
-
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
-    while len(action) != 1 or action.isdigit() is False:
-        if action != '-table':
-            print(action_table)
-        else:
-            print(table)
-        action = input()
+    action: int = check_action(input(), action_table, table)
 
-    user_str = main_menu(user_str, int(action))
+    user_str = main_menu(user_str, action)
 
     return user_str
 

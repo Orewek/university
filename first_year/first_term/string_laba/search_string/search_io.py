@@ -1,6 +1,10 @@
 from search_string.search_logic import boiera_mura_search, kmp_logic
 
 from check_speed import time_speed
+
+from Unit_tests.some_checks import check_action
+
+
 def search_menu(user_str: str, find_el: str, action: int) -> str:
     switcher = {
         1: kmp_logic,
@@ -30,18 +34,11 @@ def input_find_ed(user_str: str) -> str:
 
     print(search_table)
 
-    action = input()
-
     # checking for letters and multi-digits
-    # -talbe: user can void a talbe with options
-    while len(action) != 1 or action.isdigit() is False:
-        if action != '-table':
-            print(action_table)
-        else:
-            print(search_table)
-        action = input()
+    # -talbe: user can void a talbe with option
+    action: int = check_action(input(), action_table, search_table)
 
-    index_res = search_menu(user_str, find_el, int(action))
+    index_res = search_menu(user_str, find_el, action)
     if index_res != []:
         print(f'{find_el} was found! indexes: {index_res}')
     else:

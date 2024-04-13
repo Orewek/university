@@ -1,4 +1,4 @@
-from Unit_tests.some_checks import check_int
+from Unit_tests.some_checks import check_int, check_action
 
 from input_string.input_logic import input_generate, input_manually
 
@@ -27,18 +27,11 @@ def input_string_io(user_str: str) -> str:
 
     print(input_table)
 
-    action = input()
-
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
-    while len(action) != 1 or action.isdigit() is False:
-        if action != '-table':
-            print(action_table)
-        else:
-            print(input_table)
-        action = input()
+    action: int = check_action(input(), action_table, input_table)
 
-    user_str = input_menu(user_str, int(action))
+    user_str = input_menu(user_str, action)
 
     return user_str
 
