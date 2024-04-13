@@ -344,8 +344,8 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
             return total_index + fib_index_1 + 1
         if mas[-1] == find_el:
             return total_index + fib_index_1 + 2
-        else:
-            return -1
+            
+        return -1
 
     return fibonacci_search(new_mas, find_el, total_index + fib_index_1)
 ```

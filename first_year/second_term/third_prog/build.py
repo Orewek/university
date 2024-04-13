@@ -1,6 +1,16 @@
 import csv
 from typing import Any
 
+from typing import Any
+
+
+def check_int(int_variable: Any) -> int:
+    while int_variable.isdigit() is False:
+        print('You can write only digits')
+        int_variable: str = input()
+
+    return int_variable
+
 
 def cut(length_prices: list) -> Any:
     prices_per_meter = []

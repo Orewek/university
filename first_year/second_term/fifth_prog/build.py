@@ -7,18 +7,18 @@ from string import hexdigits
 
 def input_file_path(file_path: str) -> str:
     """ input a path to .csv and check on validation """
-    file_path = None
+    file_path: None = None
     print('Choose file')
 
     while file_path is None:
-        file_path = str(input())
+        file_path: str = str(input())
 
         try:
             with open(file_path, 'r'):
                 pass
         except:
             print('Cannot open a file on this destination')
-            file_path = None
+            file_path: None = None
 
     return file_path
 
@@ -31,21 +31,21 @@ def show_file_content(file_path: str) -> str:
 
 
 def count_letters_occurence(file_path: str) -> str:
-    string = ''
+    string: str = ''
     with open(file_path, 'r') as f:
         string += f.read()
 
-    freq = {}
+    freq: dict = {}
     for letter in set(string):
-        freq[letter] = string.count(letter)
+        freq[letter]: int = string.count(letter)
 
-    sorted_freq = {key: value for key, value in sorted(freq.items(), key=lambda item: item[1])}
+    sorted_freq: dict = {key: value for key, value in sorted(freq.items(), key=lambda item: item[1])}
     print(sorted_freq)
     return file_path
 
 
 def show_code_table_const(file_path: str) -> str:
-    string = ''
+    string: str = ''
     with open(file_path, 'r') as f:
         string += f.read()
 
@@ -56,11 +56,11 @@ def show_code_table_const(file_path: str) -> str:
 
 
 def compress_constant(file_path: str) -> str:
-    string = ''
+    string: str = ''
     with open(file_path, 'r') as f:
         string += f.read()
 
-    bin_string = str.encode(string)
+    bin_string: bin = str.encode(string)
 
     with open('constant_len.bin', 'wb') as new_f:
         new_f.write(bin_string)
@@ -105,7 +105,7 @@ def encoding_table(node, code=''):
     """
 
     if node.letter is None:
-        mapping = {}
+        mapping: dict = {}
         for child, digit in zip(node.children, hexdigits):
             mapping.update(encoding_table(child, code + digit))
         return mapping
@@ -115,17 +115,17 @@ def encoding_table(node, code=''):
 
 def huffman_encode_code(text: str) -> str:
     """ param text to encode return: (tree, binary str) """
-    text = ''
+    text: str = ''
     with open(file_path, 'r') as f:
         text += f.read()
 
-    nodes = [Node(letter, freq) for letter, freq in Counter(text).items()]
+    nodes: list = [Node(letter, freq) for letter, freq in Counter(text).items()]
     heapify(nodes)
 
     # Строит n-арное дерево
     while len(nodes) > 1:
-        list_children = [heappop(nodes) for _ in range(2)]
-        freq = sum([node.freq for node in list_children])
+        list_children: list = [heappop(nodes) for _ in range(2)]
+        freq: int = sum([node.freq for node in list_children])
 
         node = Node(None, freq)
         node.children = list_children
@@ -140,17 +140,17 @@ def huffman_encode_code(text: str) -> str:
 
 def huffman_encode_compress(text: str) -> str:
     """ param text to encode return: (tree, binary str) """
-    text = ''
+    text: str = ''
     with open(file_path, 'r') as f:
         text += f.read()
 
-    nodes = [Node(letter, freq) for letter, freq in Counter(text).items()]
+    nodes: list = [Node(letter, freq) for letter, freq in Counter(text).items()]
     heapify(nodes)
 
     # Строит n-арное дерево
     while len(nodes) > 1:
         list_children = [heappop(nodes) for _ in range(2)]
-        freq = sum([node.freq for node in list_children])
+        freq: int = sum([node.freq for node in list_children])
 
         node = Node(None, freq)
         node.children = list_children
@@ -159,22 +159,22 @@ def huffman_encode_compress(text: str) -> str:
 
     root = nodes[0]
     codes = encoding_table(root)
-    res = ''.join([codes[letter] for letter in text])
+    res: str = ''.join([codes[letter] for letter in text])
     print(res)
 
     with open('huffman_len.bin', 'wb') as f:
         sio = StringIO(res)
         while 1:
             # Grab the next 8 bits
-            b = sio.read(8)
+            b: str = sio.read(8)
             # Bail if we hit EOF
             if not b:
                 break
             # If we got fewer than 8 bits, pad with zeroes on the right
             if len(b) < 8:
-                b = b + '0' * (8 - len(b))
+                b: str = b + '0' * (8 - len(b))
             # Convert to int
-            i = int(b, 2)
+            i: int = int(b, 2)
             # Write
             f.write(i.to_bytes(1, byteorder='big'))
 
@@ -182,7 +182,7 @@ def huffman_encode_compress(text: str) -> str:
 
 
 def main_menu(file_path: str, action: int) -> str:
-    switcher = {
+    switcher: dict = {
         1: input_file_path,
         2: show_file_content,
         3: count_letters_occurence,
@@ -198,7 +198,7 @@ def main_menu(file_path: str, action: int) -> str:
 
 
 def main(file_path: str) -> str:
-    table = """
+    table: str = """
             1: read a file
             2: show file content
             3: show letters occurrence frequency
@@ -209,13 +209,13 @@ def main(file_path: str) -> str:
             8: compare sizes
             """
 
-    action_table = """
+    action_table: str = """
                    U can write only one digit.
                    After operation u can continue working with massive
                    write -table to see the options
                    """
     print(table)
-    action = input()
+    action: str = input()
 
     while action.isdigit is False or (not (1 <= int(action) <= 8)):
         if action != '-table':
@@ -223,7 +223,7 @@ def main(file_path: str) -> str:
         else:
             print(table)
 
-        action = input()
+        action: str = input()
 
     file_path = main_menu(file_path, int(action))
     return file_path
