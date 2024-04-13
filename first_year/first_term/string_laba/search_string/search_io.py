@@ -6,27 +6,27 @@ from Unit_tests.some_checks import check_action
 
 
 def search_menu(user_str: str, find_el: str, action: int) -> str:
-    switcher = {
+    switcher: dict = {
         1: kmp_logic,
         2: boiera_mura_search,
         3: time_speed,
     }
-    user_str = switcher[action](user_str, find_el)
+    user_str: str = switcher[action](user_str, find_el)
 
     return user_str
 
 
 def input_find_ed(user_str: str) -> str:
     print('Which which line u wanna find in your str')
-    find_el = str(input())
+    find_el: str = input()
 
-    search_table = """
+    search_table: str = """
             1: Knuth-Morris-Pratt
             2: Boierra-Mura
             3: compare time speed
             """
 
-    action_table = """
+    action_table: str = """
                    U can write only one digit.
                    After operation u can continue working with massive
                    write -table to see the options
@@ -38,7 +38,7 @@ def input_find_ed(user_str: str) -> str:
     # -talbe: user can void a talbe with option
     action: int = check_action(input(), action_table, search_table)
 
-    index_res = search_menu(user_str, find_el, action)
+    index_res: list = search_menu(user_str, find_el, action)
     if index_res != []:
         print(f'{find_el} was found! indexes: {index_res}')
     else:

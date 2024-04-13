@@ -15,7 +15,7 @@ def task_b9(user_str: str) -> str:
             one_digit_words.append(remove_arifmetical(words[i]))
     print(f'Words with 1 digit w/o arifmetical letters: {one_digit_words}\n')
 
-    same_letter_count = 0
+    same_letter_count: int = 0
     for i in range(len(words)):
         if words[i] is True:
             same_letter_count += 1
@@ -27,8 +27,8 @@ def task_b9(user_str: str) -> str:
 
 def remove_arifmetical(word: str) -> str:
     """ removing arifmetical letters """
-    arif_mas = ['-', '*', '+', '/']
-    new_word = ''
+    arif_mas: list = ['-', '*', '+', '/']
+    new_word: str = ''
     for i in range(len(word)):
         if word[i] not in arif_mas:
             new_word += word[i]
@@ -37,7 +37,7 @@ def remove_arifmetical(word: str) -> str:
 
 
 def same_letters(word: str) -> bool:
-    letters_mas = []
+    letters_mas: list = []
     for i in range(len(word)):
         if word[i] not in letters_mas:
             letters_mas.append(word[i])

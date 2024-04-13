@@ -4,22 +4,22 @@ from input_string.input_logic import input_generate, input_manually
 
 
 def input_menu(user_str: str, action: int) -> str:
-    switcher = {
+    switcher: dict = {
         1: input_manually,
         2: input_generate_io,
     }
-    user_str = switcher[action](user_str)
+    user_str: str = switcher[action](user_str)
 
     return user_str
 
 
 def input_string_io(user_str: str) -> str:
-    input_table = """
+    input_table: str = """
                   1: input string manually
                   2: generate random string
                   """
 
-    action_table = """
+    action_table: str = """
                    U can write only one digit.
                    After operation u can continue working with massive
                    write -table to see the options
