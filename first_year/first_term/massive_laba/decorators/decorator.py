@@ -1,8 +1,6 @@
 import time
 from typing import Any, Callable, Iterable
 
-from progress.bar import Bar
-
 
 def mas_before_after(func: Callable[[Iterable[Any]], Any]):
     """
@@ -80,21 +78,6 @@ def negative_positive(func: Callable[[Iterable[Any]], Any]):
             print(f'{neg_count} elements were changed: negative -> positive')
 
         result = func(*args)
-
-        return result
-    return wrapper
-
-
-def complete_bar(func: Callable[[Iterable[Any]], Any]):
-    """
-    Progress bar
-    """
-    def wrapper(*args: Any):
-        progress_bar = Bar('Processing', max=len(args[0]))
-        for _ in range(len(args[0])):
-            result = func(*args)
-            progress_bar.next()
-        progress_bar.finish()
 
         return result
     return wrapper

@@ -1,5 +1,5 @@
 from decorators.decor_logic import negative_positive_logic, str2int_before
-from decorators.decorator import complete_bar, count_time
+from decorators.decorator import count_time
 
 
 def symmetrical_number(number: int) -> bool:

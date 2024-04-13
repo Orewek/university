@@ -1,5 +1,5 @@
 from decorators.decor_logic import int2str_before, str2int_before
-from decorators.decorator import complete_bar, count_time
+from decorators.decorator import count_time
 
 
 @str2int_before
