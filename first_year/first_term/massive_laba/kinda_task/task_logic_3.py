@@ -3,7 +3,7 @@ from decorators.decorator import count_time
 
 
 def symmetrical_number(number: int) -> bool:
-    digits_of_num = []
+    digits_of_num: list = []
     while number != 0:
         digits_of_num.append(number % 10)
         number //= 10
@@ -18,12 +18,12 @@ def symmetrical_number(number: int) -> bool:
 
 
 def reverse_number(number: int) -> int:
-    digits_of_num = []
+    digits_of_num: list = []
     while number != 0:
         digits_of_num.append(number % 10)
         number //= 10
 
-    reversed_number = 0
+    reversed_number: int = 0
     for i in range(len(digits_of_num)):
         reversed_number += digits_of_num[i] * (10 ** i)
 

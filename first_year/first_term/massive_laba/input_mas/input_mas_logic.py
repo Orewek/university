@@ -11,11 +11,11 @@ def add_elements(mas: list) -> list:
     adding each elements into it
     if user pressed Enter -> break
     """
-    el_mas = input()
+    el_mas: str = input()
     while el_mas != '':
         if el_mas.isdigit() is True:
             mas.append(el_mas)
-        el_mas = input()
+        el_mas: str = input()
 
     return mas
 
@@ -27,16 +27,20 @@ def generate_el(mas: list, amount_elements: int) -> list:
     appending this number to mas
     """
     for _ in range(amount_elements):
-        number = randint(-1000, 1000)
+        number: int = randint(-1000, 1000)
         mas.append(number)
 
     return mas
 
 
 @str2int_after
-def generate_border(mas: list, amount_els: int, l_border: int, r_border: int) -> list:
+def generate_border(mas: list,
+                    amount_els: int,
+                    l_border: int,
+                    r_border: int) -> list:
+
     for _ in range(amount_els):
-        number = randint(l_border, r_border)
+        number: int = randint(l_border, r_border)
         mas.append(number)
 
     return mas

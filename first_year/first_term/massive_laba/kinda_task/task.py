@@ -15,7 +15,7 @@ from kinda_task.task_logic_3 import reverse_number, symmetrical_number
 
 
 def task_menu(action: int, mas: list) -> list:
-    switcher = {
+    switcher: dict = {
         1: mean_arif,
         2: min_el,
         3: max_el,
@@ -40,9 +40,9 @@ def task_menu(action: int, mas: list) -> list:
         18: laba_3_c5,
     }
     if 11 <= action <= 14:
-        mas = search_collection(mas, action)
+        mas: list = search_collection(mas, action)
     else:
-        mas = switcher[action](mas)
+        mas: list = switcher[action](mas)
     return mas
 
 
@@ -55,7 +55,7 @@ def task_io(mas: list) -> list:
     print('Well, you can find some info about your massive\n'
           'Heres the table what can you do:')
 
-    task_table = """
+    task_table: str = """
                 1: mean arifmetical
                 2: minimal element
                 3: maxmimun element
@@ -82,7 +82,7 @@ def task_io(mas: list) -> list:
     print(task_table)
 
     print('What u wanna do? Write one digit')
-    action = input()
+    action: str = input()
 
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
@@ -93,16 +93,16 @@ def task_io(mas: list) -> list:
             print(task_table)
         action = input()
 
-    mas = task_menu(int(action), mas)
+    mas: list = task_menu(int(action), mas)
     return mas
 
 
 @str2int_before
 def task_b8(mas: list) -> list:
-    result_mas = []
+    result_mas: list = []
 
     for i in range(len(mas)):
-        result = chered_checker(mas[i], 2)
+        result: int = chered_checker(mas[i], 2)
         result_mas.append(result)
 
     """
@@ -113,7 +113,7 @@ def task_b8(mas: list) -> list:
 
     print(mas)
     print(result_mas)
-    amount_numbers = result_mas.count('1')
+    amount_numbers: int = result_mas.count('1')
     print(f'Amount of non-chered elements: {amount_numbers}')
 
     return mas
@@ -121,10 +121,10 @@ def task_b8(mas: list) -> list:
 
 @str2int_before
 def task_c8(mas: list) -> list:
-    result_mas = []
+    result_mas: list = []
 
     for i in range(len(mas)):
-        result = chered_checker(mas[i], 10)
+        result: int = chered_checker(mas[i], 10)
         result_mas.append(result)
 
     print(mas)
@@ -139,10 +139,10 @@ def task_c8(mas: list) -> list:
 
 def search_collection(mas: list, search: int) -> list:
     print('Write which element you want to find in massive')
-    element = input()
+    element: str = input()
     check_int(element)
 
-    switcher = {
+    switcher: dict = {
         11: binary_search,
         12: interpolation_search,
         13: consistent_search,
@@ -158,20 +158,20 @@ def search_collection(mas: list, search: int) -> list:
 @negative_positive_logic
 @str2int_before
 def laba_3_b8(mas: list) -> list:
-    max_number = 10 ** 10
+    max_num: int = 10 ** 10
     for i in range(len(mas)):
-        if symmetrical_number(mas[i]) is True and max_number > mas[i] and mas[i] > 100:
-            max_number = mas[i]
+        if symmetrical_number(mas[i]) is True and max_num > mas[i] and mas[i] > 100:
+            max_num: int = mas[i]
 
-    if max_number == 10 ** 10:
+    if max_num == 10 ** 10:
         print('0 symmetrical numbers have found')
 
     else:
-        print(f'{max_number} is the lowest symmetrical number')
+        print(f'{max_num} is the lowest symmetrical number')
 
     for i in range(len(mas)):
         if len(str(mas[i])) == 3:
-            mas[i] = reverse_number(mas[i])
+            mas[i]: int = reverse_number(mas[i])
 
     return mas
 
@@ -180,23 +180,23 @@ def laba_3_b8(mas: list) -> list:
 @str2int_before
 def laba_3_c5(mas: list) -> list:
     # Removing prime numbers which doesnt contain digit 5
-    new_mas = []
+    new_mas: list = []
     for i in range(len(mas)):
         if not(check_contain_5(mas[i]) is False and prime_number(mas[i]) is True):
             new_mas.append(mas[i])
 
-    mas = new_mas
+    mas: list = new_mas
 
-    odd_els = []
+    odd_els: list = []
     for i in range(len(mas)):
         if mas[i] % 2 == 1:
             odd_els.append(mas[i])
 
-    odd_els = sorted(odd_els)
+    odd_els: list = sorted(odd_els)
     print(odd_els)
     for i in range(len(mas)):
         if mas[i] % 2 == 1:
-            mas[i] = odd_els[0]
+            mas[i]: int = odd_els[0]
             odd_els.pop(0)
 
     return mas

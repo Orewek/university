@@ -10,14 +10,14 @@ def sum_max2_min1(mas: list) -> list:
     find_num - min_odd + max_even
     check if this find_num in mas
     """
-    min_odd = 10**10
-    max_even = - 1
+    min_odd: int = 10**10
+    max_even: int = - 1
 
     for el in mas:
         if el % 2 == 0 and el > max_even:
-            max_even = el
+            max_even: int = el
         if el % 2 != 0 and el < min_odd:
-            min_odd = el
+            min_odd: int = el
 
     if ((min_odd + max_even) in mas) is True:
         print(f'maximum even + minimum odd in massive!\n'
@@ -32,7 +32,7 @@ def swap_el(index_max: int, perma_el: int, mas: list) -> list:
     """
     swapping max el in mas and last el in mas
     """
-    index_last = len(mas) - perma_el - 1
+    index_last: int = len(mas) - perma_el - 1
     mas[index_last], mas[index_max] = mas[index_max], mas[index_last]
 
     return mas
@@ -53,15 +53,15 @@ def selection_sort(mas: list) -> list:
     swap_el(max_el, last_el)
     perma_el += 1
     """
-    perma_el = 0
+    perma_el: int = 0
     for _ in range(len(mas)):
-        max_el = mas[0]
+        max_el: int = mas[0]
         for i in range(len(mas) - perma_el):
             if mas[i] > max_el:
-                max_el = mas[i]
-                index_el = i
+                max_el: int = mas[i]
+                index_el: int = i
 
-        mas = swap_el(index_el, perma_el, mas)
+        mas: int = swap_el(index_el, perma_el, mas)
         perma_el += 1
 
     return mas
@@ -74,7 +74,7 @@ def chered_odd(mas: list) -> list:
     x'th % 2 != (x + 1)'th % 2 => count += 1
     so, even_odd or odd_even += 1
     """
-    count_odd_pairs = 0
+    count_odd_pairs: int = 0
     for i in range(len(mas) - 1):
         if mas[i] % 2 != mas[i + 1] % 2:
             count_odd_pairs += 1
@@ -91,12 +91,12 @@ def quick_sort(mas: list) -> list:
     pivot - first el in mas
     sorting rest els to less; equal; greater
     """
-    less = []
-    equal = []
-    greater = []
+    less: list = []
+    equal: list = []
+    greater: list = []
 
     if len(mas) > 1:
-        pivot = mas[0]
+        pivot: int = mas[0]
         for el in mas:
             if el < pivot:
                 less.append(el)

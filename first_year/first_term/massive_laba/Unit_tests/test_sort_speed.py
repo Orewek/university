@@ -7,13 +7,13 @@ from kinda_task.task_logic_2 import quick_sort, selection_sort
 
 
 def speed_checker_sort(mas: list) -> list:
-    mas_copy = mas
+    mas_copy: list = mas
     start_time = time.time()
     sorted(mas_copy)
     result = time.time() - start_time
     print(f'PYTHON SORTED TIME {result}\n')
 
-    mas_copy = mas
+    mas_copy: list = mas
     start_time = time.time()
     quick_sort(mas_copy)
     result = time.time() - start_time
@@ -29,7 +29,7 @@ def speed_checker_sort(mas: list) -> list:
 
 
 def speed_checker_search(mas: list) -> list:
-    number = int(input())
+    number: int = int(input())
     binary_search(mas, number)
     interpolation_search(mas, number)
     consistent_search(mas, number)

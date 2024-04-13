@@ -17,30 +17,30 @@ def consistent_search(mas: list, find_el: int) -> int:
 @count_time
 @str2int_before
 def binary_search(mas: list, find_el: int) -> int:
-    mas = sorted(mas)
-    low = 0
-    mid = 0
-    high = len(mas) - 1
+    mas: list = sorted(mas)
+    low: int = 0
+    mid: int = 0
+    high: int = len(mas) - 1
 
     while low < high:
-        mid = (low + high) // 2
+        mid: int = (low + high) // 2
         if mas[mid] < find_el:
-            low = mid
+            low: int = mid
 
         if mas[mid] == find_el:
             return mid + 1
 
         if mas[mid] > find_el:
-            high = mid
+            high: int = mid
 
     return - 1
 
 
 @str2int_before
 def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
-    mas = sorted(mas)
-    fib_index_1 = 1
-    fib_index_2 = 1
+    mas: list = sorted(mas)
+    fib_index_1: int = 1
+    fib_index_2: int = 1
 
     while fib_index_2 <= len(mas) - 1 and mas[fib_index_2] <= find_el:
         # For example
@@ -52,8 +52,8 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
         # Heres might be 4 els in mas, but 2 + 3 = 5
         # So fib_index_2 = 5, whichs > len(mas)
         if fib_index_2 > len(mas):
-            fib_index_1 = fib_index_2 - fib_index_1
-            fib_index_2 = len(mas)
+            fib_index_1: int = fib_index_2 - fib_index_1
+            fib_index_2: int = len(mas)
             break
 
     # Now find_el <= fib_i_2
@@ -64,13 +64,13 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
         to >>>
         fib (n - 1)'th and fib n'th
         """
-        type_var = fib_index_2
-        fib_index_2 = fib_index_1
-        fib_index_1 = type_var - fib_index_1
+        type_var: int = fib_index_2
+        fib_index_2: int = fib_index_1
+        fib_index_1: int = type_var - fib_index_1
 
     # Now fib_i_1 <= find_el <= fib_i_2
     # Heres might be diff fib_i_2 than in prev while
-    new_mas = []
+    new_mas: list = []
     # Cutting new mas
     for i in range(fib_index_1, fib_index_2):
         new_mas.append(mas[i])
@@ -90,25 +90,25 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
 @count_time
 @str2int_before
 def interpolation_search(mas: list, find_el: int) -> int:
-    mas = sorted(mas)
-    left = 0
-    right = len(mas) - 1
+    mas: list = sorted(mas)
+    left: int = 0
+    right: int = len(mas) - 1
 
     # If mas[0] == mas[-1] means that whole mas contains same el
     if mas[0] == mas[-1]:
         return 0
 
     while mas[left] <= find_el <= mas[right]:
-        mid = left + int((find_el - mas[left]) / (mas[right] - mas[left]) * (right - left))
+        mid: int = left + int((find_el - mas[left]) / (mas[right] - mas[left]) * (right - left))
 
         if find_el < mas[mid]:
-            right = mid - 1
+            right: int = mid - 1
 
         if find_el == mas[mid]:
             return mid + 1
 
         if find_el > mas[mid]:
-            left = mid - 1
+            left: int = mid - 1
 
     return - 1
 

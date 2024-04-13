@@ -6,12 +6,12 @@ from input_mas.input_mas_logic import add_elements, generate_border, generate_el
 
 
 def input_menu(action: int, mas: tuple) -> tuple:
-    switcher = {
+    switcher: dict = {
         1: create_mas_manually,
         2: create_mas_generated,
         3: generate_border_io,
     }
-    mas = switcher[action](mas)
+    mas: list = switcher[action](mas)
     return mas
 
 
@@ -19,12 +19,12 @@ def create_mas_io(mas: tuple) -> tuple:
     print('You can input mas manually, by writing each element\n'
           'Or generate n elements randomly (-1000; 1000)')
 
-    input_table = """
+    input_table: str = """
                 1: manually
                 2: generate
                 3: generate with borders
                 """
-    action_table = """
+    action_table: str = """
                    U can write only one digit.
                    After operation u can continue working with massive
                    write -table to see the options
@@ -32,7 +32,7 @@ def create_mas_io(mas: tuple) -> tuple:
 
     print(input_table)
 
-    action = input()
+    action: str = input()
 
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
@@ -41,9 +41,9 @@ def create_mas_io(mas: tuple) -> tuple:
             print(action_table)
         else:
             print(input_table)
-        action = input()
+        action: str = input()
 
-    mas = input_menu(int(action), mas)
+    mas: list = input_menu(int(action), mas)
     return mas
 
 
@@ -52,7 +52,7 @@ def create_mas_manually(mas: tuple) -> tuple:
           'Remember,You can write only digits. '
           'Non-digits elements will be deleted\n'
           'If u wanna to exit, press Enter')
-    mas = add_elements(mas)
+    mas: list = add_elements(mas)
 
     print(f'Massive was sucsessfully createad. Mas - {mas}')
     return mas
@@ -61,10 +61,9 @@ def create_mas_manually(mas: tuple) -> tuple:
 @count_time
 def create_mas_generated(mas: tuple) -> tuple:
     print('How many elements do u want?')
-    amount_elements = input()
-    amount_elements = check_int(amount_elements)
+    amount_elements: int = check_int(input())
 
-    mas = generate_el(mas, int(amount_elements))
+    mas: list = generate_el(mas, int(amount_elements))
 
     # print(f'Your massive was sucsessfully generated\n mas: {mas}')
     return mas
@@ -77,20 +76,17 @@ def generate_border_io(mas: list) -> list:
     whole els in mas mas will be [lborder, rborder]
     """
     print('How many elements do u want?')
-    amount_els = input()
-    amount_els = check_int(amount_els)
+    amount_els: int = check_int(input())
 
     print('Write left border')
-    l_border = input()
-    l_border = check_int(l_border)
+    l_border: int = check_int(input())
 
     print('Write right border')
-    r_border = input()
-    r_border = check_int(r_border)
+    r_border: int = check_int(input())
 
     if r_border < l_border:
         l_border, r_border = r_border, l_border
-    mas = generate_border(mas, int(amount_els), int(l_border), int(r_border))
+    mas: list = generate_border(mas, amount_els, l_border, r_border)
 
     return mas
 

@@ -24,12 +24,12 @@ def str_to_int(func: Callable[[Iterable[Any]], Any]):
     Making whole el in mas str -> int
     """
     def wrapper(*args: Any):
-        str_count = 0
-        str_el = []
+        str_count: int = 0
+        str_el: list = []
 
         for i in range(len(args[0])):
             if type(args[0][i]) is str:
-                args[0][i] = int(args[0][i])
+                args[0][i]: int = int(args[0][i])
                 str_count += 1
                 str_el.append(args[0][i])
 
@@ -68,10 +68,10 @@ def negative_positive(func: Callable[[Iterable[Any]], Any]):
     changing negative el to positive
     """
     def wrapper(*args: Any):
-        neg_count = 0
+        neg_count: int = 0
         for el in range(len(args[0])):
             if el < 0:
-                el = abs(el)
+                el: int = abs(el)
                 neg_count += 1
 
         if neg_count > 0:

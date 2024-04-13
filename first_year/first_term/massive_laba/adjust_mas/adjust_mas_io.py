@@ -4,7 +4,7 @@ from adjust_mas.adjust_mas_logic import change_elements, show_elements
 from adjust_mas.adjust_mas_logic import clear_mas, len_mas
 
 
-def mas_elements(mas: tuple) -> tuple:
+def mas_elements(mas: list) -> list:
     """
     read show_elemetns .__doc__
     read change_elements .__doc__
@@ -18,22 +18,22 @@ def mas_elements(mas: tuple) -> tuple:
     # change_number = number of element, that we need to change
     # adding each number of these elements into change_mas
     # so, if we wanna change 2nd and 3rd element: [2, 3]
-    change_mas = []
-    change_number = input()
+    change_mas: list = []
+    change_number: str = input()
 
     while change_number != '':
 
         # checking for letters
-        change_number = check_int(change_number)
+        change_number: int = check_int(change_number)
 
         # Number of element cant be > than number of elemtns
         # ['a' 'b' 'c'] - 3, so user cant write smth > 3
         while int(change_number) > len(mas):
             print('Elements with this number doesnt exist. Try again')
-            change_number = input()
+            change_number: str = input()
 
         change_mas.append(int(change_number))
-        change_number = input()
+        change_number: str = input()
 
     # System count elements from 0 to n - 1
     # Ppl do that from 1 to n
@@ -45,14 +45,14 @@ def mas_elements(mas: tuple) -> tuple:
     return mas
 
 
-def adjust_massive(mas: tuple) -> tuple:
-    adjust_table = """
+def adjust_massive(mas: list) -> list:
+    adjust_table: str = """
             1: massive length
             2: change elements
             3: clear massive
             """
     print(adjust_table)
-    action = input()
+    action: str = input()
 
     action_table = """
                    U can write only one digit.
@@ -66,18 +66,18 @@ def adjust_massive(mas: tuple) -> tuple:
             print(action_table)
         else:
             print(adjust_table)
-        action = input()
+        action: str = input()
 
-    switcher = {
+    switcher: dict = {
         1: len_mas,
         2: mas_elements,
         3: clear_mas,
     }
     # when we writing len of mas (1 action), we dont change anything
     if int(action) != 1:
-        mas = switcher[int(action)](mas)
+        mas: list = switcher[int(action)](mas)
     else:
-        mas_len = switcher[int(action)](mas)
+        mas_len: str = switcher[int(action)](mas)
         print(mas_len)
 
     return mas

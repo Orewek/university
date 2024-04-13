@@ -8,11 +8,11 @@ def mean_arif(mas: list) -> list:
     Calculation arif sum of whole mas el
     Firstly count total sum and divide on amount of elements
     """
-    el_sum = 0
+    el_sum: int = 0
     for i in range(len(mas)):
         el_sum += mas[i]
 
-    arif_sum = el_sum / len(mas)
+    arif_sum: float = el_sum / len(mas)
     print(f'Arifmetical sum = {arif_sum}')
 
     return mas
@@ -65,26 +65,26 @@ def consecutive_result(result_mas: list) -> tuple:
     else: if count > the longest row (res1 / res0) -> res = count
     reseting count -> count = 1
     """
-    count1 = 1
-    count0 = 1
+    count1: int = 1
+    count0: int = 1
 
-    res1 = 0
-    res0 = 0
+    res1: int = 0
+    res0: int = 0
 
     for i in range(len(result_mas) - 1):
         if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '1':
             count1 += 1
 
         else:
-            res1 = max(res1, count1)
-            count1 = 1
+            res1: int = max(res1, count1)
+            count1: int = 1
 
         if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '0':
             count0 += 1
 
         else:
-            res0 = max(res0, count0)
-            count0 = 1
+            res0: int = max(res0, count0)
+            count0: int = 1
 
     return res1, res0
 

@@ -1,9 +1,12 @@
+from Unit_tests.some_checks import check_int
+
+
 def show_elements(mas: list) -> list:
     """
     enumerate each element in mas
     """
-    for count, ma in enumerate(mas):
-        print(f'{count + 1}: {ma}')
+    for count, item in enumerate(mas):
+        print(f'{count + 1}: {item}')
 
     return mas
 
@@ -16,11 +19,8 @@ def change_elements(mas: list, change_mas: list) -> list:
         if i in change_mas:
             print(f'{i + 1}: {mas[i]}. Type new element for this cell')
 
-            replace_cell = input()
-            while replace_cell.isdigit() is False:
-                print('You can change element only on another number/digit')
-                replace_cell = input()
-            mas[i] = replace_cell
+            replace_cell: str = check_int(input())
+            mas[i]: int = replace_cell
     return mas
 
 
@@ -36,7 +36,7 @@ def len_mas(mas: list) -> str:
     """
     Just calculating and returning the len of mas
     """
-    ans = f'{len(mas)} - length of massive'
+    ans: str = f'{len(mas)} - length of massive'
     return ans
 
 

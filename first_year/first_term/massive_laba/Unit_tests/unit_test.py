@@ -14,14 +14,14 @@ class TestMas(unittest.TestCase):
 
     # ADJUST MAS BLOCK
     def test_clear_mas(self) -> None:
-        mas = [213, 98213, 239, 8239, 999]
+        mas: list = [213, 98213, 239, 8239, 999]
         mas_clear = clear_mas(mas)
 
         self.assertEqual(mas_clear, [])
 
     def test_len_mas(self) -> None:
-        mas = [213, 98213, 239, 8239, 999]
-        mas_len = len_mas(mas)
+        mas: list = [213, 98213, 239, 8239, 999]
+        mas_len: int = len_mas(mas)
 
         self.assertEqual(mas_len, '5 - length of massive')
 
@@ -35,23 +35,23 @@ class TestMas(unittest.TestCase):
     """
 
     def test_chered_checker2(self) -> None:
-        mas = ['989', '213', '832', '932', '731', '84331', '232']
-        result_chered_cheker2 = ''
+        mas: list = ['989', '213', '832', '932', '731', '84331', '232']
+        result_chered_cheker2: str = ''
         for i in range(len(mas)):
             result_chered_cheker2 += chered_checker(int(mas[i]), 2)
 
         self.assertEqual(result_chered_cheker2, '1010001')
 
     def test_chered_checker10(self) -> None:
-        mas = ['989', '213', '832', '932', '731', '84331', '232']
-        result_chered_cheker10 = ''
+        mas: list = ['989', '213', '832', '932', '731', '84331', '232']
+        result_chered_cheker10: str = ''
         for i in range(len(mas)):
             result_chered_cheker10 += chered_checker(int(mas[i]), 10)
 
         self.assertEqual(result_chered_cheker10, '1111101')
 
     def test_consecutive_result(self) -> None:
-        result_mas = ['1', '1', '1', '1', '1', '0', '1']
+        result_mas: list = ['1', '1', '1', '1', '1', '0', '1']
 
         res1, res0 = consecutive_result(result_mas)
 
@@ -59,13 +59,13 @@ class TestMas(unittest.TestCase):
         self.assertEqual(res0, 1)
 
     def test_generate_el(self) -> None:
-        mas = generate_el(mas=[], amount_elements=5)
+        mas: list = generate_el(mas=[], amount_elements=5)
 
-        ok = 1
+        ok: int = 1
         if len(mas) > 0:
             for i in range(len(mas)):
                 if mas[i] is None:
-                    ok = 0
+                    ok: int = 0
                     break
 
         self.assertAlmostEqual(ok, 1)
