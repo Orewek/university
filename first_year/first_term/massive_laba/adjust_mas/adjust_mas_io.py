@@ -1,4 +1,4 @@
-from Unit_tests.some_checks import check_int
+from Unit_tests.some_checks import check_int, check_action
 
 from adjust_mas.adjust_mas_logic import change_elements, show_elements
 from adjust_mas.adjust_mas_logic import clear_mas, len_mas
@@ -52,7 +52,6 @@ def adjust_massive(mas: list) -> list:
             3: clear massive
             """
     print(adjust_table)
-    action: str = input()
 
     action_table = """
                    U can write only one digit.
@@ -61,12 +60,7 @@ def adjust_massive(mas: list) -> list:
                    """
 
     # checking for letters and multi-digits
-    while len(action) != 1 or action.isdigit() is False:
-        if action != '-table':
-            print(action_table)
-        else:
-            print(adjust_table)
-        action: str = input()
+    action = check_action(input(), action_table, adjust_table)
 
     switcher: dict = {
         1: len_mas,

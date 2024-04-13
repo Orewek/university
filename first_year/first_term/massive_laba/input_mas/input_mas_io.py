@@ -1,4 +1,4 @@
-from Unit_tests.some_checks import check_int
+from Unit_tests.some_checks import check_int, check_action
 
 from decorators.decorator import count_time
 
@@ -32,16 +32,9 @@ def create_mas_io(mas: tuple) -> tuple:
 
     print(input_table)
 
-    action: str = input()
-
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
-    while len(action) != 1 or action.isdigit() is False:
-        if action != '-table':
-            print(action_table)
-        else:
-            print(input_table)
-        action: str = input()
+    action = check_action(input(), action_table, input_table)
 
     mas: list = input_menu(int(action), mas)
     return mas

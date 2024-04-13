@@ -91,24 +91,24 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
 @str2int_before
 def interpolation_search(mas: list, find_el: int) -> int:
     mas: list = sorted(mas)
-    left: int = 0
-    right: int = len(mas) - 1
+    l: int = 0
+    r: int = len(mas) - 1
 
     # If mas[0] == mas[-1] means that whole mas contains same el
     if mas[0] == mas[-1]:
         return 0
 
-    while mas[left] <= find_el <= mas[right]:
-        mid: int = left + int((find_el - mas[left]) / (mas[right] - mas[left]) * (right - left))
+    while mas[l] <= find_el <= mas[r]:
+        mid: int = l + int((find_el - mas[l]) / (mas[r] - mas[l]) * (r - l))
 
         if find_el < mas[mid]:
-            right: int = mid - 1
+            r: int = mid - 1
 
         if find_el == mas[mid]:
             return mid + 1
 
         if find_el > mas[mid]:
-            left: int = mid - 1
+            l: int = mid - 1
 
     return - 1
 

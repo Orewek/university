@@ -6,6 +6,8 @@ from kinda_task.task import task_io
 
 from output.output_mas import show_mas
 
+from Unit_tests.some_checks import check_action
+
 
 def menu(action: int, mas: list) -> list:
     switcher: dict = {
@@ -36,19 +38,12 @@ def main(mas: list) -> list:
 
     print('What u wanna do? Write one digit')
 
-    action: str = input()
-
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
-    while len(action) != 1 or action.isdigit() is False:
-        if action != '-table':
-            print(action_table)
-        else:
-            print(table)
-        action: str = input()
+    action: int = check_action(input(), action_table, table)
 
-    mas: list = menu(int(action), mas)
-    if int(action) == 5:
+    mas: list = menu(action, mas)
+    if action == 5:
         mas.append('exit')
     return mas
 
