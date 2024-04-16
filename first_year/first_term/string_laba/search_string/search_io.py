@@ -17,8 +17,7 @@ def search_menu(user_str: str, find_el: str, action: int) -> str:
 
 
 def input_find_ed(user_str: str) -> str:
-    print('Which which line u wanna find in your str')
-    find_el: str = input()
+    find_el: str = input('Which which line u wanna find in your str')
 
     search_table: str = """
             1: Knuth-Morris-Pratt

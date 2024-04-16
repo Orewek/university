@@ -53,8 +53,7 @@ def create_mas_manually(mas: tuple) -> tuple:
 
 @count_time
 def create_mas_generated(mas: tuple) -> tuple:
-    print('How many elements do u want?')
-    amount_elements: int = check_int(input())
+    amount_elements: int = check_int(input('How many elements do u want?'))
 
     mas: list = generate_el(mas, int(amount_elements))
 
@@ -68,14 +67,9 @@ def generate_border_io(mas: list) -> list:
     Input l and r border
     whole els in mas mas will be [lborder, rborder]
     """
-    print('How many elements do u want?')
-    amount_els: int = check_int(input())
-
-    print('Write left border')
-    l_border: int = check_int(input())
-
-    print('Write right border')
-    r_border: int = check_int(input())
+    amount_els: int = check_int(input('How many elements do u want?'))
+    l_border: int = check_int(input('Write left border'))
+    r_border: int = check_int(input('Write right border'))
 
     if r_border < l_border:
         l_border, r_border = r_border, l_border

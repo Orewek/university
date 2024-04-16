@@ -21,24 +21,17 @@ class City_17(object):
 
 def add_city(cities: list) -> list:
     """ add a new city with some properties to list of cities """
-    print('Write a name of city')
-    name: str = str(input())
+    name: str = str(input('Write a name of city'))
 
-    print('How many ppl r living in this city')
-    population: int = input()
+    population: int = input('How many ppl r living in this city')
     while population.isdigit() is False:
-        print('You can write only digits in population category')
-        population: int = input()
+        population: int = input('You can write only digits in population category')
 
-    print('Whos the mayor of that city')
-    mayor: str = str(input())
-
-    print('How many years this city exist')
-    age: int = input()
+    mayor: str = str(input('Whos the mayor of that city'))
+    age: int = input('How many years this city exist')
 
     while age.isdigit() is False:
-        print('You can write only digits in age category')
-        age: str = input()
+        age: str = input('You can write only digits in age category')
 
     city_name: str = City_17(int(population), mayor, int(age), name.capitalize())
     cities.append(city_name)
@@ -52,13 +45,10 @@ def delete_city(cities: list) -> list:
     for count, city in enumerate(cities):
         print(count + 1, city.name)
 
-    print('Write a number next to the city which we should delete')
-
-    action: int = input()
+    action: int = input('Write a number next to the city which we should delete')
 
     while action.isdigit is False or (not (1 <= int(action) <= len(cities))):
-        print('You can write only a number or number <= 0 / >= last city')
-        action: int = input()
+        action: int = input('You can write only a number or number <= 0 / >= last city')
 
     del cities[int(action) - 1]
 
@@ -87,13 +77,10 @@ def change_smth_city(cities: list) -> list:
     for count, city in enumerate(cities):
         print(count + 1, city.name)
 
-    print('Choose in which city we should change info')
-
-    action: int = input()
+    action: int = input('Choose in which city we should change info')
 
     while action.isdigit is False or (not (1 <= int(action) <= len(cities))):
-        print('You can write only a number or number <= 0 / >= last city')
-        action: int = input()
+        action: int = input('You can write only a number or number <= 0 / >= last city')
 
     city: str = cities[int(action) - 1]
 
@@ -106,21 +93,15 @@ def change_smth_city(cities: list) -> list:
             4: mayor
             """
 
-    print(table)
-
-    action_city: int = input()
+    action_city: int = input(table)
 
     while action_city.isdigit is False or (not (1 <= int(action_city) <= 4)):
-        print('You can write only a number or number <= 0 / > 4')
-        action_city: int = input()
+        action_city: int = input('You can write only a number or number <= 0 / > 4')
 
-    print('Write updated info')
-
-    new_info: int = input()
+    new_info: int = input('Write updated info')
 
     while (2 <= int(action_city) <= 3) and new_info.isdigit() is False:
-        print('You can write only digits to age and population')
-        new_info: int = input()
+        new_info: int = input('You can write only digits to age and population')
 
     action_menu(action_city, city, new_info)
 
@@ -132,19 +113,18 @@ def show_city_info(cities: list) -> list:
     for count, city in enumerate(cities):
         print(count + 1, city.name)
 
-    print('Write number next to city, to see info about')
-
-    action: int = input()
+    action: int = input('Write number next to city, to see info about')
 
     while action.isdigit() is False or (not (1 <= int(action) <= len(cities))):
-        print('You can write only a number or number <= 0 / >= last city')
-        action = input()
+        action = input('You can write only a number or number <= 0 / >= last city')
 
     city: str = cities[int(action) - 1]
-    print(f'name: {city.name}\n'
-          f'population: {city.population}\n'
-          f'age: {city.age}\n'
-          f'mayor: {city.mayor}\n')
+    print(f"""
+           name: {city.name}
+           population: {city.population}
+           age: {city.age}
+           mayor: {city.mayor}
+           """)
 
     return cities
 
@@ -183,26 +163,19 @@ def city_filter(cities: list) -> list:
             4: mayor
             """
 
-    print(table)
-
-    action_city: int = input()
+    action_city: int = input(table)
 
     while action_city.isdigit() is False or (not (2 <= int(action_city) <= 3)):
-        print('You can make age/population filter')
-        action_city: int = input()
+        action_city: int = input('You can make age/population filter')
 
-    print('less 1; bigger 2')
-    less_big: int = input()
+    less_big: int = input('less 1; bigger 2')
     while less_big.isdigit() is False or (not (1 <= int(less_big) <= 2)):
-        print('You can write only 1 or 2')
-        less_big: int = input()
+        less_big: int = input('You can write only 1 or 2')
 
-    print('Write number, with that we will compare rest')
-    border: int = input()
+    border: int = input('Write number, with that we will compare rest')
 
     while border.isdigit() is False:
-        print('You can write only a number')
-        border: int = input()
+        border: int = input('You can write only a number')
 
     cities_satisty_filter(action_city, less_big, border)
 
@@ -261,9 +234,7 @@ def main(cities: list) -> list:
                    write -table to see the options
                    """
 
-    print(table)
-
-    action: int = input()
+    action: int = input(table)
 
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options

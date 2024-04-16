@@ -20,10 +20,12 @@ def choose_file(file_path: str) -> str:
 def print_absolute_path(file_path: str) -> str:
     """ output absolute path for file/folder """
     abs_path = os.path.abspath(file_path)
-    print(f'ABSOLUTE PATH\n'
-          f'-------------\n'
-          f' {abs_path}  \n'
-          f'-------------\n')
+    print(f"""
+           ABSOLUTE PATH
+           -------------
+            {abs_path}  
+           -------------
+           """)
 
     return file_path
 
@@ -72,12 +74,13 @@ def show_all_file_properties(file_path: str) -> str:
     last_time_modified = datetime.datetime.fromtimestamp(last_time_modified)
     file_creation_time = datetime.datetime.fromtimestamp(file_creation_time)
 
-    print(f'file size: {file_size}\n'
-          f'time of last modification: {last_time_modified}\n'
-          f'creation time: {file_creation_time}\n')
+    print(f"""
+           file size: {file_size}
+           time of last modification: {last_time_modified}
+           creation time: {file_creation_time}
+           """)
 
-    print('print "more" for additional info')
-    action = input()
+    action = input('print "more" for additional info')
     if action == 'more':
         mean_table = """
                     st_mode the file type and permissions
@@ -98,12 +101,9 @@ def create_file_copy(file_path: str) -> str:
         extension = file_path.split(".")
         copy_file_path = f'{extension[0]}_copy.{extension[1]}'
 
-        print('Choose a file path for a copy')
-
-        new_path = input()
+        new_path = input('Choose a file path for a copy')
         while os.path.exists(new_path) is False or os.path.isfile(new_path) is True:
-            print('You should write a competely a new path for that copy')
-            new_path = input()
+            new_path = input('You should write a competely a new path for that copy')
 
         shutil.copy(file_path, copy_file_path)
         os.replace(copy_file_path, f'{new_path}\{copy_file_path}')
@@ -121,8 +121,7 @@ def show_all_spec_files_in_folder(file_path: str) -> str:
         print('You must write a folder path')
     else:
         all_files = make_files_list([], file_path)
-        print('Write an extension')
-        extension = input()
+        extension = input('Write an extension')
         if "." not in extension:
             extension = f'.{extension}'
 
@@ -142,8 +141,7 @@ def delete_file_or_folder(file_path: str) -> None:
         yes_confirmation = ['y', 'yes', 'yeah']
 
         for file in all_files:
-            print(f'Do you want to delete {file}? Write Y/N')
-            confirmation = input()
+            confirmation = input(f'Do you want to delete {file}? Write Y/N')
             if confirmation.lower() in yes_confirmation:
                 os.remove(rf'{file_path}\{file}')
 
@@ -173,8 +171,7 @@ def find_file_in_folder(file_path: str) -> str:
 
     else:
         all_files = make_files_list([], file_path)
-        print('Write a file_name that we are loooking for')
-        file_name = input()
+        file_name = input('Write a file_name that we are loooking for')
         if file_name in all_files:
             print(f'This folder does contains {file_name}')
         else:
@@ -222,8 +219,7 @@ def main(file_path: str) -> str:
                    After operation u can continue working with massive
                    write -table to see the options
                    """
-    print(table)
-    action = input()
+    action = input(table)
 
     while action.isdigit is False or (not (1 <= int(action) <= 9)):
         if action != '-table':

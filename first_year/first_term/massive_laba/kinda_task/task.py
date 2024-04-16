@@ -81,8 +81,7 @@ def task_io(mas: list) -> list:
                 """
     print(task_table)
 
-    print('What u wanna do? Write one digit')
-    action: str = input()
+    action: str = input('What u wanna do? Write one digit')
 
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
@@ -138,8 +137,7 @@ def task_c8(mas: list) -> list:
 
 
 def search_collection(mas: list, search: int) -> list:
-    print('Write which element you want to find in massive')
-    element: str = input()
+    element: str = input('Write which element you want to find in massive')
     check_int(element)
 
     switcher: dict = {

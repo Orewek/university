@@ -4,8 +4,7 @@ from typing import Any
 
 def check_int(int_variable: Any) -> int:
     while int_variable.isdigit() is False:
-        print('You can write only digits')
-        int_variable: str = input()
+        int_variable: str = input('You can write only digits')
 
     return int_variable
 
@@ -50,12 +49,10 @@ def input_prices(length_prices: list) -> list:
     meters: str = ''
     meters_list: list = []
     while price.lower() != "exit" and meters.lower() != "exit":
-        print('Write a  meter')
-        meters: int = input()
+        meters: int = input('Write a  meter')
 
         if meters != "exit":
-            print(f'Write a price for {meters} meters')
-            price: int = input()
+            price: int = input(f'Write a price for {meters} meters')
 
         if price.isdigit() is True and meters.isdigit() is True and int(meters) not in meters_list:
             length_prices.append(int(price))
@@ -116,25 +113,24 @@ def make_correct_length(meters: int, list_indexes: list) -> list:
 
 
 def main() -> None:
-    print('Do you want to write prices manually or from file?')
-    print('1: file\n2: manually\n')
+    print("""
+          Do you want to write prices manually or from file?
+          1: file\n2: manually
+          """)
 
     action: int = input()
     while action.isdigit() is False or (int(action) != 1 and int(action) != 2):
-        print('You can write only 1 or 2')
-        action: int = input()
+        action: int = input('You can write only 1 or 2')
 
     if int(action) == 1:
         length_prices: int = read_info_from_file([0])
     else:
         length_prices: int = input_prices([0])
 
-    print('Write length of the steel')
-    steel_length: int = input()
+    steel_length: int = input('Write length of the steel')
 
     while steel_length.isdigit() is False:
-        print('You can write only a number')
-        steel_length: int = input()
+        steel_length: int = input('You can write only a number')
 
     length_prices: list = length_prices[0:int(steel_length) + 1]
 

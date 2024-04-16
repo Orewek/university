@@ -212,8 +212,7 @@ def main(file_path: str,
                    After operation u can continue working with massive
                    write -table to see the options
                    """
-    print(table)
-    action: str = input()
+    action: str = input(table)
 
     while action.isdigit is False or (not (1 <= int(action) <= 9)):
         if action != '-table':
@@ -233,18 +232,18 @@ def main(file_path: str,
         names, volumes, prices = read_file_data(file_path)
 
     elif int(action) == 2:
-        print('Write a bag volume')
-        bag_volume: str = input()
+        bag_volume: str = input('Write a bag volume')
 
         while bag_volume.isdigit() is False:
-            print('You can write only a number')
-            bag_volume: str = input()
+            bag_volume: str = input('You can write only a number')
 
     elif int(action) == 3:
-        print('Choose method\n'
-              '1: recursion\n'
-              '2: dynamic\n'
-              '3: greddy')
+        print("""
+              Choose method
+              1: recursion
+              2: dynamic
+              3: greddy
+              """)
         method: int = int(input())
         if method == 1:
             result = get_table_recursion(volumes,

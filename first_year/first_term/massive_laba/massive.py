@@ -36,11 +36,10 @@ def main(mas: list) -> list:
                    """
     print(table)
 
-    print('What u wanna do? Write one digit')
-
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
-    action: int = check_action(input(), action_table, table)
+    action: int = check_action(input('What u wanna do? Write one digit'),
+                               action_table, table)
 
     mas: list = menu(action, mas)
     if action == 5:
@@ -54,8 +53,7 @@ if __name__ == '__main__':
     # If user wanna continue, he can write 1/yes/y
     approved: list = ['y', 'yes', '1']
 
-    print(f'One more?\n {approved}')
-    additional_check: str = input()
+    additional_check: str = input(f'One more?\n {approved}')
 
     while additional_check.lower() in approved and 'exit' not in mas:
         mas: list = main(mas)

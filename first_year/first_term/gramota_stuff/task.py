@@ -63,8 +63,7 @@ def to_bin_frac(frac_part: str) -> str:
 
 def main() -> None:
     try:
-        print('Input a number % 1 != 0\n')
-        number: str = input()
+        number: str = input('Input a number % 1 != 0\n')
         # number = '95821.99123'
         integer, frac_part = str(number).split('.')
 
@@ -112,5 +111,4 @@ if __name__ == '__main__':
     additional_check: str = input()
     while additional_check.lower():
         main()
-        additional_check: str = input()
-        print(f'One more?\n {approved}')
+        additional_check: str = input(f'One more?\n {approved}')

@@ -29,8 +29,7 @@ def mas_elements(mas: list) -> list:
         # Number of element cant be > than number of elemtns
         # ['a' 'b' 'c'] - 3, so user cant write smth > 3
         while int(change_number) > len(mas):
-            print('Elements with this number doesnt exist. Try again')
-            change_number: str = input()
+            change_number: str = input('Elements with this number doesnt exist. Try again')
 
         change_mas.append(int(change_number))
         change_number: str = input()

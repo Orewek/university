@@ -37,8 +37,7 @@ def input_string_io(user_str: str) -> str:
 
 
 def input_generate_io(user_str: str) -> str:
-    print('Write how many letter you wanna add')
-    amount_of_els: str = input()
+    amount_of_els: str = input('Write how many letter you wanna add')
     check_int(amount_of_els)
 
     user_str: str = input_generate(user_str, int(amount_of_els))

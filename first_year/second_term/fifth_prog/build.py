@@ -214,8 +214,7 @@ def main(file_path: str) -> str:
                    After operation u can continue working with massive
                    write -table to see the options
                    """
-    print(table)
-    action: str = input()
+    action: str = input(table)
 
     while action.isdigit is False or (not (1 <= int(action) <= 8)):
         if action != '-table':
