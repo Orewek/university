@@ -158,12 +158,11 @@ def search_collection(mas: list, search: int) -> list:
 def laba_3_b8(mas: list) -> list:
     max_num: int = 10 ** 10
     for i in range(len(mas)):
-        if symmetrical_number(mas[i]) is True and max_num > mas[i] and mas[i] > 100:
+        if symmetrical_number(mas[i]) is True and max_num > mas[i] > 100:
             max_num: int = mas[i]
 
     if max_num == 10 ** 10:
         print('0 symmetrical numbers have found')
-
     else:
         print(f'{max_num} is the lowest symmetrical number')
 

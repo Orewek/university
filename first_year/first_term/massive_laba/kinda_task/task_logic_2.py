@@ -13,19 +13,26 @@ def sum_max2_min1(mas: list) -> list:
     min_odd: int = 10**10
     max_even: int = - 1
 
+    min_odd, max_even = find_max_even_min_odd(mas, min_odd, max_even)
+    if ((min_odd + max_even) in mas) is True:
+        print(f"""
+               maximum even + minimum odd in massive!
+               {max_even} + {min_odd} = {max_even + min_odd}
+               """)
+    else:
+        print('maximum even + minimum odd not in massive!')
+
+    return mas
+
+
+def find_max_even_min_odd(mas: list, min_odd: int, max_even: int) -> tuple:
     for el in mas:
         if el % 2 == 0 and el > max_even:
             max_even: int = el
         if el % 2 != 0 and el < min_odd:
             min_odd: int = el
 
-    if ((min_odd + max_even) in mas) is True:
-        print(f'maximum even + minimum odd in massive!\n'
-              f'{max_even} + {min_odd} = {max_even + min_odd}')
-    else:
-        print('maximum even + minimum odd not in massive!')
-
-    return mas
+    return (min_odd, max_even)
 
 
 def swap_el(index_max: int, perma_el: int, mas: list) -> list:

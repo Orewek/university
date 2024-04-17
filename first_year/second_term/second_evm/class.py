@@ -129,27 +129,19 @@ def show_city_info(cities: list) -> list:
     return cities
 
 
-def cities_satisty_filter(action_city: str, less_big: str, border: str) -> None:
+def cities_satisty_filter(action_city: int, less_big: int, border: int) -> None:
     """ print cities that satisfy the filter """
-    if int(action_city) == 2 and int(less_big) == 1:
-        for city in cities:
-            if city.age < int(border):
-                print(city.name, city.age)
+    if action_city == 2 and less_big == 1:
+        print(*[[city.name, city.age] for city in cities if city.age < border])
 
-    if int(action_city) == 2 and int(less_big) == 2:
-        for city in cities:
-            if city.age > int(border):
-                print(city.name, city.age)
+    if action_city == 2 and less_big == 2:
+        print(*[[city.name, city.age] for city in cities if city.age > border])
 
-    if int(action_city) == 3 and int(less_big) == 1:
-        for city in cities:
-            if city.population < int(border):
-                print(city.name, city.population)
+    if action_city == 3 and less_big == 1:
+        print(*[[city.name, city.population] for city in cities if city.age < border])
 
-    if int(action_city) == 3 and int(less_big) == 2:
-        for city in cities:
-            if city.population > int(border):
-                print(city.name, city.population)
+    if action_city == 3 and less_big == 2:
+        print(*[[city.name, city.population] for city in cities if city.age > border])
 
 
 def city_filter(cities: list) -> list:
@@ -177,7 +169,7 @@ def city_filter(cities: list) -> list:
     while border.isdigit() is False:
         border: int = input('You can write only a number')
 
-    cities_satisty_filter(action_city, less_big, border)
+    cities_satisty_filter(int(action_city), int(less_big), int(border))
 
     return cities
 
@@ -185,10 +177,12 @@ def city_filter(cities: list) -> list:
 def show_all_cities_info(cities: list) -> list:
     """ show all cities from the list and their properties """
     for city in cities:
-        print(f'name: {city.name}\n'
-              f'population: {city.population}\n'
-              f'age: {city.age}\n'
-              f'mayor: {city.mayor}\n')
+        print(f"""
+               name: {city.name}
+               population: {city.population}
+               age: {city.age}
+               mayor: {city.mayor}
+               """)
 
     return cities
 

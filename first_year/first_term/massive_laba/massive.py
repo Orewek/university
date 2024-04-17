@@ -1,3 +1,5 @@
+from Unit_tests.some_checks import check_action
+
 from adjust_mas.adjust_mas_io import adjust_massive
 
 from input_mas.input_mas_io import create_mas_io
@@ -5,8 +7,6 @@ from input_mas.input_mas_io import create_mas_io
 from kinda_task.task import task_io
 
 from output.output_mas import show_mas
-
-from Unit_tests.some_checks import check_action
 
 
 def menu(action: int, mas: list) -> list:

@@ -1,8 +1,8 @@
-from search_string.search_logic import boiera_mura_search, kmp_logic
+from Unit_tests.some_checks import check_action
 
 from check_speed import time_speed
 
-from Unit_tests.some_checks import check_action
+from search_string.search_logic import boiera_mura_search, kmp_logic
 
 
 def search_menu(user_str: str, find_el: str, action: int) -> str:

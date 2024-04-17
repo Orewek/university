@@ -217,8 +217,10 @@ def sum_max2_min1(mas: list) -> list:
             min_odd: int = el
 
     if ((min_odd + max_even) in mas) is True:
-        print(f'maximum even + minimum odd in massive!\n'
-              f'{max_even} + {min_odd} = {max_even + min_odd}')
+        print(f"""
+               maximum even + minimum odd in massive!
+               {max_even} + {min_odd} = {max_even + min_odd}
+               """)
     else:
         print('maximum even + minimum odd not in massive!')
 

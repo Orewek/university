@@ -30,8 +30,10 @@ def cut(length_prices: list) -> Any:
 def make_total_list(meters_list: list, prices_list: list) -> list:
     total_list: list = []
     prices_list: list = prices_list[1:]
-    print(f'meters list: {meters_list}\n',
-          f'prices list: {prices_list}')
+    print(f"""
+           meters list: {meters_list}
+           prices list: {prices_list}
+           """)
 
     for i in range(int(meters_list[-1]) + 1):
         if i not in meters_list:
@@ -61,9 +63,11 @@ def input_prices(length_prices: list) -> list:
         elif price.lower() != "exit" and meters.lower() != "exit":
             print('You can write only numbers as a price or meter')
 
-    print(f'Prices were succsessfully added\n'
-          f'Modidied pricee list: {length_prices[1:]}\n'
-          f'meters list: {meters_list}')
+    print(f"""
+           Prices were succsessfully added
+           Modidied pricee list: {length_prices[1:]}
+           meters list: {meters_list}
+           """)
 
     length_prices: list = make_total_list(meters_list, length_prices)
     return length_prices

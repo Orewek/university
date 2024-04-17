@@ -1,4 +1,4 @@
-from Unit_tests.some_checks import check_int, check_action
+from Unit_tests.some_checks import check_action, check_int
 
 from decorators.decorator import count_time
 
@@ -41,10 +41,12 @@ def create_mas_io(mas: tuple) -> tuple:
 
 
 def create_mas_manually(mas: tuple) -> tuple:
-    print('\nWrite each element separated\n'
-          'Remember,You can write only digits. '
-          'Non-digits elements will be deleted\n'
-          'If u wanna to exit, press Enter')
+    print("""
+          Write each element separated
+          Remember,You can write only digits.
+          Non-digits elements will be deleted
+          If u wanna to exit, press Enter
+          """)
     mas: list = add_elements(mas)
 
     print(f'Massive was sucsessfully createad. Mas - {mas}')
@@ -57,7 +59,6 @@ def create_mas_generated(mas: tuple) -> tuple:
 
     mas: list = generate_el(mas, int(amount_elements))
 
-    # print(f'Your massive was sucsessfully generated\n mas: {mas}')
     return mas
 
 

@@ -50,14 +50,13 @@ def get_table_dynamic(volumes: list, prices: list, bag_volume: int) -> list:
 
     for x in range(len(prices) + 1):
         for y in range(bag_volume + 1):
+            volume[x][y] = volume[x - 1][y]
+
             if x == 0 or y == 0:
                 volume[x][y] = 0
 
             elif volumes[x - 1] <= y:
                 volume[x][y] = max(prices[x - 1] + volume[x - 1][y - volumes[x - 1]], volume[x - 1][y])
-
-            else:
-                volume[x][y] = volume[x - 1][y]
 
     return volume
 
@@ -104,32 +103,70 @@ def greedy(names: list, volumes: list, prices: list, bag_volume: int) -> None:
     temp_volumes = volumes
     while bag_volume > 0:
         for _ in range(len(names)):
-            item_position: int = 0
-            price: int = 0
-            for i in range(len(names) - len(taken_prices)):
-                if temp_prices[i] > price:
-                    item_position: int = i
-                    price: int = temp_prices[i]
-                    # print('price', price)
-
+            item_position, price = find_biggest_price(names,
+                                                      taken_prices,
+                                                      temp_prices,
+                                                      0,
+                                                      0)
             if price != 0:
-                bag_volume -= volumes[item_position]
-                taken_prices.append(prices[item_position])
-                taken_volumes.append(volumes[item_position])
-                temp_prices.pop(item_position)
-                temp_volumes.pop(item_position)
-
+                bag_volume, taken_prices, taken_volumes = add_to_bad(bag_volume,
+                                                                     taken_prices,
+                                                                     taken_volumes,
+                                                                     item_position)
+                temp_prices, temp_volumes = remove_from_temp(temp_prices,
+                                                             temp_volumes,
+                                                             item_position)
             if bag_volume < 0:
                 taken_prices.pop()
                 taken_volumes.pop()
                 break
 
+    print_named_items(taken_prices)
+
+
+def print_named_items(taken_prices: list) -> None:
     named_items: list = []
     for _ in range(len(taken_prices)):
         named_items.append(names[0])
         names.pop(0)
-    print(f'Items that give optimal price {named_items}\n'
-          f'optimal_price: ${sum(taken_prices)}')
+    print(f"""
+           Items that give optimal price {named_items}
+           optimal_price: ${sum(taken_prices)}
+           """)
+
+
+def add_to_bad(bag_volume: int,
+               taken_prices: list,
+               taken_volumes: list,
+               item_position: int) -> tuple:
+
+    bag_volume -= volumes[item_position]
+    taken_prices.append(prices[item_position])
+    taken_volumes.append(volumes[item_position])
+
+    return bag_volume, taken_prices, taken_volumes
+
+
+def remove_from_temp(temp_prices: list,
+                     temp_volumes: list,
+                     item_position: int) -> tuple:
+    temp_prices.pop(item_position)
+    temp_volumes.pop(item_position)
+
+    return temp_prices, temp_volumes
+
+
+def find_biggest_price(names: list,
+                       taken_prices: list,
+                       temp_prices: list,
+                       price: int,
+                       item_position: int) -> tuple:
+    for i in range(len(names) - len(taken_prices)):
+        if temp_prices[i] > price:
+            item_position: int = i
+            price: int = temp_prices[i]
+
+    return item_position, price
 
 
 def get_items(names: list,
@@ -164,12 +201,26 @@ def compare_speed(file_path: str,
                   mames: list,
                   volumes: list,
                   prices: list,
-                  bag_volume: list,
+                  bag_volume: int,
                   named_prices: list,
                   named_items: list,
                   optimal_price: int) -> None:
 
     """ compare three method by time """
+    elapsed_dynamic = time_dynamic(volumes, prices, bag_volume)
+    elapsed_recursion = elapsed_dynamic * (2 ** len(named_items))
+    elapsed_greedy = time_greddy(names, volumes, prices, bag_volume)
+    print(f"""
+           {round(elapsed_dynamic, 5)} seconds for dynamic
+           {round(elapsed_recursion, 5)} seconds for recursion
+           {round(elapsed_greedy, 10)} seconds for greedy
+           """)
+
+
+def time_dynamic(volumes: list,
+                 prices: list,
+                 bag_volume: int) -> Any:
+
     start = time.time()
     volume = get_table_dynamic(volumes, prices, int(bag_volume))
     items = get_items(names, volumes, prices, volume, int(bag_volume))
@@ -179,14 +230,20 @@ def compare_speed(file_path: str,
                                                           items)
     end = time.time()
     elapsed_dynamic = end - start
-    elapsed_recursion = elapsed_dynamic * (2**len(named_items))
+
+    return elapsed_dynamic
+
+
+def time_greddy(names: list,
+                volumes: list,
+                prices: list,
+                bag_volume: int) -> Any:
     start = time.time()
     greedy(names, volumes, prices, int(bag_volume))
     end = time.time()
     elapsed_greedy = end - start
-    print(f'{round(elapsed_dynamic, 5)} seconds for dynamic\n'
-          f'{round(elapsed_recursion, 5)} seconds for recursion\n'
-          f'{round(elapsed_greedy, 10)} seconds for greedy\n')
+
+    return elapsed_greedy
 
 
 def main(file_path: str,
@@ -258,8 +315,10 @@ def main(file_path: str,
                                                                   volumes,
                                                                   prices,
                                                                   items)
-            print(f'Items that give optimal price:\n{named_items}\n'
-                  f'optimal price is ${optimal_price}')
+            print(f"""
+                   Items that give optimal price:\n{named_items}
+                   optimal price is ${optimal_price}
+                   """)
 
         if method == 3:
             greedy(names, volumes, prices, int(bag_volume))

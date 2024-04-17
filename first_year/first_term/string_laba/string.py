@@ -1,3 +1,5 @@
+from Unit_tests.some_checks import check_action
+
 from input_string.input_io import input_string_io
 
 from output_string.output_logic import output_user_str
@@ -5,8 +7,6 @@ from output_string.output_logic import output_user_str
 from search_string.search_io import input_find_ed
 
 from task.tasks import task_b9
-
-from Unit_tests.some_checks import check_action
 
 
 def main_menu(user_str: str, action: int) -> str:

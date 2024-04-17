@@ -34,10 +34,12 @@ def str_to_int(func: Callable[[Iterable[Any]], Any]):
                 str_el.append(args[0][i])
 
         if str_count > 0:
-            print(f'\n===STRING_TO_INT===STRING_TO_INT===STRING_TO_INT\n'
-                  f'{str_count} elements were changed: str -> int\n'
-                  f'This elements were str {str_el}\n'
-                  f'===STRING_TO_INT===STRING_TO_INT===STRING_TO_INT')
+            print(f"""
+                   ===STRING_TO_INT===STRING_TO_INT===STRING_TO_INT
+                   {str_count} elements were changed: str -> int
+                   This elements were str {str_el}
+                   ===STRING_TO_INT===STRING_TO_INT===STRING_TO_INT
+                   """)
 
         result = func(*args)
 
@@ -55,9 +57,11 @@ def count_time(func: Callable[[Iterable[Any]], Any]):
         end_time = time.time()
 
         time_result = end_time - start_time
-        print(f'\n==TIME===TIME===TIME===TIME===TIME===TIME===TIME===TIME=\n'
-              f'Function had been working for {round(time_result, 3)} seconds\n'
-              f'===TIME===TIME===TIME===TIME===TIME===TIME===TIME===TIME==')
+        print(f"""
+               ==TIME===TIME===TIME===TIME===TIME===TIME===TIME===TIME=
+               Function had been working for {round(time_result, 3)} seconds
+               ===TIME===TIME===TIME===TIME===TIME===TIME===TIME===TIME==
+               """)
 
         return result
     return wrapper

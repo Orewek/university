@@ -42,6 +42,33 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
     fib_index_1: int = 1
     fib_index_2: int = 1
 
+    fib_index_1, fib_index_2 = looking_for_limit(fib_index_1,
+                                                 fib_index_2,
+                                                 find_el, mas)
+    # Now find_el <= fib_i_2
+    fib_index_1, fib_index_2 = reduce_nth(fib_index_1,
+                                          fib_index_2,
+                                          find_el, mas)
+
+    # Now fib_i_1 <= find_el <= fib_i_2
+    # Heres might be diff fib_i_2 than in prev while
+    new_mas: list = []
+    # Cutting new mas
+    for i in range(fib_index_1, fib_index_2):
+        new_mas.append(mas[i])
+
+    # Checking the corners
+
+    return corners_check(fib_index_1,
+                         fib_index_2,
+                         total_index,
+                         find_el, mas)
+    return fibonacci_search(new_mas, find_el, total_index + fib_index_1)
+
+
+def looking_for_limit(fib_index_1: int,
+                      fib_index_2: int,
+                      find_el: int, mas: list) -> tuple:
     while fib_index_2 <= len(mas) - 1 and mas[fib_index_2] <= find_el:
         # For example
         # 1 + 1 = 2; 1 + 2 = 3
@@ -56,8 +83,12 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
             fib_index_2: int = len(mas)
             break
 
-    # Now find_el <= fib_i_2
+    return (fib_index_1, fib_index_2)
 
+
+def reduce_nth(fib_index_1: int,
+               fib_index_2: int,
+               find_el: int, mas: list) -> tuple:
     while fib_index_1 > len(mas) - 1 or mas[fib_index_1] > find_el:
         """
         fib n'th and fib (n + 1)'th
@@ -68,14 +99,13 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
         fib_index_2: int = fib_index_1
         fib_index_1: int = type_var - fib_index_1
 
-    # Now fib_i_1 <= find_el <= fib_i_2
-    # Heres might be diff fib_i_2 than in prev while
-    new_mas: list = []
-    # Cutting new mas
-    for i in range(fib_index_1, fib_index_2):
-        new_mas.append(mas[i])
+    return (fib_index_1, fib_index_2)
 
-    # Checking the corners
+
+def corners_check(fib_index_1: int,
+                  fib_index_2: int,
+                  total_index: int,
+                  find_el: int, mas: list) -> tuple:
     if fib_index_1 == fib_index_2 or fib_index_1 == 0:
         if mas[0] == find_el:
             return total_index + fib_index_1 + 1
@@ -83,8 +113,6 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
             return total_index + fib_index_1 + 2
 
         return -1
-
-    return fibonacci_search(new_mas, find_el, total_index + fib_index_1)
 
 
 @count_time

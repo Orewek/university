@@ -73,9 +73,11 @@ def compare_sizes(file_path: str) -> str:
     const_size = os.stat('constant_len.bin').st_size
     huffman_size = os.stat('huffman_len.bin').st_size
 
-    print(f'default: {default_size}\n'
-          f'constant: {const_size}\n'
-          f'huffman: {huffman_size}')
+    print(f"""
+           default: {default_size}
+           constant: {const_size}
+           huffman: {huffman_size}
+           """)
     return file_path
 
 
@@ -172,7 +174,7 @@ def huffman_encode_compress(text: str) -> str:
                 break
             # If we got fewer than 8 bits, pad with zeroes on the right
             if len(b) < 8:
-                b: str = b + '0' * (8 - len(b))
+                b: str = f'{b}{'0' * (8 - len(b))}'
             # Convert to int
             i: int = int(b, 2)
             # Write

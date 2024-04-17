@@ -57,7 +57,7 @@ def letters_jump(user_str: str, find_el: str) -> list:
     return prefix
 
 
-def same_letters_find_el(find_el_index: list) -> list:
+def same_letters_find_el(find_index: list) -> list:
     """
     [p, 1] -> separating [i][j] to 2 diff lists
     if we found p and its already in our list[i]
@@ -67,15 +67,15 @@ def same_letters_find_el(find_el_index: list) -> list:
     total_letter: List[list] = []
     letters_ascii_letter: List[int] = []
     letters_word_jump: List[int] = []
-    for i in range(len(find_el_index)):
-        if find_el_index[i][0] not in letters_ascii_letter:
-            letters_ascii_letter.append(find_el_index[i][0])
-            letters_word_jump.append(find_el_index[i][1])
-            total_letter.append([find_el_index[i][0], find_el_index[i][1]])
+    for i in range(len(find_index)):
+        if find_index[i][0] not in letters_ascii_letter:
+            letters_ascii_letter.append(find_index[i][0])
+            letters_word_jump.append(find_index[i][1])
+            total_letter.append([find_index[i][0], find_index[i][1]])
         else:
-            for j in range(len(find_el_index)):
-                if letters_ascii_letter[j] == find_el_index[i][0]:
-                    total_letter.append([find_el_index[i][0], letters_word_jump[j]])
+            for j in range(len(find_index)):
+                if letters_ascii_letter[j] == find_index[i][0]:
+                    total_letter.append([find_index[i][0], letters_word_jump[j]])
                     break
 
     return total_letter

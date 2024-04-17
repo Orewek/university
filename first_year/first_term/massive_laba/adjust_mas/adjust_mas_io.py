@@ -1,4 +1,4 @@
-from Unit_tests.some_checks import check_int, check_action
+from Unit_tests.some_checks import check_action, check_int
 
 from adjust_mas.adjust_mas_logic import change_elements, show_elements
 from adjust_mas.adjust_mas_logic import clear_mas, len_mas
@@ -11,9 +11,11 @@ def mas_elements(mas: list) -> list:
     """
     show_elements(mas)
 
-    print('\nNow You can write digits next to elements that we need to change\n'
-          'Write them separated, after each digit press Enter\n'
-          'It will be able to write more digits. When You done: press Enter\n')
+    print("""
+          Now You can write digits next to elements that we need to change
+          Write them separated, after each digit press Enter
+          It will be able to write more digits. When You done: press Enter
+          """)
 
     # change_number = number of element, that we need to change
     # adding each number of these elements into change_mas
@@ -29,7 +31,7 @@ def mas_elements(mas: list) -> list:
         # Number of element cant be > than number of elemtns
         # ['a' 'b' 'c'] - 3, so user cant write smth > 3
         while int(change_number) > len(mas):
-            change_number: str = input('Elements with this number doesnt exist. Try again')
+            change_number: str = input('Elements with this number doesnt exist')
 
         change_mas.append(int(change_number))
         change_number: str = input()

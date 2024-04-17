@@ -57,34 +57,18 @@ def chered_checker(number: int, divide: int) -> str:
 
 @int2str_before
 def consecutive_result(result_mas: list) -> tuple:
-    """
-    consecutive 1 in the row = res1
-    consecutive 0 in the row = res0
+    res1: str = '1'
+    res0: str = '0'
 
-    while we finding out that n == n + 1 -> count += 1
-    else: if count > the longest row (res1 / res0) -> res = count
-    reseting count -> count = 1
-    """
-    count1: int = 1
-    count0: int = 1
+    string = ''.join(result_mas)
+    while res1 in string:
+        res1 += '1'
 
-    res1: int = 0
-    res0: int = 0
+    while res0 in string:
+        res0 += '0'
 
-    for i in range(len(result_mas) - 1):
-        if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '1':
-            count1 += 1
-
-        else:
-            res1: int = max(res1, count1)
-            count1: int = 1
-
-        if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '0':
-            count0 += 1
-
-        else:
-            res0: int = max(res0, count0)
-            count0: int = 1
+    res1 -= '1'
+    res0 -= '0'
 
     return res1, res0
 

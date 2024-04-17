@@ -20,10 +20,12 @@ def choose_file(file_path: str) -> str:
 def print_absolute_path(file_path: str) -> str:
     """ output absolute path for file/folder """
     abs_path = os.path.abspath(file_path)
-    print(f'ABSOLUTE PATH\n'
-          f'-------------\n'
-          f' {abs_path}  \n'
-          f'-------------\n')
+    print(f"""
+           ABSOLUTE PATH
+           -------------
+            {abs_path}
+           -------------
+           """)
 
     return file_path
 
@@ -72,13 +74,15 @@ def show_all_file_properties(file_path: str) -> str:
     last_time_modified = datetime.datetime.fromtimestamp(last_time_modified)
     file_creation_time = datetime.datetime.fromtimestamp(file_creation_time)
 
-    print(f'file size: {file_size}\n'
-          f'time of last modification: {last_time_modified}\n'
-          f'creation time: {file_creation_time}\n')
+    print(f"""
+           file size: {file_size}
+           time of last modification: {last_time_modified}
+           creation time: {file_creation_time}
+           """)
 
     action: str = input('print "more" for additional info')
     if action == 'more':
-        mean_table: str  = """
+        mean_table: str = """
                            st_mode the file type and permissions
                            st_ino the inode number
                            st_dev the device id
@@ -102,7 +106,7 @@ def create_file_copy(file_path: str) -> str:
             new_path: str = input('You should write a competely a new path for that copy')
 
         shutil.copy(file_path, copy_file_path)
-        os.replace(copy_file_path, f'{new_path}\{copy_file_path}')
+        os.replace(copy_file_path, rf'{new_path}\{copy_file_path}')
 
         print('copy was succsessfully created')
 
@@ -132,20 +136,20 @@ def delete_file_or_folder(file_path: str) -> None:
     """ delete file/folder """
     if os.path.isfile(file_path) is True:
         os.remove(file_path)
+        return None
+
+    all_files: list = make_files_list([], file_path)
+    yes_confirmation: list = ['y', 'yes', 'yeah']
+    for file in all_files:
+        confirmation: str = input(f'Do you want to delete {file}? Write Y/N')
+        if confirmation.lower() in yes_confirmation:
+            os.remove(rf'{file_path}\{file}')
+
+    all_files: list = make_files_list([], file_path)
+    if all_files == []:
+        os.rmdir(file_path)
     else:
-        all_files: list = make_files_list([], file_path)
-        yes_confirmation: list = ['y', 'yes', 'yeah']
-
-        for file in all_files:
-            confirmation: str = input(f'Do you want to delete {file}? Write Y/N')
-            if confirmation.lower() in yes_confirmation:
-                os.remove(rf'{file_path}\{file}')
-
-        all_files: list = make_files_list([], file_path)
-        if all_files == []:
-            os.rmdir(file_path)
-        else:
-            print('You cant remove a dir which contains some files')
+        print('You cant remove a dir which contains some files')
 
     return None
 
