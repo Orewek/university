@@ -26,11 +26,8 @@ def sum_max2_min1(mas: list) -> list:
 
 
 def find_max_even_min_odd(mas: list, min_odd: int, max_even: int) -> tuple:
-    for el in mas:
-        if el % 2 == 0 and el > max_even:
-            max_even: int = el
-        if el % 2 != 0 and el < min_odd:
-            min_odd: int = el
+    max_even: int = max([number for number in mas if number % 2 == 0])
+    min_odd: int = min([number for number in mas if number % 2 != 0])
 
     return (min_odd, max_even)
 

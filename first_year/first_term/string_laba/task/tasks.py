@@ -2,11 +2,11 @@ from typing import List
 
 from input_string.input_logic import input_generate
 
+from typing import reduce
+
 
 def task_b9(user_str: str) -> str:
-    words: list[str] = []
-    for _ in range(10):
-        words.append(input_generate(user_str, 20))
+    words: List[str] = [input_generate(user_str, 20) for _ in range(10)]
     print(words)
 
     one_digit_words: list[str] = []
@@ -28,10 +28,7 @@ def task_b9(user_str: str) -> str:
 def remove_arifmetical(word: str) -> str:
     """ removing arifmetical letters """
     arif_mas: list = ['-', '*', '+', '/']
-    new_word: str = ''
-    for i in range(len(word)):
-        if word[i] not in arif_mas:
-            new_word += word[i]
+    new_word: str = ''.join([letter for letter in word if letter not in arif_mas])
 
     return new_word
 

@@ -98,11 +98,7 @@ def task_io(mas: list) -> list:
 
 @str2int_before
 def task_b8(mas: list) -> list:
-    result_mas: list = []
-
-    for i in range(len(mas)):
-        result: int = chered_checker(mas[i], 2)
-        result_mas.append(result)
+    result_mas: list = [chered_checker(mas[i], 2) for i in range(len(mas))]
 
     """
     Random numbers
@@ -120,11 +116,7 @@ def task_b8(mas: list) -> list:
 
 @str2int_before
 def task_c8(mas: list) -> list:
-    result_mas: list = []
-
-    for i in range(len(mas)):
-        result: int = chered_checker(mas[i], 10)
-        result_mas.append(result)
+    result_mas: list = [chered_checker(mas[i], 10) for i in range(len(mas))]
 
     print(mas)
     print(result_mas)
@@ -157,9 +149,7 @@ def search_collection(mas: list, search: int) -> list:
 @str2int_before
 def laba_3_b8(mas: list) -> list:
     max_num: int = 10 ** 10
-    for i in range(len(mas)):
-        if symmetrical_number(mas[i]) is True and max_num > mas[i] > 100:
-            max_num: int = mas[i]
+    max_num = min([number for number in mas if symmetrical_number(number) is True and max_num > number > 100])
 
     if max_num == 10 ** 10:
         print('0 symmetrical numbers have found')
@@ -177,17 +167,9 @@ def laba_3_b8(mas: list) -> list:
 @str2int_before
 def laba_3_c5(mas: list) -> list:
     # Removing prime numbers which doesnt contain digit 5
-    new_mas: list = []
-    for i in range(len(mas)):
-        if not(check_contain_5(mas[i]) is False and prime_number(mas[i]) is True):
-            new_mas.append(mas[i])
+    mas: list = [number for number in mas if not(check_contain_5(mas[i]) is False and prime_number(mas[i]) is True)]
 
-    mas: list = new_mas
-
-    odd_els: list = []
-    for i in range(len(mas)):
-        if mas[i] % 2 == 1:
-            odd_els.append(mas[i])
+    odd_els: list = [number for number in mas if number % 2 != 0]
 
     odd_els: list = sorted(odd_els)
     print(odd_els)

@@ -271,8 +271,7 @@ if __name__ == '__main__':
                 cities.append(city_name)
 
             lines += 1
-    for city in cities:
-        print(city.name)
+    [print(city.name) for city in cities]
     while True:
         cities = main(cities)
         with open('new_file.csv', mode='w') as csv_file:

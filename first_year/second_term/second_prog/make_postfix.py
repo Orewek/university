@@ -1,3 +1,6 @@
+from functools import reduce
+
+
 def infix_to_postfix() -> str:
     """ making a string with postfix expression """
     expression = read_expression()
@@ -26,12 +29,9 @@ def infix_to_postfix() -> str:
 
 def read_expression() -> str:
     """ reading math expression from the file """
-    expression = ''
-
     with open(r".\txts\infix.txt", "r") as f:
         lines = f.readlines()
-        for line in lines:
-            expression += f' {line.strip()}'
+        expression: str = reduce(lambda x, y: f'{x} {y.strip()}', lines, '')
 
     return expression.strip()
 

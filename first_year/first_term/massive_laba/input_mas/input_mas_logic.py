@@ -26,9 +26,7 @@ def generate_el(mas: list, amount_elements: int) -> list:
     generating (-1000; 1000) number
     appending this number to mas
     """
-    for _ in range(amount_elements):
-        number: int = randint(-1000, 1000)
-        mas.append(number)
+    mas = [randint(-1000, 1000) for _ in range(amount_elements)]
 
     return mas
 
@@ -39,9 +37,7 @@ def generate_border(mas: list,
                     l_border: int,
                     r_border: int) -> list:
 
-    for _ in range(amount_els):
-        number: int = randint(l_border, r_border)
-        mas.append(number)
+    mas = [randint(l_border, r_border) for _ in range(amount_els)]
 
     return mas
 

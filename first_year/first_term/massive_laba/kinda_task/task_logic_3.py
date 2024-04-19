@@ -3,10 +3,7 @@ from decorators.decorator import count_time
 
 
 def symmetrical_number(number: int) -> bool:
-    digits_of_num: list = []
-    while number != 0:
-        digits_of_num.append(number % 10)
-        number //= 10
+    digits_of_num: list = [int(i) for i in str(abs(number))]
 
     for i in range(len(digits_of_num) // 2):
         if digits_of_num[i] != digits_of_num[len(digits_of_num) - 1 - i]:
@@ -18,35 +15,18 @@ def symmetrical_number(number: int) -> bool:
 
 
 def reverse_number(number: int) -> int:
-    digits_of_num: list = []
-    while number != 0:
-        digits_of_num.append(number % 10)
-        number //= 10
-
-    reversed_number: int = 0
-    for i in range(len(digits_of_num)):
-        reversed_number += digits_of_num[i] * (10 ** i)
+    digits_of_num: list = [int(i) for i in str(abs(number))]
+    reversed_number: int = sum([digits_of_num[i] * (10 ** i) for i in range(len(digits_of_num))])
 
     return reversed_number
 
 
 def prime_number(number: int) -> bool:
-    for i in range(2, (number // 2) + 1):
-        if number % i == 0:
-            return False
-
-    # Showing prime numbers in mas
-    # print(number, 'prime')
-    return True
+    return not(any([int(x) for x in range(2, (number // 2) + 1) if number % x == 0]))
 
 
 def check_contain_5(number: int) -> bool:
-    while number != 0:
-        if number % 10 == 5:
-            return True
-        number //= 10
-
-    return False
+    return any([int(x) for x in str(abs(number)) if int(x) % 5 == 0])
 
 
 if __name__ == '__main__':

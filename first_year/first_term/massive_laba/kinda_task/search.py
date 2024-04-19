@@ -52,10 +52,8 @@ def fibonacci_search(mas: list, find_el: int, total_index=0) -> int:
 
     # Now fib_i_1 <= find_el <= fib_i_2
     # Heres might be diff fib_i_2 than in prev while
-    new_mas: list = []
     # Cutting new mas
-    for i in range(fib_index_1, fib_index_2):
-        new_mas.append(mas[i])
+    new_mas = [mas[i] for i in range(fib_index_1, fib_index_2)]
 
     # Checking the corners
 

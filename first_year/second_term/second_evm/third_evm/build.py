@@ -125,9 +125,7 @@ def show_all_spec_files_in_folder(file_path: str) -> str:
         if "." not in extension:
             extension = f'.{extension}'
 
-        for file in all_files:
-            if extension in file:
-                print(file)
+        [print(file) for file in all_files if extension in file]
 
     return file_path
 
@@ -156,10 +154,7 @@ def delete_file_or_folder(file_path: str) -> None:
 
 def make_files_list(all_files: list, file_path: str) -> list:
     """ make a list of files into the folder """
-    all_files: list = []
-    for path in os.listdir(file_path):
-        if os.path.isfile(os.path.join(file_path, path)):
-            all_files.append(path)
+    all_files: list = [path for path in os.listdir(file_path) if os.path.isfile(os.path.join(file_path, path))]
 
     return all_files
 

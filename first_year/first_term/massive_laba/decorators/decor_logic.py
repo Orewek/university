@@ -12,10 +12,7 @@ def str2int_before(func: Callable[[Iterable[Any]], Any]):
     Making whole el in mas str -> int
     """
     def wrapper(*args: Any):
-        for i in range(len(args[0])):
-            if type(args[0][i]) is str:
-                args[0][i] = int(args[0][i])
-
+        [int(number) for number in args[0]]
         result = func(args[0], *args[1:])
 
         return result
@@ -28,9 +25,7 @@ def str2int_after(func: Callable[[Iterable[Any]], Any]):
     """
     def wrapper(*args: Any):
         result = func(args[0], *args[1:])
-        for i in range(len(args[0])):
-            if type(args[0][i]) is str:
-                args[0][i]: int = int(args[0][i])
+        [int(number) for number in args[0]]
 
         return result
     return wrapper
@@ -41,10 +36,7 @@ def int2str_before(func: Callable[[Iterable[Any]], Any]):
     Making whole el in mas: int -> str
     """
     def wrapper(*args: Any):
-        for i in range(len(args[0])):
-            if type(args[0][i]) is int:
-                args[0][i]: str = str(args[0][i])
-
+        [str(number) for number in args[0]]
         result = func(args[0], *args[1:])
 
         return result
@@ -56,10 +48,7 @@ def negative_positive_logic(func: Callable[[Iterable[Any]], Any]):
     changing negative el to positive
     """
     def wrapper(*args: Any):
-        for el in range(len(args[0])):
-            if args[0][el] < 0:
-                args[0][el]: int = abs(args[0][el])
-
+        [abs(number) for number in args[0]]
         result = func(args[0], *args[1:])
 
         return result

@@ -6,6 +6,8 @@ from input_mas.input_mas_logic import generate_el
 
 from kinda_task.task_logic import chered_checker, consecutive_result, mean_arif
 
+from functools import reduce
+
 
 class TestMas(unittest.TestCase):
     """

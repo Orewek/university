@@ -38,8 +38,7 @@ def mas_elements(mas: list) -> list:
 
     # System count elements from 0 to n - 1
     # Ppl do that from 1 to n
-    for i in range(len(change_mas)):
-        change_mas[i] -= 1
+    change_mas = list(map(lambda item: item - 1, change_mas))
 
     change_elements(mas, change_mas)
 

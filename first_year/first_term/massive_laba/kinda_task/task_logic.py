@@ -1,6 +1,8 @@
 from decorators.decor_logic import int2str_before, str2int_before
 from decorators.decorator import count_time
 
+from functools import reduce
+
 
 @str2int_before
 def mean_arif(mas: list) -> list:
@@ -8,9 +10,8 @@ def mean_arif(mas: list) -> list:
     Calculation arif sum of whole mas el
     Firstly count total sum and divide on amount of elements
     """
-    el_sum: int = 0
-    for i in range(len(mas)):
-        el_sum += mas[i]
+
+    el_sum = reduce(lambda x, y: x + y, mas)
 
     arif_sum: float = el_sum / len(mas)
     print(f'Arifmetical sum = {arif_sum}')
@@ -67,10 +68,10 @@ def consecutive_result(result_mas: list) -> tuple:
     while res0 in string:
         res0 += '0'
 
-    res1 -= '1'
-    res0 -= '0'
+    res1 = res1[:-1]
+    res0 = res0[:-1]
 
-    return res1, res0
+    return len(res1), len(res0)
 
 
 @count_time
@@ -78,8 +79,7 @@ def consecutive_result(result_mas: list) -> tuple:
 def bubble_sort(mas: list) -> list:
     for _ in range(len(mas)):
         for i in range(len(mas) - 1):
-            if mas[i] > mas[i + 1]:
-                mas[i], mas[i + 1] = mas[i + 1], mas[i]
+            mas[i], mas[i + 1] = min(mas[i + 1], mas[i]), max(mas[i + 1], mas[i])
     return mas
 
 
