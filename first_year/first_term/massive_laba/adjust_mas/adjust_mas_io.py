@@ -51,7 +51,6 @@ def adjust_massive(mas: list) -> list:
             2: change elements
             3: clear massive
             """
-    print(adjust_table)
 
     action_table = """
                    U can write only one digit.
@@ -60,7 +59,7 @@ def adjust_massive(mas: list) -> list:
                    """
 
     # checking for letters and multi-digits
-    action = check_action(input(), action_table, adjust_table)
+    action = check_action(input(adjust_table), action_table, adjust_table)
 
     switcher: dict = {
         1: len_mas,

@@ -15,10 +15,7 @@ def task_b9(user_str: str) -> str:
             one_digit_words.append(remove_arifmetical(words[i]))
     print(f'Words with 1 digit w/o arifmetical letters: {one_digit_words}\n')
 
-    same_letter_count: int = 0
-    for i in range(len(words)):
-        if words[i] is True:
-            same_letter_count += 1
+    same_letter_count: int = words.count(True)
 
     print(f'{same_letter_count} words with same letter had found!\n')
 

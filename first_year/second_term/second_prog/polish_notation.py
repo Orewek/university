@@ -12,9 +12,7 @@ def change_file_name(file_name: str) -> None:
     with open(r'.\txts\temp.txt', 'r') as tm:
         with open(rf'.\txts\{file_name}.txt', 'w') as fp:
             lines = tm.readlines()
-
-            for line in lines:
-                fp.write(line)
+            [fp.write(line) for line in lines]
 
     os.remove(r'.\txts\temp.txt')
 

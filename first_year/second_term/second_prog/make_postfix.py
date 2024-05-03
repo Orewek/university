@@ -6,8 +6,8 @@ def infix_to_postfix() -> str:
     expression = read_expression()
     print(f'expression: {expression}')
 
-    stack = []
-    output = ''
+    stack: list = []
+    output: str = ''
 
     for char in expression:
         if char not in '+-*/()^':

@@ -8,10 +8,7 @@ def consistent_search(mas: list, find_el: int) -> int:
     """
     going throw the mas (n >> n + 1 >> n + 2) to find el
     """
-    for i in range(len(mas)):
-        if mas[i] == find_el:
-            return i + 1
-    return -1
+    return mas.index(find_el) + 1 if find_el in mas else -1
 
 
 @count_time

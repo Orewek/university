@@ -37,11 +37,9 @@ def main(user_str: str) -> str:
                    write -table to see the options
                    """
 
-    print(table)
-
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
-    action: int = check_action(input(), action_table, table)
+    action: int = check_action(input(table), action_table, table)
 
     user_str: str = main_menu(user_str, action)
 

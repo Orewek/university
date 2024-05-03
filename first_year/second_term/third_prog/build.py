@@ -156,12 +156,10 @@ def main() -> None:
             total_price: int = max(total_price, new_price)
 
         total_list: list = make_correct_length(main_shard, list_indexes)
-        for i in range(10):
-            total_list[i] *= parts
+        [total_list[i] * parts for i in range(10)]
 
         shard_total_list: list = make_correct_length(free_metrs, list_indexes)
-        for i in range(10):
-            total_list[i] += shard_total_list[i]
+        [total_list[i] + shard_total_list[i] for i in range(10)]
         print(total_list)
 
     else:

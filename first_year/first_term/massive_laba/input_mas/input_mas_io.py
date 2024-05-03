@@ -30,11 +30,9 @@ def create_mas_io(mas: tuple) -> tuple:
                    write -table to see the options
                    """
 
-    print(input_table)
-
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
-    action = check_action(input(), action_table, input_table)
+    action = check_action(input(input_table), action_table, input_table)
 
     mas: list = input_menu(int(action), mas)
     return mas

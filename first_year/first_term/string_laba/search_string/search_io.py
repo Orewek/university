@@ -31,11 +31,9 @@ def input_find_ed(user_str: str) -> str:
                    write -table to see the options
                    """
 
-    print(search_table)
-
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with option
-    action: int = check_action(input(), action_table, search_table)
+    action: int = check_action(input(search_table), action_table, search_table)
 
     index_res: list = search_menu(user_str, find_el, action)
     if index_res != []:

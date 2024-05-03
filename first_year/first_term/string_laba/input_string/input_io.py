@@ -25,11 +25,9 @@ def input_string_io(user_str: str) -> str:
                    write -table to see the options
                    """
 
-    print(input_table)
-
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
-    action: int = check_action(input(), action_table, input_table)
+    action: int = check_action(input(input_table), action_table, input_table)
 
     user_str: str = input_menu(user_str, action)
 

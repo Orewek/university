@@ -5,8 +5,7 @@ def show_elements(mas: list) -> list:
     """
     enumerate each element in mas
     """
-    for count, item in enumerate(mas):
-        print(f'{count + 1}: {item}')
+    print(*[f'{count + 1}: {item}' for count, item in enumerate(mas)], sep='\n')
 
     return mas
 

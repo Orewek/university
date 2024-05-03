@@ -42,8 +42,7 @@ def add_city(cities: list) -> list:
 
 def delete_city(cities: list) -> list:
     """ delete a city from the list """
-    for count, city in enumerate(cities):
-        print(count + 1, city.name)
+    print(*[f'{count + 1} {city.name}' for count, city in enumerate(cities)], sep='\n')
 
     action: int = input('Write a number next to the city which we should delete')
 
@@ -74,8 +73,8 @@ def action_menu(action_city: str, city: City_17, new_info: str) -> None:
 
 def change_smth_city(cities: list) -> list:
     """ change some information for city into the list """
-    for count, city in enumerate(cities):
-        print(count + 1, city.name)
+
+    print(*[f'{count + 1} {city.name}' for count, city in enumerate(cities)], sep='\n')
 
     action: int = input('Choose in which city we should change info')
 
@@ -110,8 +109,7 @@ def change_smth_city(cities: list) -> list:
 
 def show_city_info(cities: list) -> list:
     """ show properties of exact city """
-    for count, city in enumerate(cities):
-        print(count + 1, city.name)
+    print(*[f'{count + 1} {city.name}' for count, city in enumerate(cities)], sep='\n')
 
     action: int = input('Write number next to city, to see info about')
 
