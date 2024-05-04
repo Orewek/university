@@ -291,13 +291,13 @@ def main(file_path: str,
             bag_volume: str = input('You can write only a number')
 
     elif int(action) == 3:
-        print("""
-              Choose method
-              1: recursion
-              2: dynamic
-              3: greddy
-              """)
-        method: int = int(input())
+        method: int = int(input(
+            """
+            Choose method
+            1: recursion
+            2: dynamic
+            3: greddy
+            """))
         if method == 1:
             result = get_table_recursion(volumes,
                                          prices,

@@ -11,17 +11,16 @@ def mas_elements(mas: list) -> list:
     """
     show_elements(mas)
 
-    print("""
-          Now You can write digits next to elements that we need to change
-          Write them separated, after each digit press Enter
-          It will be able to write more digits. When You done: press Enter
-          """)
-
     # change_number = number of element, that we need to change
     # adding each number of these elements into change_mas
     # so, if we wanna change 2nd and 3rd element: [2, 3]
     change_mas: list = []
-    change_number: str = input()
+    change_number: str = input(
+        """
+        Now You can write digits next to elements that we need to change
+        Write them separated, after each digit press Enter
+        It will be able to write more digits. When You done: press Enter
+        """)
 
     while change_number != '':
 

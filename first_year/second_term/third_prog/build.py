@@ -117,12 +117,12 @@ def make_correct_length(meters: int, list_indexes: list) -> list:
 
 
 def main() -> None:
-    print("""
-          Do you want to write prices manually or from file?
-          1: file\n2: manually
-          """)
 
-    action: int = input()
+    action: int = input(
+        """
+        Do you want to write prices manually or from file?
+        1: file\n2: manually
+        """)
     while action.isdigit() is False or (int(action) != 1 and int(action) != 2):
         action: int = input('You can write only 1 or 2')
 
