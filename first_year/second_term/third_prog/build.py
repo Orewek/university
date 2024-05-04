@@ -126,10 +126,7 @@ def main() -> None:
     while action.isdigit() is False or (int(action) != 1 and int(action) != 2):
         action: int = input('You can write only 1 or 2')
 
-    if int(action) == 1:
-        length_prices: int = read_info_from_file([0])
-    else:
-        length_prices: int = input_prices([0])
+    length_prices: int = read_info_from_file([0]) if int(action) == 1 else input_prices([0])
 
     steel_length: int = input('Write length of the steel')
 

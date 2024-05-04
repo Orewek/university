@@ -36,10 +36,7 @@ def input_find_ed(user_str: str) -> str:
     action: int = check_action(input(search_table), action_table, search_table)
 
     index_res: list = search_menu(user_str, find_el, action)
-    if index_res != []:
-        print(f'{find_el} was found! indexes: {index_res}')
-    else:
-        print(f'{find_el} was not found')
+    print(f'{find_el} was found! indexes: {index_res}' if index_res != [] else f'{find_el} was not found')
 
     return user_str
 

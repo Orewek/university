@@ -39,10 +39,7 @@ def task_menu(action: int, mas: list) -> list:
         17: laba_3_b8,
         18: laba_3_c5,
     }
-    if 11 <= action <= 14:
-        mas: list = search_collection(mas, action)
-    else:
-        mas: list = switcher[action](mas)
+    mas: list = search_collection(mas, action) if 11 <= action <= 14 else switcher[action](mas)
     return mas
 
 
@@ -151,10 +148,7 @@ def laba_3_b8(mas: list) -> list:
     max_num: int = 10 ** 10
     max_num = min([number for number in mas if symmetrical_number(number) is True and max_num > number > 100])
 
-    if max_num == 10 ** 10:
-        print('0 symmetrical numbers have found')
-    else:
-        print(f'{max_num} is the lowest symmetrical number')
+    print('0 symmetrical numbers have found' if max_num == 10 ** 10 else f'{max_num} is the lowest symmetrical number')
 
     for i in range(len(mas)):
         if len(str(mas[i])) == 3:

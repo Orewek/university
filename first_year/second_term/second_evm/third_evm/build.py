@@ -144,10 +144,7 @@ def delete_file_or_folder(file_path: str) -> None:
             os.remove(rf'{file_path}\{file}')
 
     all_files: list = make_files_list([], file_path)
-    if all_files == []:
-        os.rmdir(file_path)
-    else:
-        print('You cant remove a dir which contains some files')
+    os.rmdir(file_path) if all_files == [] else print('You cant remove a dir which contains some files')
 
     return None
 
@@ -167,10 +164,7 @@ def find_file_in_folder(file_path: str) -> str:
     else:
         all_files: list = make_files_list([], file_path)
         file_name: str = input('Write a file_name that we are loooking for')
-        if file_name in all_files:
-            print(f'This folder does contains {file_name}')
-        else:
-            print(f'This folder doesnt contains {file_name}')
+        print(f'This folder does contains {file_name}' if file_name in all_files else f'This folder doesnt contains {file_name}')
 
     return file_path
 
@@ -217,11 +211,7 @@ def main(file_path: str) -> str:
     action: int = input(table)
 
     while action.isdigit is False or (not (1 <= int(action) <= 9)):
-        if action != '-table':
-            print(action_table)
-        else:
-            print(table)
-
+        print(action_table if action != '-table' else table)
         action = input()
 
     file_path = main_menu(file_path, int(action))

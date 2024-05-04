@@ -68,10 +68,7 @@ def main() -> None:
         # number = '95821.99123'
         integer, frac_part = str(number).split('.')
 
-        if integer.startswith('-'):
-            con: str = '-'
-        else:
-            con: str = ''
+        con: str = '-' if integer.startswith('-') else ''
 
         if int(integer) != 0:
             number: str = f'{con}{bin(int(integer))[2:]}.{to_bin_frac(frac_part)}'
@@ -84,11 +81,7 @@ def main() -> None:
                """)
 
         # bin to 32bits
-        number_3e_32bit_bin: str = ''
-        if number.startswith('-'):
-            number_3e_32bit_bin += '1'
-        else:
-            number_3e_32bit_bin += '0'
+        number_3e_32bit_bin: str = '1' if number.startswith('-') else '0'
 
         number = number.split('.')
         # to find out pow(10, exp)

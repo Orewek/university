@@ -231,10 +231,7 @@ def main(cities: list) -> list:
     # checking for letters and multi-digits
     # -talbe: user can void a talbe with options
     while action.isdigit() is False or (not (0 < int(action) < 9)):
-        if action != '-table':
-            print(action_table)
-        else:
-            print(table)
+        print(action_table if action != '-table' else table)
         action: int = input()
 
     if int(action) == 8:

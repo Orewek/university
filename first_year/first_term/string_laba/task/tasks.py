@@ -33,10 +33,7 @@ def remove_arifmetical(word: str) -> str:
 def same_letters(word: str) -> bool:
     letters_mas: list = []
     for i in range(len(word)):
-        if word[i] not in letters_mas:
-            letters_mas.append(word[i])
-        else:
-            return True
+        letters_mas.append(word[i]) if word[i] not in letters_mas else return True
 
     return False
 

@@ -10,10 +10,7 @@ def check_int(int_variable: Any) -> int:
 
 def check_action(action: Any, action_table: str, table: str) -> int:
     while len(action) != 1 or action.isdigit() is False:
-        if action != '-table':
-            print(action_table)
-        else:
-            print(table)
+        print(action_table if action != '-table' else table)
         action: str = input()
 
     return int(action)

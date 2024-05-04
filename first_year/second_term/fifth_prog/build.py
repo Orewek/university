@@ -219,10 +219,7 @@ def main(file_path: str) -> str:
     action: str = input(table)
 
     while action.isdigit is False or (not (1 <= int(action) <= 8)):
-        if action != '-table':
-            print(action_table)
-        else:
-            print(table)
+        print(action_table if action != '-table' else table)
 
         action: str = input()
 
