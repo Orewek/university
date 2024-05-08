@@ -1,7 +1,3 @@
-from decorators.decor_logic import negative_positive_logic, str2int_before
-from decorators.decorator import count_time
-
-
 def symmetrical_number(number: int) -> bool:
     digits_of_num: list = [int(i) for i in str(abs(number))]
 

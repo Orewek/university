@@ -3,15 +3,24 @@ from Unit_tests.test_sort_speed import speed_checker_search, speed_checker_sort
 
 from decorators.decor_logic import negative_positive_logic, str2int_before
 
-from kinda_task.search import binary_search, interpolation_search
-from kinda_task.search import consistent_search, fibonacci_search
-from kinda_task.task_logic import bubble_sort
-from kinda_task.task_logic import chered_checker, consecutive_result
-from kinda_task.task_logic import max_el, mean_arif, min_el
-from kinda_task.task_logic_2 import chered_odd, selection_sort
-from kinda_task.task_logic_2 import quick_sort, sum_max2_min1
-from kinda_task.task_logic_3 import check_contain_5, prime_number
-from kinda_task.task_logic_3 import reverse_number, symmetrical_number
+from kinda_task.search import (binary_search,
+                               interpolation_search,
+                               consistent_search,
+                               fibonacci_search)
+from kinda_task.task_logic import (bubble_sort,
+                                   chered_checker,
+                                   consecutive_result,
+                                   max_el,
+                                   mean_arif,
+                                   min_el)
+from kinda_task.task_logic_2 import (chered_odd,
+                                     selection_sort,
+                                     quick_sort,
+                                     sum_max2_min1)
+from kinda_task.task_logic_3 import (check_contain_5,
+                                     prime_number,
+                                     reverse_number,
+                                     symmetrical_number)
 
 
 def task_menu(action: int, mas: list) -> list:
@@ -161,7 +170,7 @@ def laba_3_b8(mas: list) -> list:
 @str2int_before
 def laba_3_c5(mas: list) -> list:
     # Removing prime numbers which doesnt contain digit 5
-    mas: list = [number for number in mas if not(check_contain_5(mas[i]) is False and prime_number(mas[i]) is True)]
+    mas: list = [i for i in mas if not(check_contain_5(mas[i]) is False and prime_number(mas[i]) is True)]
 
     odd_els: list = [number for number in mas if number % 2 != 0]
 

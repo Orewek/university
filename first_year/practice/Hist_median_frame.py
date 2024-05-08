@@ -4,8 +4,6 @@ from matplotlib import pyplot as plt
 
 import numpy as np
 
-from scipy import ndimage
-
 
 def make_hist(file_name, frame_folder, mega_frame):
     img = cv2.imread(f'median_frames/{mega_frame}/{frame_folder}/median_frame_{file_name}.png', 0)

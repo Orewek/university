@@ -2,8 +2,6 @@ from typing import List
 
 from input_string.input_logic import input_generate
 
-from typing import reduce
-
 
 def task_b9(user_str: str) -> str:
     words: List[str] = [input_generate(user_str, 20) for _ in range(10)]
@@ -33,7 +31,9 @@ def remove_arifmetical(word: str) -> str:
 def same_letters(word: str) -> bool:
     letters_mas: list = []
     for i in range(len(word)):
-        letters_mas.append(word[i]) if word[i] not in letters_mas else return True
+        if word[i] in letters_mas:
+            return True
+        letters_mas.append(word[i])
 
     return False
 

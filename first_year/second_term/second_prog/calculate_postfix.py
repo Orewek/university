@@ -1,6 +1,3 @@
-from make_postfix import infix_to_postfix
-
-
 def eval_postfix(text: list) -> float:
     """ calculating math expression """
     stack = list()

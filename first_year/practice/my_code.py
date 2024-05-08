@@ -7,8 +7,6 @@ from hist_median_frame import make_hist
 
 from openpyxl import load_workbook
 
-import pandas as pd
-
 
 def get_data(list_min, list_hour, list_folders, mega_frame, bad_videos):
     with open('data.csv', 'w', newline='') as f:

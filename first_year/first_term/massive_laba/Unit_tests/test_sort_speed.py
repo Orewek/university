@@ -1,7 +1,9 @@
 import time
 
-from kinda_task.search import binary_search, interpolation_search
-from kinda_task.search import consistent_search, fibonacci_search
+from kinda_task.search import (binary_search,
+                               interpolation_search,
+                               consistent_search,
+                               fibonacci_search)
 from kinda_task.task_logic import bubble_sort
 from kinda_task.task_logic_2 import quick_sort, selection_sort
 

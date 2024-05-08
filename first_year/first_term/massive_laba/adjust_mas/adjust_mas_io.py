@@ -1,7 +1,9 @@
 from Unit_tests.some_checks import check_action, check_int
 
-from adjust_mas.adjust_mas_logic import change_elements, show_elements
-from adjust_mas.adjust_mas_logic import clear_mas, len_mas
+from adjust_mas.adjust_mas_logic import (change_elements,
+                                         show_elements,
+                                         clear_mas,
+                                         len_mas)
 
 
 def mas_elements(mas: list) -> list:
