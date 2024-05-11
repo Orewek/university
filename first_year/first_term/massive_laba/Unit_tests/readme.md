@@ -14,7 +14,7 @@
         mas: list = [213, 98213, 239, 8239, 999]
         mas_len: int = len_mas(mas)
 
-        self.assertEqual(mas_len, 5)
+        self.assertEqual(mas_len, '5 - length of massive')
 ```
 ```py
     def test_mean_arif(self) -> None:
@@ -26,18 +26,14 @@
 ```py
     def test_chered_checker2(self) -> None:
         mas: list = ['989', '213', '832', '932', '731', '84331', '232']
-        result_chered_cheker2: str = ''
-        for i in range(len(mas)):
-            result_chered_cheker2 += chered_checker(mas, len(mas), 2)
+        result_chered_cheker2: str = ''.join(chered_checker(int(mas[i]), 2) for i in range(len(mas)))
 
         self.assertEqual(result_chered_cheker2, '1010001')
 ```
 ```py
     def test_chered_checker10(self) -> None:
         mas: list = ['989', '213', '832', '932', '731', '84331', '232']
-        result_chered_cheker10 = ''
-        for i in range(len(mas)):
-            result_chered_cheker10 += chered_checker(mas, len(mas), 10)
+        result_chered_cheker10: str = ''.join(chered_checker(int(mas[i]), 10) for i in range(len(mas)))
 
         self.assertEqual(result_chered_cheker10, '1111101')
 ```
@@ -56,10 +52,7 @@
 
         ok: int = 1
         if len(mas) > 0:
-            for i in range(len(mas)):
-                if mas[i] is None:
-                    ok: int = 0
-                    break
+            ok = all(mas[i] is not None for i in range(len(mas)))
 
-        self.assertAlmostEqual(OK, 1)
+        self.assertAlmostEqual(ok, 1)
 ```

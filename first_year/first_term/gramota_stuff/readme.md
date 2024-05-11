@@ -18,11 +18,12 @@ def normal_view(integer: str, frac_part: str) -> str:
     int_len_frac_part: int = len(str(int(frac_part)))
     len_frac_part: int = len(frac_part)
     str_len_frac_part: str = str(len_frac_part)
+    str_len_integer = str(len(integer))
     con: str = ''
     if abs(int(integer)) >= 1:
         if not (integer.startswith('-')):
-            return f'{integer[0]}.{integer[1:]}{frac_part} * 10^{str(len(integer[1:]))}'
-        return f'{integer[0:2]}.{integer[2:]}{frac_part} * 10^{str(len(integer[1:]) - 1)}'
+            return f'{integer[0]}.{integer[1:]}{frac_part} * 10^{str_len_integer[1:]}'
+        return f'{integer[0:2]}.{integer[2:]}{frac_part} * 10^{str_len_integer[1:] - 1}'
 
     if (integer.startswith('-')):
         con: str = '-'
@@ -100,22 +101,17 @@ def to_bin_frac(frac_part: str) -> str:
 ```
 ```py
 # bin to 32bits
-        number_3e_32bit_bin: str = ''
-        if number.startswith('-'):
-            number_3e_32bit_bin += '1'
-        else:
-            number_3e_32bit_bin += '0'
-
-        number = number.split('.')
-        # to find out pow(10, exp)
-        exp: int = len(number[0]) - 1
-        # pow of exponent
-        number_3e_32bit_bin += '0' * (8 - len(bin(127 + exp)[2:])) + bin(127 + exp)[2:]
-        # remainder of mantissa
-        number_3e_32bit_bin += (str(number[0]) + str(number[1]))[1:]
-        # adding zeros to the end
-        number_3e_32bit_bin: str = number_3e_32bit_bin.ljust(32, '0')
-        print(f'number into IEEE 32bit: {number_3e_32bit_bin}')
-
-        number_3e_32bit_hex: str = ''.join([hex(int(number_3e_32bit_bin[i:i + 4], 2))[2:] for i in range(0, 32, 4)])
+number_3e_32bit_bin: str = '1' if number.startswith('-') else '0
+number = number.split('.')
+# to find out pow(10, exp)
+exp: int = len(number[0]) - 1
+# pow of exponent
+mask: bin = bin(127 + exp)[2:]
+number_3e_32bit_bin += f'{"0" * (8 - len(mask))}{mask}'
+# remainder of mantissa
+number_3e_32bit_bin += (str(number[0]) + str(number[1]))[1:]
+# adding zeros to the end
+number_3e_32bit_bin: str = number_3e_32bit_bin.ljust(32, '0')
+print(f'number into IEEE 32bit: {number_3e_32bit_bin}'
+number_3e_32bit_hex: str = ''.join([hex(int(number_3e_32bit_bin[i:i + 4], 2))[2:] for i in range(0, 32, 4)])
 ```

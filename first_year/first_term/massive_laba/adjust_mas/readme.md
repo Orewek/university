@@ -9,8 +9,7 @@
 ###### Нумеруем их с единицы, то есть `i + 1`
 ```py
 def show_elements(mas: list) -> list:
-    for count, item in enumerate(mas):
-        print(f'{count + 1}: {item}')
+    print(*[f'{count + 1}: {item}' for count, item in enumerate(mas)], sep='\n')
 ```
 ##### После позователь записывает построчно индексы элементов, которые надо поменять
 ```py

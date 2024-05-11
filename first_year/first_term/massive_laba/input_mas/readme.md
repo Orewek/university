@@ -21,8 +21,7 @@ def add_elements(mas: list) -> list:
 ```py
 def generate_el(mas: list, amount_elements: int) -> list:
     for _ in range(amount_elements):
-        number: int = randint(-1000, 1000)
-        mas.append(number)
+        mas = [randint(-1000, 1000) for _ in range(amount_elements)]
 
     return mas
 ```

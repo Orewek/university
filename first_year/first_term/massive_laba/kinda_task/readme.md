@@ -6,9 +6,7 @@
 ```py
 @str2int_before
 def mean_arif(mas: list) -> list:
-    el_sum: int = 0
-    for i in range(len(mas)):
-        el_sum += mas[i]
+    el_sum = reduce(lambda x, y: x + y, mas)
 
     arif_sum: float = el_sum / len(mas)
     print(f'Arifmetical sum = {arif_sum}')
@@ -94,28 +92,20 @@ def chered_checker(number: int, divide: int) -> str:
 ```py
 @int2str_before
 def consecutive_result(result_mas: list) -> tuple:
-    count1: int = 1
-    count0: int = 1
+    res1: str = '1'
+    res0: str = '0'
 
-    res1: int = 0
-    res0: int = 0
+    string = ''.join(result_mas)
+    while res1 in string:
+        res1 += '1'
 
-    for i in range(len(result_mas) - 1):
-        if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '1':
-            count1 += 1
+    while res0 in string:
+        res0 += '0'
 
-        else:
-            res1: int = max(res1, count1)
-            count1: int = 1
+    res1 = res1[:-1]
+    res0 = res0[:-1]
 
-        if result_mas[i] == result_mas[i + 1] and str(result_mas[i]) == '0':
-            count0 += 1
-
-        else:
-            res0: int = max(res0, count0)
-            count0: int = 1
-
-    return res1, res0
+    return len(res1), len(res0)
 ```
 * Смотрим, равны ли два подряд идущих элемента
     * Изначально `count = 1`, потому что если мы найдем такую пару, это же уже строчка из 2 элементов
@@ -210,12 +200,7 @@ def sum_max2_min1(mas: list) -> list:
     min_odd: int = 10**10
     max_even: int = - 1
 
-    for el in mas:
-        if el % 2 == 0 and el > max_even:
-            max_even: int = el
-        if el % 2 != 0 and el < min_odd:
-            min_odd: int = el
-
+    min_odd, max_even = find_max_even_min_odd(mas, min_odd, max_even)
     if ((min_odd + max_even) in mas) is True:
         print(f"""
                maximum even + minimum odd in massive!
@@ -252,10 +237,7 @@ def chered_odd(mas: list) -> list:
 @count_time
 @str2int_before
 def consistent_search(mas: list, find_el: int) -> int:
-    for i in range(len(mas)):
-        if mas[i] == find_el:
-            return i + 1
-    return -1
+    return mas.index(find_el) + 1 if find_el in mas else -1
 ```
 
 ## Бинарный поиск
@@ -390,15 +372,9 @@ def interpolation_search(mas: list, find_el: int) -> int:
 @str2int_before
 def laba_3_b8(mas: list) -> list:
     max_num: int = 10 ** 10
-    for i in range(len(mas)):
-        if symmetrical_number(mas[i]) is True and max_num > mas[i] and mas[i] > 100:
-            max_num: int = mas[i]
+    max_num = min([number for number in mas if symmetrical_number(number) is True and max_num > number > 100])
 
-    if max_num == 10 ** 10:
-        print('0 symmetrical numbers have found')
-
-    else:
-        print(f'{max_num} is the lowest symmetrical number')
+    print('0 symmetrical numbers have found' if max_num == 10 ** 10 else f'{max_num} is the lowest symmetrical number')
 
     for i in range(len(mas)):
         if len(str(mas[i])) == 3:
@@ -409,28 +385,17 @@ def laba_3_b8(mas: list) -> list:
 ##### Нахождеие симметричного числа
 ```py
 def symmetrical_number(number: int) -> bool:
-    digits_of_num: list = []
-    while number != 0:
-        digits_of_num.append(number % 10)
-        number //= 10
+    digits_of_num: list = [int(i) for i in str(abs(number))]
 
     for i in range(len(digits_of_num) // 2):
         if digits_of_num[i] != digits_of_num[len(digits_of_num) - 1 - i]:
             return False
-
-    return True
 ```
 ##### Переворт числа
 ```py
 def reverse_number(number: int) -> int:
-    digits_of_num: list = []
-    while number != 0:
-        digits_of_num.append(number % 10)
-        number //= 10
-
-    reversed_number: int = 0
-    for i in range(len(digits_of_num)):
-        reversed_number += digits_of_num[i] * (10 ** i)
+    digits_of_num: list = [int(i) for i in str(abs(number))]
+    reversed_number: int = sum([digits_of_num[i] * (10 ** i) for i in range(len(digits_of_num))])
 
     return reversed_number
 ```
@@ -445,17 +410,9 @@ def reverse_number(number: int) -> int:
 @str2int_before
 def laba_3_c5(mas: list) -> list:
     # Removing prime numbers which doesnt contain digit 5
-    new_mas: list = []
-    for i in range(len(mas)):
-        if not(check_contain_5(mas[i]) is False and prime_number(mas[i]) is True):
-            new_mas.append(mas[i])
+    mas: list = [i for i in mas if not(check_contain_5(mas[i]) is False and prime_number(mas[i]) is True)]
 
-    mas: list = new_mas
-
-    odd_els: list = []
-    for i in range(len(mas)):
-        if mas[i] % 2 == 1:
-            odd_els.append(mas[i])
+    odd_els: list = [number for number in mas if number % 2 != 0]
 
     odd_els: list = sorted(odd_els)
     print(odd_els)

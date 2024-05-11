@@ -111,9 +111,7 @@ def boiera_mura_search(user_str: str, find_el: str) -> list:
 ```
 ```py
 def task_b9(user_str: str) -> str:
-    words: list[str] = []
-    for _ in range(10):
-        words.append(input_generate(user_str, 20))
+    words: List[str] = [input_generate(user_str, 20) for _ in range(10)]
     print(words)
 
     one_digit_words: list[str] = []
@@ -122,10 +120,7 @@ def task_b9(user_str: str) -> str:
             one_digit_words.append(remove_arifmetical(words[i]))
     print(f'Words with 1 digit w/o arifmetical letters: {one_digit_words}\n')
 
-    same_letter_count: int = 0
-    for i in range(len(words)):
-        if words[i] is True:
-            same_letter_count += 1
+    same_letter_count: int = words.count(True)
 
     print(f'{same_letter_count} words with same letter had found!\n')
 
@@ -135,10 +130,7 @@ def task_b9(user_str: str) -> str:
 ```py
 def remove_arifmetical(word: str) -> str:
     arif_mas: list = ['-', '*', '+', '/']
-    new_word: str = ''
-    for i in range(len(word)):
-        if word[i] not in arif_mas:
-            new_word += word[i]
+    new_word: str = ''.join([letter for letter in word if letter not in arif_mas])
 
     return new_word
 
