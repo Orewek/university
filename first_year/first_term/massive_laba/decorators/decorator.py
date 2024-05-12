@@ -52,11 +52,11 @@ def count_time(func: Callable[[Iterable[Any]], Any]):
     start_time; end_time; after operation (end - start)
     """
     def wrapper(*args: Any):
-        start_time = time.time()
+        start_time: float = time.time()
         result = func(*args)
-        end_time = time.time()
+        end_time: float = time.time()
 
-        time_result = end_time - start_time
+        time_result: float = end_time - start_time
         print(f"""
                ==TIME===TIME===TIME===TIME===TIME===TIME===TIME===TIME=
                Function had been working for {round(time_result, 3)} seconds
