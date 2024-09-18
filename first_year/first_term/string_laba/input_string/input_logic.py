@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 from random import randint
 
 
@@ -18,6 +21,7 @@ def input_generate(user_str: str, amount_of_els: int) -> str:
             new_letter_code: int = randint(65, 122 + 1)
 
         add_letters += chr(new_letter_code)
+
     user_str += add_letters
     return user_str
 

@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+"""Main file that starts up the program."""
+
+
 from Unit_tests.some_checks import check_action
 
 from adjust_mas.adjust_mas_io import adjust_massive
@@ -10,6 +14,17 @@ from output.output_mas import show_mas
 
 
 def menu(action: int, mas: list) -> list:
+    """Menu with other menus.
+
+    Args:
+    ----
+        action: User input
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
     switcher: dict = {
         1: create_mas_io,
         2: adjust_massive,
@@ -18,10 +33,21 @@ def menu(action: int, mas: list) -> list:
     }
     if action != 5:
         mas: list = switcher[action](mas)
+
     return mas
 
 
 def main(mas: list) -> list:
+    """Menu or user input.
+
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
     table: str = """
             1: input massive
             2: adjust massive
@@ -44,6 +70,7 @@ def main(mas: list) -> list:
     mas: list = menu(action, mas)
     if action == 5:
         mas.append('exit')
+
     return mas
 
 
@@ -57,5 +84,6 @@ if __name__ == '__main__':
 
     while additional_check.lower() in approved and 'exit' not in mas:
         mas: list = main(mas)
+
     mas: list = mas[:-1]
     print(mas)

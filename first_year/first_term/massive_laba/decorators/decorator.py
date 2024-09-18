@@ -1,16 +1,17 @@
-import time
-from typing import Any, Callable, Iterable
+# -*- coding: utf-8 -*-
+"""All decorators."""
+import time as tm
 
 
-def mas_before_after(func: Callable[[Iterable[Any]], Any]):
+def mas_before_after(func: callable[[Iterable[any]], any]) -> any:
     """
-    Massive before operation
+    Massive before operation.
     Operation is happening
     Massive after operation
 
     Need to find some bugs or just to watch the diff
     """
-    def wrapper(*args: Any):
+    def wrapper(*args: any) -> any:
         print(f'\nMassive before operation {args[0]}')
         result = func(*args)
         print(f'\nMassive after operation {args[0]}\n')
@@ -19,11 +20,9 @@ def mas_before_after(func: Callable[[Iterable[Any]], Any]):
     return wrapper
 
 
-def str_to_int(func: Callable[[Iterable[Any]], Any]):
-    """
-    Making whole el in mas str -> int
-    """
-    def wrapper(*args: Any):
+def str_to_int(func: callable[[Iterable[any]], any]) -> any:
+    """Make whole el in mas str -> int."""
+    def wrapper(*args: any) -> any:
         str_count: int = 0
         str_el: list = []
 
@@ -47,14 +46,12 @@ def str_to_int(func: Callable[[Iterable[Any]], Any]):
     return wrapper
 
 
-def count_time(func: Callable[[Iterable[Any]], Any]):
-    """
-    start_time; end_time; after operation (end - start)
-    """
-    def wrapper(*args: Any):
-        start_time: float = time.time()
+def count_time(func: callable[[Iterable[any]], any]) -> any:
+    """Start_time; end_time; after operation (end - start)."""
+    def wrapper(*args: any) -> any:
+        start_time: float = tm.time()
         result = func(*args)
-        end_time: float = time.time()
+        end_time: float = tm.time()
 
         time_result: float = end_time - start_time
         print(f"""
@@ -67,11 +64,9 @@ def count_time(func: Callable[[Iterable[Any]], Any]):
     return wrapper
 
 
-def negative_positive(func: Callable[[Iterable[Any]], Any]):
-    """
-    changing negative el to positive
-    """
-    def wrapper(*args: Any):
+def negative_positive(func: callable[[Iterable[any]], any]) -> any:
+    """Change negative el to positive."""
+    def wrapper(*args: any) -> any:
         neg_count: int = 0
         for el in range(len(args[0])):
             if el < 0:

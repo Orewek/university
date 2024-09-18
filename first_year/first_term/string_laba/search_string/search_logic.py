@@ -1,4 +1,4 @@
-from typing import List
+# -*- coding: utf-8 -*-
 
 
 def consistent_search(user_str: str, find_str: str) -> int:
@@ -20,12 +20,13 @@ def kmp_logic(user_str: str, find_el: str) -> list:
         if j == len(find_el):
             match.append(i - len(find_el) + 1)
             j: int = 0
+
     return match
 
 
 def set_status(find_el: str) -> dict:
     """
-    Checking, might be that find_el contains same letters
+    Check, might be that find_el contains same letters.
     for example in "apple" heres 2 'p'
     """
     status: dict = {el: [0 for _ in range(len(find_el))] for el in set(find_el)}
@@ -33,12 +34,13 @@ def set_status(find_el: str) -> dict:
         for j in range(i + 1):
             if find_el[i - j:i] == find_el[0:j]:
                 status[find_el[j]][i] = j + 1
+
     return status
 
 
 def letters_jump(user_str: str, find_el: str) -> list:
     """
-    numeric each letter in find_el (in reversed find_el)
+    Numeric each letter in find_el (in reversed find_el).
     vpo -> [[o, 0], [p, 1], [v, 2]]
     rest letters in ASCII will have [letter, len(find_el)]
     """
@@ -59,14 +61,14 @@ def letters_jump(user_str: str, find_el: str) -> list:
 
 def same_letters_find_el(find_index: list) -> list:
     """
-    [p, 1] -> separating [i][j] to 2 diff lists
+    [p, 1] -> separating [i][j] to 2 diff lists.
     if we found p and its already in our list[i]
     we should take his el from list[j] (so here j == i)
     so our [p, 4] must change to [p, 1] in total
     """
-    total_letter: List[list] = []
-    letters_ascii_letter: List[int] = []
-    letters_word_jump: List[int] = []
+    total_letter: list[list] = []
+    letters_ascii_letter: list[int] = []
+    letters_word_jump: list[int] = []
     for i in range(len(find_index)):
         if find_index[i][0] not in letters_ascii_letter:
             letters_ascii_letter.append(find_index[i][0])
@@ -83,7 +85,7 @@ def same_letters_find_el(find_index: list) -> list:
 
 def boiera_mura_search(user_str: str, find_el: str) -> list:
     """
-    by this prefix we will make jump
+    By this prefix we will make jump.
     lets say that [user_str = 'asdkjvpoijqvpoqego[qf', find_el = 'vpo']
     in prefix [a, 3], so we go from index 0 to index 3 in user_str
     same for [k, 3] to 6
@@ -97,7 +99,7 @@ def boiera_mura_search(user_str: str, find_el: str) -> list:
     # making this prefix
     prefix: list = letters_jump(user_str, find_el)
     user_index: int = 0
-    result: List[int] = []
+    result: list[int] = []
     # by user_index we will make a jump
     while user_index < len(user_str):
         if prefix[ord(user_str[user_index])][1] != 0:
@@ -107,6 +109,7 @@ def boiera_mura_search(user_str: str, find_el: str) -> list:
             # Here our jump equal to 0
             if user_str[user_index - len(find_el) + 1: user_index + 1] == find_el:
                 result.append(user_index - len(find_el) + 1)
+
             user_index += len(find_el)
 
     return result

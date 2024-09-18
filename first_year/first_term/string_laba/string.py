@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 from Unit_tests.some_checks import check_action
 
 from input_string.input_io import input_string_io

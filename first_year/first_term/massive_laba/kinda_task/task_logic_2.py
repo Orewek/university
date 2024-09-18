@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+"""Func for tasks."""
+
+
 from decorators.decor_logic import str2int_before
 from decorators.decorator import count_time
 
@@ -5,10 +9,18 @@ from decorators.decorator import count_time
 @str2int_before
 def sum_max2_min1(mas: list) -> list:
     """
-    max_even - max el % 2 in mas
+    Max_even - max el % 2 in mas.
     min_odd - min el !% 2n in mas
     find_num - min_odd + max_even
     check if this find_num in mas
+    
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
     """
     min_odd: int = 10**10
     max_even: int = - 1
@@ -26,6 +38,17 @@ def sum_max2_min1(mas: list) -> list:
 
 
 def find_max_even_min_odd(mas: list, min_odd: int, max_even: int) -> tuple:
+    """Find max even and min odd in mas.
+
+    Args:
+    ----
+        mas: massive with numbers
+        min_odd: min odd
+        max_even: max even
+
+    Return: tuple with min_odd and max_min
+    ------
+    """
     max_even: int = max([number for number in mas if number % 2 == 0])
     min_odd: int = min([number for number in mas if number % 2 != 0])
 
@@ -33,8 +56,17 @@ def find_max_even_min_odd(mas: list, min_odd: int, max_even: int) -> tuple:
 
 
 def swap_el(index_max: int, perma_el: int, mas: list) -> list:
-    """
-    swapping max el in mas and last el in mas
+    """Swap max el in mas and last el in mas.
+    
+    Args:
+    ----
+        index_max: I have no idea
+        perma_el: I have no idea
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
     """
     index_last: int = len(mas) - perma_el - 1
     mas[index_last], mas[index_max] = mas[index_max], mas[index_last]
@@ -46,7 +78,7 @@ def swap_el(index_max: int, perma_el: int, mas: list) -> list:
 # @str2int_before
 def selection_sort(mas: list) -> list:
     """
-    perma_el - how many el's r permanent
+    Perma_el - how many el's r permanent.
     -(last 2, last 3 cuz the already max)
 
     max_el: finding max el for O(n)
@@ -55,6 +87,14 @@ def selection_sort(mas: list) -> list:
 
     swap_el(max_el, last_el)
     perma_el += 1
+    
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
     """
     perma_el: int = 0
     for _ in range(len(mas)):
@@ -73,9 +113,17 @@ def selection_sort(mas: list) -> list:
 @str2int_before
 def chered_odd(mas: list) -> list:
     """
-    pair - x'th and (x + 1)'th
+    Pair - x'th and (x + 1)'th.
     x'th % 2 != (x + 1)'th % 2 => count += 1
     so, even_odd or odd_even += 1
+    
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
     """
     count_odd_pairs: int = 0
     for i in range(len(mas) - 1):
@@ -90,9 +138,17 @@ def chered_odd(mas: list) -> list:
 @str2int_before
 def quick_sort(mas: list) -> list:
     """
-    Quick_sort
+    Quick_sort.
     pivot - first el in mas
     sorting rest els to less; equal; greater
+
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
     """
     less: list = []
     equal: list = []
@@ -103,8 +159,10 @@ def quick_sort(mas: list) -> list:
         for el in mas:
             if el < pivot:
                 less.append(el)
+
             if el == pivot:
                 equal.append(el)
+
             if el > pivot:
                 greater.append(el)
 

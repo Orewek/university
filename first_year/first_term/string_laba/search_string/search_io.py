@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 from Unit_tests.some_checks import check_action
 
 from check_speed import time_speed

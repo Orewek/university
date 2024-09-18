@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+
 from Unit_tests.some_checks import check_action, check_int
 
 from input_string.input_logic import input_generate, input_manually

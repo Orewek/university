@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+
+"""Input massive menu."""
 from Unit_tests.some_checks import check_action, check_int
 
 from decorators.decorator import count_time
@@ -5,8 +8,19 @@ from decorators.decorator import count_time
 from input_mas.input_mas_logic import add_elements, generate_border, generate_el
 
 
-def input_menu(action: int, mas: tuple) -> tuple:
-    switcher: dict = {
+def input_menu(action: int, mas: list) -> list:
+    """Menu for input.
+
+    Args:
+    ----
+        action: which line from the dict we should take 
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
+    switcher: dict[int, callable] = {
         1: create_mas_manually,
         2: create_mas_generated,
         3: generate_border_io,
@@ -15,7 +29,17 @@ def input_menu(action: int, mas: tuple) -> tuple:
     return mas
 
 
-def create_mas_io(mas: tuple) -> tuple:
+def create_mas_io(mas: list) -> list:
+    """Create massive menu.
+
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
     print('You can input mas manually, by writing each element\n'
           'Or generate n elements randomly (-1000; 1000)')
 
@@ -38,7 +62,17 @@ def create_mas_io(mas: tuple) -> tuple:
     return mas
 
 
-def create_mas_manually(mas: tuple) -> tuple:
+def create_mas_manually(mas: list) -> list:
+    """Create massive by typing each element manually.
+    
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
     print("""
           Write each element separated
           Remember,You can write only digits.
@@ -52,7 +86,17 @@ def create_mas_manually(mas: tuple) -> tuple:
 
 
 @count_time
-def create_mas_generated(mas: tuple) -> tuple:
+def create_mas_generated(mas: list) -> list:
+    """Create massive by generating elements.
+    
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
     amount_elements: int = check_int(input('How many elements do u want?'))
 
     mas: list = generate_el(mas, int(amount_elements))
@@ -63,8 +107,16 @@ def create_mas_generated(mas: tuple) -> tuple:
 @count_time
 def generate_border_io(mas: list) -> list:
     """
-    Input l and r border
+    Input l and r border.
     whole els in mas mas will be [lborder, rborder]
+
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
     """
     amount_els: int = check_int(input('How many elements do u want?'))
     l_border: int = check_int(input('Write left border'))

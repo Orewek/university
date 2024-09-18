@@ -1,12 +1,16 @@
+# -*- coding: utf-8 -*-
+"""File with menu with tasks."""
+
+
 from Unit_tests.some_checks import check_int
 from Unit_tests.test_sort_speed import speed_checker_search, speed_checker_sort
 
 from decorators.decor_logic import negative_positive_logic, str2int_before
 
 from kinda_task.search import (binary_search,
-                               interpolation_search,
                                consistent_search,
-                               fibonacci_search)
+                               fibonacci_search,
+                               interpolation_search)
 from kinda_task.task_logic import (bubble_sort,
                                    chered_checker,
                                    consecutive_result,
@@ -14,8 +18,8 @@ from kinda_task.task_logic import (bubble_sort,
                                    mean_arif,
                                    min_el)
 from kinda_task.task_logic_2 import (chered_odd,
-                                     selection_sort,
                                      quick_sort,
+                                     selection_sort,
                                      sum_max2_min1)
 from kinda_task.task_logic_3 import (check_contain_5,
                                      prime_number,
@@ -24,6 +28,17 @@ from kinda_task.task_logic_3 import (check_contain_5,
 
 
 def task_menu(action: int, mas: list) -> list:
+    """Menu with func.
+
+    Args:
+    ----
+        action: User input
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
     switcher: dict = {
         1: mean_arif,
         2: min_el,
@@ -56,8 +71,15 @@ def task_io(mas: list) -> list:
     """
     User can find min/max so + or * of el, median etc.
     Rn it has the name "task", cant change it
+    
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
     """
-
     print('Well, you can find some info about your massive\n'
           'Heres the table what can you do:')
 
@@ -96,6 +118,7 @@ def task_io(mas: list) -> list:
             print(task_table)
         else:
             print(task_table)
+
         action = input()
 
     mas: list = task_menu(int(action), mas)
@@ -104,13 +127,21 @@ def task_io(mas: list) -> list:
 
 @str2int_before
 def task_b8(mas: list) -> list:
-    result_mas: list = [chered_checker(mas[i], 2) for i in range(len(mas))]
-
     """
-    Random numbers
+    Random numbers.
     Results, Yes(11) No(00)
     Total amount
+    
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
     """
+    result_mas: list = [chered_checker(mas[i], 2) for i in range(len(mas))]
+
 
     print(mas)
     print(result_mas)
@@ -122,6 +153,16 @@ def task_b8(mas: list) -> list:
 
 @str2int_before
 def task_c8(mas: list) -> list:
+    """C8 task.
+
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
     result_mas: list = [chered_checker(mas[i], 10) for i in range(len(mas))]
 
     print(mas)
@@ -135,6 +176,17 @@ def task_c8(mas: list) -> list:
 
 
 def search_collection(mas: list, search: int) -> list:
+    """Menu with searches.
+
+    Args:
+    ----
+        mas: massive with numbers
+        search: User input
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
     element: str = input('Write which element you want to find in massive')
     check_int(element)
 
@@ -154,6 +206,16 @@ def search_collection(mas: list, search: int) -> list:
 @negative_positive_logic
 @str2int_before
 def laba_3_b8(mas: list) -> list:
+    """B8 task.
+
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
     max_num: int = 10 ** 10
     max_num = min([number for number in mas if symmetrical_number(number) is True and max_num > number > 100])
 
@@ -169,6 +231,16 @@ def laba_3_b8(mas: list) -> list:
 @negative_positive_logic
 @str2int_before
 def laba_3_c5(mas: list) -> list:
+    """C5 task.
+
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
     # Removing prime numbers which doesnt contain digit 5
     mas: list = [i for i in mas if not(check_contain_5(mas[i]) is False and prime_number(mas[i]) is True)]
 

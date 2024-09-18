@@ -1,4 +1,17 @@
+# -*- coding: utf-8 -*-
+"""Output massive."""
+
 def show_mas(mas: list) -> list:
+    """Output massive.
+
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
     print(f'\n Your massive - {mas}')
     return mas
 

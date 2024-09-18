@@ -1,15 +1,27 @@
+# -*- coding: utf-8 -*-
+
+"""File with menus for adjusting massive."""
+
 from Unit_tests.some_checks import check_action, check_int
 
 from adjust_mas.adjust_mas_logic import (change_elements,
-                                         show_elements,
                                          clear_mas,
-                                         len_mas)
+                                         len_mas,
+                                         show_elements)
 
 
 def mas_elements(mas: list) -> list:
     """
-    read show_elemetns .__doc__
-    read change_elements .__doc__
+    Read show_elemetns .__doc__ .
+    Read change_elements .__doc__
+
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
     """
     show_elements(mas)
 
@@ -39,7 +51,7 @@ def mas_elements(mas: list) -> list:
 
     # System count elements from 0 to n - 1
     # Ppl do that from 1 to n
-    change_mas = list(map(lambda item: item - 1, change_mas))
+    change_mas = [item - 1 for item in change_mas]
 
     change_elements(mas, change_mas)
 
@@ -47,6 +59,16 @@ def mas_elements(mas: list) -> list:
 
 
 def adjust_massive(mas: list) -> list:
+    """Menu for adjust massive.
+    
+    Args:
+    ----
+        mas: massive with numbers
+    
+    Return:
+    ------
+        mas: massive with numbers
+    """
     adjust_table: str = """
             1: massive length
             2: change elements

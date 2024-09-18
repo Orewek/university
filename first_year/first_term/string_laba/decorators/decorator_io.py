@@ -1,15 +1,15 @@
-import time
-from typing import Any, Callable, Iterable
+# -*- coding: utf-8 -*-
+"""Count how long func was working."""
 
 
-def count_time(func: Callable[[Iterable[Any]], Any]):
-    """
-    start_time; end_time; after operation (end - start)
-    """
-    def wrapper(*args: Any):
-        start_time: float = time.time()
+import time as tm
+
+def count_time(func: callable[[iterable[any]], any]) -> any:
+    """Start_time; end_time; after operation (end - start)."""
+    def wrapper(*args: any) -> any:
+        start_time: float = tm.time()
         result = func(*args)
-        end_time: float = time.time()
+        end_time: float = tm.time()
 
         time_result: float = end_time - start_time
         print(f"""

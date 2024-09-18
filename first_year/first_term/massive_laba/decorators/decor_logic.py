@@ -1,17 +1,14 @@
-from typing import Any, Callable, Iterable
-
+# -*- coding: utf-8 -*-
 """
-SAME DECORATORS AS IN decorator.py
+SAME DECORATORS AS IN decorator.py .
 THESE WERE MADE KINDA LOGIC, W/O ANY PRINTS
 HERES ONLY DECORATORS THAT HAS ANY SENSE W/O PRINTS
 """
 
 
-def str2int_before(func: Callable[[Iterable[Any]], Any]):
-    """
-    Making whole el in mas str -> int
-    """
-    def wrapper(*args: Any):
+def str2int_before(func: callable[[Iterable[any]], any]) -> any:
+    """Make whole el in mas str -> int."""
+    def wrapper(*args: any) -> any:
         [int(number) for number in args[0]]
         result = func(args[0], *args[1:])
 
@@ -19,11 +16,9 @@ def str2int_before(func: Callable[[Iterable[Any]], Any]):
     return wrapper
 
 
-def str2int_after(func: Callable[[Iterable[Any]], Any]):
-    """
-    Making the same, but after the function
-    """
-    def wrapper(*args: Any):
+def str2int_after(func: callable[[Iterable[any]], any]) -> any:
+    """Make the same, but after the function."""
+    def wrapper(*args: any) -> any:
         result = func(args[0], *args[1:])
         [int(number) for number in args[0]]
 
@@ -31,11 +26,9 @@ def str2int_after(func: Callable[[Iterable[Any]], Any]):
     return wrapper
 
 
-def int2str_before(func: Callable[[Iterable[Any]], Any]):
-    """
-    Making whole el in mas: int -> str
-    """
-    def wrapper(*args: Any):
+def int2str_before(func: callable[[Iterable[any]], any]) -> any:
+    """Make whole el in mas: int -> str."""
+    def wrapper(*args: any) -> any:
         [str(number) for number in args[0]]
         result = func(args[0], *args[1:])
 
@@ -43,11 +36,9 @@ def int2str_before(func: Callable[[Iterable[Any]], Any]):
     return wrapper
 
 
-def negative_positive_logic(func: Callable[[Iterable[Any]], Any]):
-    """
-    changing negative el to positive
-    """
-    def wrapper(*args: Any):
+def negative_positive_logic(func: callable[[Iterable[any]], any]) -> any:
+    """Change negative el to positive."""
+    def wrapper(*args: any) -> any:
         [abs(number) for number in args[0]]
         result = func(args[0], *args[1:])
 
